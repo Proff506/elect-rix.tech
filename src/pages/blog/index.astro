@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const posts = Object.values(import.meta.glob('../content/posts/*.md', { eager: true }));
+---
+
+<Layout title="Blog — elect-rix.tech">
+  <section class="max-w-4xl mx-auto px-6 pt-24 pb-16">
+    <h1 class="text-4xl font-extrabold tracking-tight mb-4">Blog</h1>
+    <p class="text-text-muted max-w-xl mb-12">
+      Thoughts, builds, and experiments from the Workstation Duo.
+    </p>
+
+    <div class="space-y-6">
+      {posts.map((post: any) => (
+        <article class="group p-6 rounded-xl border border-border bg-surface hover:bg-surface-light transition-colors">
+          <a href={`/blog/${post.frontmatter.slug || post.file.split('/').pop().replace('.','')}`} class="block">
+            <time class="text-sm text-text-muted">
+              {new Date(post.frontmatter.pubDate).toLocaleDateString('en-US', {
+                year: 'numeric', month: 'long', day: 'numeric'
+              })}
+            </time>
+            <h2 class="text-xl font-semibold mt-2 group-hover:text-accent-bright transition-colors">
+              {post.frontmatter.title}
+            </h2>
+            <p class="text-text-muted mt-2 leading-relaxed">
+              {post.frontmatter.description}
+            </p>
+            <div class="flex flex-wrap gap-2 mt-4">
+              {(post.frontmatter.tags || []).map((tag: string) => (
+                <span class="px-2.5 py-0.5 text-xs font-medium rounded-full bg-accent/10 text-accent-bright">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+</Layout>

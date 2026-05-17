@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="About — elect-rix.tech" description="The vision behind the Workstation Duo and elect-rix.tech">
+  <section class="max-w-3xl mx-auto px-6 pt-24 pb-16">
+    <h1 class="text-4xl font-extrabold tracking-tight mb-8">About</h1>
+
+    <div class="space-y-6 text-text-muted leading-relaxed">
+      <p>
+        <strong class="text-text">elect-rix.tech</strong> is an experiment in controlled independence — a website
+        built on local hardware, served by global infrastructure, and authored by an expanding vision.
+      </p>
+
+      <p>
+        The <strong class="text-text">Workstation Duo</strong> powers everything behind this domain:
+      </p>
+
+      <ul class="space-y-3 pl-5 list-disc marker:text-accent">
+        <li>
+          <span class="text-text font-medium">butters</span> — Intel i9-14900K, NVIDIA RTX 5070 Ti 16GB,
+          32GB RAM. Handles content drafting, website builds, and Ollama inference.
+        </li>
+        <li>
+          <span class="text-text font-medium">proff</span> — Intel i7, dual AMD RX 9060 XT.
+          Handles batch image generation via ComfyUI, parallel processing, and media pipelines.
+        </li>
+      </ul>
+
+      <p>
+        Nothing here is outsourced that doesn't need to be. The AI stack is local. The site is static.
+        The only cloud dependency is the edge network itself — Cloudflare Pages — because no basement server
+        can beat 300+ global PoPs.
+      </p>
+
+      <p>
+        The vision is still forming. This site exists to make sure the platform is ready when the direction
+        reveals itself.
+      </p>
+    </div>
+
+    <div class="mt-12 p-6 rounded-xl border border-border bg-surface">
+      <h2 class="text-lg font-semibold text-text mb-2">Technology Stack</h2>
+      <div class="flex flex-wrap gap-2">
+        {
+          [
+            'Astro', 'Tailwind CSS', 'bun', 'Cloudflare Pages',
+            'Ollama', 'ComfyUI', 'Cloudflare', 'PostgreSQL'
+          ].map((tech) => (
+            <span class="px-3 py-1 text-sm rounded-full bg-accent/10 text-accent-bright border border-accent/20">
+              {tech}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,46 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'elect-rix.tech — powered by the Workstation Duo' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body class="antialiased">
+    <nav class="fixed top-0 w-full z-50 border-b border-border bg-primary/80 backdrop-blur-md">
+      <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="/" class="text-xl font-bold tracking-tight text-accent-bright">elect-rix.tech</a>
+        <div class="flex gap-6 text-sm font-medium">
+          <a href="/" class="text-text-muted hover:text-text transition-colors">Home</a>
+          <a href="/blog" class="text-text-muted hover:text-text transition-colors">Blog</a>
+          <a href="/about" class="text-text-muted hover:text-text transition-colors">About</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="pt-16 min-h-screen">
+      <slot />
+    </main>
+
+    <footer class="border-t border-border py-8 mt-20">
+      <div class="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-text-muted">
+        <span>© 2025 elect-rix.tech</span>
+        <span>Powered by the Workstation Duo — local AI, no compromises.</span>
+      </div>
+    </footer>
+  </body>
+</html>

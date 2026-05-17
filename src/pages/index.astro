@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="elect-rix.tech — Home">
+  <section class="max-w-4xl mx-auto px-6 pt-24 pb-16">
+    <h1 class="text-5xl sm:text-7xl font-extrabold tracking-tight mb-6">
+      <span class="text-accent-bright">local</span> intelligence.
+      <br />
+      <span class="text-text-muted">global edge.</span>
+    </h1>
+    <p class="text-lg text-text-muted max-w-2xl leading-relaxed mb-10">
+      A site built on the Workstation Duo — two machines, one vision.
+      Content drafted by local LLMs, illustrated by ComfyUI, deployed worldwide.
+    </p>
+    <div class="flex gap-4">
+      <a href="/blog" class="px-6 py-3 bg-accent text-white font-semibold rounded-lg hover:bg-accent-bright transition-colors">
+        Read the blog
+      </a>
+      <a href="/about" class="px-6 py-3 border border-border text-text font-semibold rounded-lg hover:bg-surface-light transition-colors">
+        About the Duo
+      </a>
+    </div>
+  </section>
+
+  <section class="border-t border-border py-16">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-2xl font-bold mb-8">Latest posts</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <article class="group p-6 rounded-xl border border-border bg-surface hover:bg-surface-light transition-colors cursor-pointer">
+          <a href="/blog/hello-duo" class="block">
+            <time class="text-sm text-text-muted">May 17, 2025</time>
+            <h3 class="text-lg font-semibold mt-2 group-hover:text-accent-bright transition-colors">
+              Hello, World — from the Duo
+            </h3>
+            <p class="text-text-muted text-sm mt-2 leading-relaxed">
+              The first post, written entirely by local AI and pushed live from a basement workstation.
+            </p>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+</Layout>
