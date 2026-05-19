@@ -1,44 +1,199 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+
+const services = [
+  {
+    title: 'AI Integration',
+    description: 'Connect LLMs, agents, and ML pipelines into your products. Local or cloud — your data stays yours.',
+    icon: '🤖',
+  },
+  {
+    title: 'Full-Stack Engineering',
+    description: 'React, Astro, Node, Python — clean architecture, typed APIs, and performance that scales.',
+    icon: '⚡',
+  },
+  {
+    title: 'Cloud & DevOps',
+    description: 'Deploy anywhere. AWS, Cloudflare, self-hosted. CI/CD, IaC, and automated workflows.',
+    icon: '☁️',
+  },
+  {
+    title: 'Consulting',
+    description: 'Strategic technology decisions, architecture reviews, and hands-on mentorship for your team.',
+    icon: '🎯',
+  },
+];
+
+const builds = [
+  {
+    name: 'Hermes Agent Bot',
+    category: 'AI Agent Platform',
+    description: 'Autonomous AI assistant deployed on Telegram. Manages coding tasks, research, and DevOps — 24/7.',
+    stack: 'Python',
+    status: 'Running',
+  },
+  {
+    name: 'elect-rix.tech',
+    category: 'Personal Site',
+    description: 'This site — Astro, Bun, Tailwind. Built locally, deployed to Cloudflare Pages, generated with AI.',
+    stack: 'Astro · Bun · Tailwind',
+    status: 'Live',
+  },
+  {
+    name: 'Workstation Duo',
+    category: 'Lab Infrastructure',
+    description: 'Two-machine setup: local LLM inference, distributed builds, GPU compute, and self-hosted services.',
+    stack: 'Pop!_OS · Ollama · Docker',
+    status: 'Active',
+  },
+];
+
+const posts = Object.values(import.meta.glob('../content/posts/*.md', { eager: true })).slice(0, 3);
 ---
 
-<Layout title="elect-rix.tech — Home">
-  <section class="max-w-4xl mx-auto px-6 pt-24 pb-16">
-    <h1 class="text-5xl sm:text-7xl font-extrabold tracking-tight mb-6">
-      <span class="text-accent-bright">local</span> intelligence.
-      <br />
-      <span class="text-text-muted">global edge.</span>
-    </h1>
-    <p class="text-lg text-text-muted max-w-2xl leading-relaxed mb-10">
-      A site built on the Workstation Duo — two machines, one vision.
-      Content drafted by local LLMs, illustrated by ComfyUI, deployed worldwide.
-    </p>
-    <div class="flex gap-4">
-      <a href="/blog" class="px-6 py-3 bg-accent text-white font-semibold rounded-lg hover:bg-accent-bright transition-colors">
-        Read the blog
-      </a>
-      <a href="/about" class="px-6 py-3 border border-border text-text font-semibold rounded-lg hover:bg-surface-light transition-colors">
-        About the Duo
-      </a>
+<Layout title="elect-rix.tech — AI Engineering & Full-Stack Development" description="AI-powered engineering. Full-stack builds, local LLM workflows, and hands-on consulting by elect-rix.">
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="max-w-5xl mx-auto px-6 pt-32 pb-20 text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent-bright text-sm font-medium mb-8 border border-accent/20">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Available for projects
+      </div>
+      <h1 class="text-5xl sm:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6">
+        Built by AI.<br />
+        <span class="text-accent-bright">Shipped by humans.</span>
+      </h1>
+      <p class="text-lg sm:text-xl text-text-muted max-w-2xl mx-auto leading-relaxed mb-10">
+        Local LLMs, full-stack engineering, and cloud infrastructure — elect-rix builds autonomous systems and ships products that scale.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/builds" class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright transition-colors">
+          See Builds →
+        </a>
+        <a href="mailto:hello@elect-rix.tech" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-border text-text font-semibold hover:bg-surface-light transition-colors">
+          Get in Touch
+        </a>
+      </div>
     </div>
   </section>
 
-  <section class="border-t border-border py-16">
-    <div class="max-w-4xl mx-auto px-6">
-      <h2 class="text-2xl font-bold mb-8">Latest posts</h2>
-      <div class="grid gap-6 sm:grid-cols-2">
-        <article class="group p-6 rounded-xl border border-border bg-surface hover:bg-surface-light transition-colors cursor-pointer">
-          <a href="/blog/hello-duo" class="block">
-            <time class="text-sm text-text-muted">May 17, 2025</time>
-            <h3 class="text-lg font-semibold mt-2 group-hover:text-accent-bright transition-colors">
-              Hello, World — from the Duo
-            </h3>
-            <p class="text-text-muted text-sm mt-2 leading-relaxed">
-              The first post, written entirely by local AI and pushed live from a basement workstation.
+  <!-- About Preview -->
+  <section class="border-y border-border bg-surface/50">
+    <div class="max-w-5xl mx-auto px-6 py-20">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl font-bold tracking-tight mb-4">Who is elect-rix?</h2>
+          <div class="space-y-4 text-text-muted leading-relaxed">
+            <p>
+              I'm a solo builder running a two-workstation AI lab. One machine handles local LLM inference with Ollama and 16GB VRAM. The other manages distributed builds and GPU compute. Everything is self-hosted, private, and fast.
             </p>
+            <p>
+              I build autonomous AI agents, full-stack web applications, and cloud infrastructure. My tools are local-first — your data never leaves the box unless you want it to. From prototype to production, the Workstation Duo delivers.
+            </p>
+          </div>
+          <a href="/duo" class="inline-flex items-center gap-2 text-accent-bright font-medium mt-6 hover:underline">
+            Meet the Workstation Duo →
+          </a>
+        </div>
+        <div class="p-6 rounded-xl border border-border bg-primary">
+          <div class="space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent-bright">🖥️</div>
+              <div>
+                <div class="font-medium">Primary Workstation</div>
+                <div class="text-sm text-text-muted">Intel i9-14900K · RTX 5070 Ti · 32GB DDR5</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent-bright">🖥️</div>
+              <div>
+                <div class="font-medium">Secondary Workstation</div>
+                <div class="text-sm text-text-muted">Intel i7 · Dual RX 9060 XT · Linux Mint</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent-bright">🧠</div>
+              <div>
+                <div class="font-medium">Local AI Stack</div>
+                <div class="text-sm text-text-muted">Ollama · Qwen · Granite · Phi · Nemotron</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="max-w-5xl mx-auto px-6 py-20">
+    <div class="text-center mb-14">
+      <h2 class="text-3xl font-bold tracking-tight mb-3">What I Do</h2>
+      <p class="text-text-muted max-w-xl mx-auto">End-to-end engineering — from AI agents to production deployments.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-6">
+      {services.map((s) => (
+        <div class="group p-6 rounded-xl border border-border bg-surface hover:bg-surface-light transition-all hover:-translate-y-0.5">
+          <div class="text-3xl mb-4">{s.icon}</div>
+          <h3 class="text-lg font-semibold mb-2">{s.title}</h3>
+          <p class="text-text-muted leading-relaxed text-sm">{s.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Featured Builds -->
+  <section class="border-y border-border bg-surface/50">
+    <div class="max-w-5xl mx-auto px-6 py-20">
+      <div class="flex items-end justify-between mb-10">
+        <div>
+          <h2 class="text-3xl font-bold tracking-tight mb-2">Featured Builds</h2>
+          <p class="text-text-muted">Projects shipping from the Workstation Duo.</p>
+        </div>
+        <a href="/builds" class="text-sm text-accent-bright font-medium hover:underline hidden sm:block">View All →</a>
+      </div>
+      <div class="grid sm:grid-cols-3 gap-5">
+        {builds.map((b) => (
+          <div class="p-5 rounded-xl border border-border bg-primary hover:bg-surface-light transition-all group">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-accent/10 text-accent-bright">{b.category}</span>
+              <span class="text-xs text-emerald-400 font-medium flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>{b.status}
+              </span>
+            </div>
+            <h3 class="font-semibold mb-2 group-hover:text-accent-bright transition-colors">{b.name}</h3>
+            <p class="text-sm text-text-muted leading-relaxed mb-4">{b.description}</p>
+            <div class="text-xs text-text-muted font-mono">{b.stack}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Posts -->
+  <section class="max-w-5xl mx-auto px-6 py-20">
+    <div class="flex items-end justify-between mb-10">
+      <div>
+        <h2 class="text-3xl font-bold tracking-tight mb-2">From the Blog</h2>
+        <p class="text-text-muted">Experiments, tutorials, and lessons learned.</p>
+      </div>
+      <a href="/blog" class="text-sm text-accent-bright font-medium hover:underline hidden sm:block">All Posts →</a>
+    </div>
+    <div class="space-y-4">
+      {posts.map((post: any) => (
+        <article class="group p-5 rounded-xl border border-border bg-surface hover:bg-surface-light transition-colors">
+          <a href={`/blog/${post.frontmatter.slug || post.file.split('/').pop().replace('.md','')}`} class="flex flex-col sm:flex-row sm:items-center gap-4">
+            <time class="text-sm text-text-muted whitespace-nowrap w-32 shrink-0">
+              {new Date(post.frontmatter.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+            </time>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-semibold group-hover:text-accent-bright transition-colors truncate">{post.frontmatter.title}</h3>
+              <p class="text-sm text-text-muted truncate">{post.frontmatter.description}</p>
+            </div>
+            <span class="text-accent-bright opacity-0 group-hover:opacity-100 transition-opacity shrink-0">→</span>
           </a>
         </article>
-      </div>
+      ))}
     </div>
   </section>
 </Layout>

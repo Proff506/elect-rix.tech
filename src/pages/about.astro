@@ -2,57 +2,46 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="About — elect-rix.tech" description="The vision behind the Workstation Duo and elect-rix.tech">
+<Layout title="About — elect-rix.tech" description="AI-powered engineering by elect-rix. Full-stack builds, local LLM workflows, hands-on consulting.">
   <section class="max-w-3xl mx-auto px-6 pt-24 pb-16">
-    <h1 class="text-4xl font-extrabold tracking-tight mb-8">About</h1>
+    <header class="mb-10">
+      <h1 class="text-4xl font-extrabold tracking-tight mb-4">About</h1>
+      <p class="text-lg text-text-muted leading-relaxed">The builder behind the bots. What I do, how I work, and why local AI matters.</p>
+    </header>
 
-    <div class="space-y-6 text-text-muted leading-relaxed">
-      <p>
-        <strong class="text-text">elect-rix.tech</strong> is an experiment in controlled independence — a website
-        built on local hardware, served by global infrastructure, and authored by an expanding vision.
-      </p>
+    <div class="space-y-8">
+      <section>
+        <h2 class="text-2xl font-bold mb-3">Who I Am</h2>
+        <p class="text-text-muted leading-relaxed">
+          I'm elect-rix — a solo builder and AI engineer running a two-workstation development lab. I don't work at a big tech company. I don't have a team. What I have is two powerful machines, a stack of local AI models, and the obsessive drive to build things that work.
+        </p>
+      </section>
 
-      <p>
-        The <strong class="text-text">Workstation Duo</strong> powers everything behind this domain:
-      </p>
+      <section>
+        <h2 class="text-2xl font-bold mb-3">What I Do</h2>
+        <div class="space-y-3 text-text-muted leading-relaxed">
+          <p><strong class="text-text">AI Integration —</strong> I wire large language models into real applications. Not demos — production systems that handle real workloads, maintain context, and deliver reliable results. Local models via Ollama, cloud APIs when needed, always with proper tooling and agent orchestration.</p>
+          <p><strong class="text-text">Full-Stack Engineering —</strong> I build complete products from database to pixel. TypeScript, React, Astro, Node, Python — whatever fits the problem. I care about architecture, type safety, and performance.</p>
+          <p><strong class="text-text">Cloud & DevOps —</strong> I deploy to AWS, Cloudflare, and self-hosted infrastructure. IaC, CI/CD, container orchestration, automated backups. If it breaks at 3am, it should fix itself.</p>
+          <p><strong class="text-text">Consulting —</strong> I advise teams on AI strategy, architecture decisions, and hands-on implementation. I review code, design systems, and mentor engineers.</p>
+        </div>
+      </section>
 
-      <ul class="space-y-3 pl-5 list-disc marker:text-accent">
-        <li>
-          <span class="text-text font-medium">butters</span> — Intel i9-14900K, NVIDIA RTX 5070 Ti 16GB,
-          32GB RAM. Handles content drafting, website builds, and Ollama inference.
-        </li>
-        <li>
-          <span class="text-text font-medium">proff</span> — Intel i7, dual AMD RX 9060 XT.
-          Handles batch image generation via ComfyUI, parallel processing, and media pipelines.
-        </li>
-      </ul>
+      <section>
+        <h2 class="text-2xl font-bold mb-3">How I Work</h2>
+        <div class="space-y-3 text-text-muted leading-relaxed">
+          <p>I work from the Workstation Duo — two machines in my home lab. The primary workstation runs Pop!_OS with an RTX 5070 Ti for local LLM inference. The secondary handles distributed builds and GPU compute on Linux Mint. Everything is private by default. Your data never touches a third-party API unless you explicitly ask for it.</p>
+          <p>I use AI as a collaborator, not a replacement. The models handle the boilerplate, the research, and the repetitive tasks. I handle the architecture, the edge cases, and the judgment calls. That's the only way to build systems that actually work.</p>
+        </div>
+      </section>
 
-      <p>
-        Nothing here is outsourced that doesn't need to be. The AI stack is local. The site is static.
-        The only cloud dependency is the edge network itself — Cloudflare Pages — because no basement server
-        can beat 300+ global PoPs.
-      </p>
-
-      <p>
-        The vision is still forming. This site exists to make sure the platform is ready when the direction
-        reveals itself.
-      </p>
-    </div>
-
-    <div class="mt-12 p-6 rounded-xl border border-border bg-surface">
-      <h2 class="text-lg font-semibold text-text mb-2">Technology Stack</h2>
-      <div class="flex flex-wrap gap-2">
-        {
-          [
-            'Astro', 'Tailwind CSS', 'bun', 'Cloudflare Pages',
-            'Ollama', 'ComfyUI', 'Cloudflare', 'PostgreSQL'
-          ].map((tech) => (
-            <span class="px-3 py-1 text-sm rounded-full bg-accent/10 text-accent-bright border border-accent/20">
-              {tech}
-            </span>
-          ))
-        }
-      </div>
+      <section>
+        <h2 class="text-2xl font-bold mb-3">Get in Touch</h2>
+        <p class="text-text-muted leading-relaxed mb-4">Interested in working together? Have a project that needs AI integration or full-stack engineering? Let's talk.</p>
+        <a href="mailto:hello@elect-rix.tech" class="inline-flex items-center px-5 py-2.5 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright transition-colors">
+          hello@elect-rix.tech
+        </a>
+      </section>
     </div>
   </section>
 </Layout>

@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+const hardware = [
+  {
+    name: 'Primary Workstation',
+    role: 'Main Dev · Local LLM Inference',
+    specs: [
+      'Intel Core i9-14900K (24C/32T)',
+      'NVIDIA GeForce RTX 5070 Ti · 16GB GDDR7 VRAM',
+      '32GB DDR5-6000 RAM',
+      '1.8TB NVMe SSD (Gen 4)',
+      'Pop!_OS 22.04 (Linux)',
+    ],
+    models: ['Qwen 3.5 · Granite 4.1 · Phi 4 · Nemotron · Llama 3.2', 'CUDA 13.0 / NVIDIA Driver 550+'],
+  },
+  {
+    name: 'Secondary Workstation',
+    role: 'Distributed Builds · GPU Compute',
+    specs: [
+      'Intel Core i7 (8C/16T)',
+      'Dual AMD RX 9060 XT · 32GB VRAM total',
+      '32GB DDR4-3200 RAM',
+      '2TB SATA SSD',
+      'Linux Mint 21 (Cinnamon)',
+    ],
+    models: ['ROCm · OpenCL · Distributed training workloads'],
+  },
+];
+
+const software = [
+  { name: 'Ollama', desc: 'Local LLM inference server. Runs Qwen, Granite, Phi, Nemotron, and more.', link: 'https://ollama.com' },
+  { name: 'Astro', desc: 'Static site generator. This site is Astro + Bun + Tailwind, built locally.', link: 'https://astro.build' },
+  { name: 'Bun', desc: 'JavaScript runtime and bundler. Faster than Node for this workload.', link: 'https://bun.sh' },
+  { name: 'Tailwind CSS v4', desc: 'Utility-first CSS. Uses @theme directive for custom design tokens.', link: 'https://tailwindcss.com' },
+  { name: 'Docker', desc: 'Containerized services. Everything that can be containerized, is.', link: 'https://docker.com' },
+  { name: 'Cloudflare', desc: 'Edge deployment. DNS, Pages, and Workers for global distribution.', link: 'https://cloudflare.com' },
+];
+---
+
+<Layout title="The Workstation Duo — elect-rix.tech" description="Two machines. One lab. Local AI, full-stack builds, and no cloud dependency.">
+  <section class="max-w-4xl mx-auto px-6 pt-24 pb-16">
+    <header class="text-center mb-16">
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">The Workstation Duo</h1>
+      <p class="text-lg text-text-muted max-w-xl mx-auto">A two-machine AI lab. Local inference, distributed builds, zero cloud lock-in.</p>
+    </header>
+
+    <!-- Hardware -->
+    <div class="space-y-6 mb-16">
+      {hardware.map((h) => (
+        <div class="p-6 rounded-xl border border-border bg-surface">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent-bright">🖥️</div>
+            <div>
+              <h2 class="text-lg font-semibold">{h.name}</h2>
+              <span class="text-sm text-text-muted">{h.role}</span>
+            </div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-3 mb-5">
+            {h.specs.map((s) => (
+              <div class="text-sm text-text-muted flex items-center gap-2">
+                <span class="w-1 h-1 rounded-full bg-accent"></span>
+                {s}
+              </div>
+            ))}
+          </div>
+          <div class="flex flex-wrap gap-2">
+            {h.models.map((m) => (
+              <span class="text-xs font-mono px-2 py-1 rounded bg-primary border border-border">{m}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Software Stack -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold mb-6">Software Stack</h2>
+      <div class="grid sm:grid-cols-2 gap-4">
+        {software.map((s) => (
+          <a href={s.link} target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl border border-border bg-surface hover:bg-surface-light transition-colors group">
+            <div class="font-semibold mb-1 group-hover:text-accent-bright transition-colors">{s.name} →</div>
+            <div class="text-sm text-text-muted">{s.desc}</div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Philosophy -->
+    <div class="p-6 rounded-xl border border-border bg-surface">
+      <h2 class="text-2xl font-bold mb-4">Why Local?</h2>
+      <div class="space-y-3 text-text-muted leading-relaxed">
+        <p>Every prompt to a closed cloud service becomes training data. Every file you upload to a remote API is stored, analyzed, and potentially reproduced. For personal projects, code, and proprietary data, that's unacceptable.</p>
+        <p>Local models run at 30-80 tok/s on modern GPUs. They're private, cost nothing per token, and work offline. The Workstation Duo proves you don't need a $20/month subscription to get world-class AI — you need the right hardware and the knowledge to use it.</p>
+        <p>When cloud is needed, it's chosen consciously — not by default. That's the difference.</p>
+      </div>
+    </div>
+  </section>
+</Layout>

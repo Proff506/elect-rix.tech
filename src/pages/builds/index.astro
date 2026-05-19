@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const builds = Object.values(import.meta.glob('../../content/builds/*.md', { eager: true })).sort((a: any, b: any) =>
+  new Date(b.frontmatter.updated || b.frontmatter.date).getTime() - new Date(a.frontmatter.updated || a.frontmatter.date).getTime()
+);
+
+const statuses = { Live: 'bg-emerald-400', Running: 'bg-emerald-400', Active: 'bg-emerald-400', Beta: 'bg-amber-400', Archived: 'bg-slate-400' };
+---
+
+<Layout title="Builds — elect-rix.tech" description="Projects, experiments, and systems built on the Workstation Duo.">
+  <section class="max-w-5xl mx-auto px-6 pt-24 pb-16">
+    <header class="mb-12">
+      <h1 class="text-4xl font-extrabold tracking-tight mb-3">Builds</h1>
+      <p class="text-lg text-text-muted max-w-xl">Projects, experiments, and systems shipping from the local AI lab.</p>
+    </header>
+
+    <div class="space-y-4">
+      {builds.map((b: any) => {
+        const slug = b.file.split('/').pop().replace('.md', '');
+        const statusColor = statuses[b.frontmatter.status as keyof typeof statuses] || 'bg-emerald-400';
+        return (
+          <article class="group p-6 rounded-xl border border-border bg-surface hover:bg-surface-light transition-all">
+            <a href={`/builds/${slug}`} class="flex flex-col sm:flex-row gap-6">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-3 mb-2">
+                  <span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-accent/10 text-accent-bright">{b.frontmatter.category}</span>
+                  <span class="text-xs text-text-muted flex items-center gap-1">
+                    <span class={`w-1.5 h-1.5 rounded-full ${statusColor}`}></span>
+                    {b.frontmatter.status}
+                  </span>
+                </div>
+                <h2 class="text-xl font-semibold mb-2 group-hover:text-accent-bright transition-colors">{b.frontmatter.title}</h2>
+                <p class="text-text-muted leading-relaxed mb-3">{b.frontmatter.description}</p>
+                <div class="flex flex-wrap gap-2">
+                  {(b.frontmatter.stack || '').split(' · ').filter(Boolean).map((s: string) => (
+                    <span class="text-xs font-mono px-2 py-0.5 rounded bg-primary border border-border">{s.trim()}</span>
+                  ))}
+                </div>
+              </div>
+              <div class="flex items-center text-accent-bright opacity-0 group-hover:opacity-100 transition-opacity shrink-0 self-center">→</div>
+            </a>
+          </article>
+        );
+      })}
+    </div>
+  </section>
+</Layout>

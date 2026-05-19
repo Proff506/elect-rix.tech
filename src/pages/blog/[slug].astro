@@ -5,16 +5,11 @@ export function getStaticPaths() {
   const posts = Object.entries(import.meta.glob('../../content/posts/*.md', { eager: true }));
   return posts.map(([path, post]: [string, any]) => {
     const slug = path.split('/').pop().replace('.md', '');
-    return {
-      params: { slug },
-      props: { post, slug },
-    };
+    return { params: { slug }, props: { post, slug } };
   });
 }
 
 const { post, slug } = Astro.props;
-
-// @ts-ignore
 const { Content } = post;
 ---
 
@@ -22,25 +17,23 @@ const { Content } = post;
   <article class="max-w-3xl mx-auto px-6 pt-24 pb-16">
     <header class="mb-10">
       <time class="text-sm text-text-muted">
-        {new Date(post.frontmatter.pubDate || Date.now()).toLocaleDateString('en-US', {
-          year: 'numeric', month: 'long', day: 'numeric'
-        })}
+        {new Date(post.frontmatter.pubDate || Date.now()).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
       </time>
       <h1 class="text-4xl font-extrabold tracking-tight mt-3 mb-4">{post.frontmatter.title}</h1>
       <p class="text-lg text-text-muted leading-relaxed">{post.frontmatter.description}</p>
-      {post.frontmatter.heroImage && (
-        <img src={post.frontmatter.heroImage} alt={post.frontmatter.title} class="mt-8 rounded-xl w-full" />
-      )}
+      <div class="flex flex-wrap gap-2 mt-5">
+        {(post.frontmatter.tags || []).map((tag: string) => (
+          <span class="px-2.5 py-0.5 text-xs font-medium rounded-full bg-accent/10 text-accent-bright">{tag}</span>
+        ))}
+      </div>
     </header>
 
     <div class="prose prose-invert max-w-none">
       <Content />
     </div>
 
-    <footer class="border-t border-border mt-16 pt-8">
-      <a href="/blog" class="text-accent-bright hover:text-accent transition-colors text-sm font-medium">
-        ← All posts
-      </a>
-    </footer>
+    <div class="mt-12 pt-8 border-t border-border">
+      <a href="/blog" class="text-accent-bright font-medium hover:underline">← All Posts</a>
+    </div>
   </article>
 </Layout>

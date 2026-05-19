@@ -1,0 +1,46 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+export function getStaticPaths() {
+  const builds = Object.entries(import.meta.glob('../../content/builds/*.md', { eager: true }));
+  return builds.map(([path, build]: [string, any]) => {
+    const slug = path.split('/').pop().replace('.md', '');
+    return { params: { slug }, props: { build, slug } };
+  });
+}
+
+const { build, slug } = Astro.props;
+const { Content } = build;
+const fm = build.frontmatter;
+---
+
+<Layout title={`${fm.title} — elect-rix.tech Builds`} description={fm.description}>
+  <article class="max-w-3xl mx-auto px-6 pt-24 pb-16">
+    <header class="mb-10">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-accent/10 text-accent-bright">{fm.category}</span>
+        <span class="text-xs text-emerald-400 font-medium flex items-center gap-1">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>{fm.status}
+        </span>
+      </div>
+      <h1 class="text-4xl font-extrabold tracking-tight mb-4">{fm.title}</h1>
+      <p class="text-lg text-text-muted leading-relaxed">{fm.description}</p>
+      
+      {fm.stack && (
+        <div class="flex flex-wrap gap-2 mt-5">
+          {fm.stack.split(' · ').map((s: string) => (
+            <span class="text-xs font-mono px-2 py-1 rounded bg-surface-light border border-border">{s.trim()}</span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <div class="prose prose-invert max-w-none">
+      <Content />
+    </div>
+
+    <div class="mt-12 pt-8 border-t border-border">
+      <a href="/builds" class="text-accent-bright font-medium hover:underline">← All Builds</a>
+    </div>
+  </article>
+</Layout>
