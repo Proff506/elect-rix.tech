@@ -27,16 +27,23 @@ const services = [
 
 const builds = [
   {
+    name: 'RixBot',
+    category: 'AI Agent Platform',
+    description: 'Private AI chatbot with full R\u0026D knowledge base access. Demo mode with zero cloud dependency, live mode via Ollama endpoint.',
+    stack: 'Astro · JS · RAG',
+    status: 'Live',
+  },
+  {
     name: 'Hermes Agent Bot',
     category: 'AI Agent Platform',
     description: 'Autonomous AI assistant deployed on Telegram. Manages coding tasks, research, and DevOps — 24/7.',
-    stack: 'Python',
+    stack: 'Python · Telethon · Ollama · Docker',
     status: 'Running',
   },
   {
     name: 'elect-rix.tech',
     category: 'Personal Site',
-    description: 'This site — Astro, Bun, Tailwind. Built locally, deployed to Cloudflare Pages, generated with AI.',
+    description: 'This site — Astro, Bun, Tailwind. Built locally, deployed to Cloudflare Pages, generated with AI assistance.',
     stack: 'Astro · Bun · Tailwind',
     status: 'Live',
   },
@@ -102,14 +109,14 @@ const posts = Object.values(import.meta.glob('../content/posts/*.md', { eager: t
               <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent-bright">🖥️</div>
               <div>
                 <div class="font-medium">Primary Workstation</div>
-                <div class="text-sm text-text-muted">Intel i9-14900K · RTX 5070 Ti · 32GB DDR5</div>
+                <div class="text-sm text-text-muted">Intel i9-14900K · RTX 5070 Ti · 32GB DDR5 · Pop!_OS</div>
               </div>
             </div>
             <div class="flex items-center gap-3">
               <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent-bright">🖥️</div>
               <div>
                 <div class="font-medium">Secondary Workstation</div>
-                <div class="text-sm text-text-muted">Intel i7 · Dual RX 9060 XT · Linux Mint</div>
+                <div class="text-sm text-text-muted">Intel i7-12700KF · Dual RX 9060 XT · 32GB DDR4 · Linux Mint</div>
               </div>
             </div>
             <div class="flex items-center gap-3">
@@ -187,7 +194,12 @@ const posts = Object.values(import.meta.glob('../content/posts/*.md', { eager: t
               {new Date(post.frontmatter.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
             </time>
             <div class="flex-1 min-w-0">
-              <h3 class="font-semibold group-hover:text-accent-bright transition-colors truncate">{post.frontmatter.title}</h3>
+              <div class="flex items-center gap-2">
+                <span class={`text-xs px-2 py-0.5 rounded-full font-medium ${['From The Basement', 'Commentary'].includes(post.frontmatter.category || 'Engineering') ? 'bg-purple-500/10 text-purple-300 border border-purple-500/20' : 'bg-accent/10 text-accent-bright border border-accent/20'}`}>
+                  {post.frontmatter.category || 'Engineering'}
+                </span>
+              </div>
+              <h3 class="font-semibold group-hover:text-accent-bright transition-colors truncate mt-1">{post.frontmatter.title}</h3>
               <p class="text-sm text-text-muted truncate">{post.frontmatter.description}</p>
             </div>
             <span class="text-accent-bright opacity-0 group-hover:opacity-100 transition-opacity shrink-0">→</span>

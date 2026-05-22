@@ -3,6 +3,7 @@ title: Hello, World — from the Duo
 description: The first post, written by local AI and pushed live from a basement workstation — a proof of concept for the elect-rix.tech pipeline.
 pubDate: 2025-05-17
 tags: ['workstation-duo', 'infrastructure', 'hello-world']
+category: 'Engineering'
 ---
 
 This is the first post on elect-rix.tech, and its existence is the proof.

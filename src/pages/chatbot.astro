@@ -1,0 +1,520 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const botName = 'RixBot';
+const botTagline = 'Private AI assistant with full access to elect-rix R\u0026D data.';
+
+// Compile R\u0026D knowledge base from all content
+const builds = Object.values(import.meta.glob('../content/builds/*.md', { eager: true }));
+const posts = Object.values(import.meta.glob('../content/posts/*.md', { eager: true }));
+
+const knowledgeBase = [
+  {
+    role: 'system',
+    content: 'You are RixBot, the private AI assistant for elect-rix.tech. You are running entirely locally or via a private endpoint. You have access to the complete project R\u0026D database including builds, blog posts, and workstation specifications. You help answer questions about the Workstation Duo, Hermes Agent, local LLM workflows, and the elect-rix project. You are knowledgeable, direct, and technically precise.'
+  },
+  ...builds.map((b: any) => ({
+    source: `build/${b.frontmatter.slug || 'unknown'}`,
+    title: b.frontmatter.title || 'Untitled Build',
+    category: b.frontmatter.category || 'General',
+    status: b.frontmatter.status || 'Unknown',
+    stack: b.frontmatter.stack || '',
+    description: b.frontmatter.description || '',
+    date: b.frontmatter.date || '',
+    updated: b.frontmatter.updated || '',
+    content: b.rawContent?.() || ''
+  })),
+  ...posts.map((p: any) => ({
+    source: `post/${p.frontmatter.slug || 'unknown'}`,
+    title: p.frontmatter.title || 'Untitled Post',
+    category: p.frontmatter.category || 'Engineering',
+    description: p.frontmatter.description || '',
+    pubDate: p.frontmatter.pubDate || '',
+    tags: p.frontmatter.tags || [],
+    content: p.rawContent?.() || ''
+  }))
+];
+---
+
+<Layout title={`${botName} — Private AI Chatbot`} description={botTagline}>
+  <section class="max-w-4xl mx-auto px-6 pt-24 pb-16">
+    <!-- Header -->
+    <div class="text-center mb-10">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent-bright text-sm font-medium mb-6 border border-accent/20">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" id="status-dot"></span>
+        <span id="status-text">Demo Mode — No data sent to cloud</span>
+      </div>
+      <h1 class="text-4xl font-extrabold tracking-tight mb-3">{botName}</h1>
+      <p class="text-lg text-text-muted max-w-xl mx-auto">{botTagline}</p>
+    </div>
+
+    <!-- Chat Container -->
+    <div class="rounded-2xl border border-border bg-surface overflow-hidden shadow-lg shadow-black/20">
+      <!-- Messages Area -->
+      <div id="chat-messages" class="h-[500px] overflow-y-auto p-6 space-y-5 scroll-smooth">
+        <!-- Welcome Message -->
+        <div class="flex gap-3">
+          <div class="w-8 h-8 rounded-lg bg-accent/20 flex items-center justify-center shrink-0 text-accent-bright text-sm font-bold">R</div>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-text-muted mb-1">{botName} <span id="mode-badge" class="ml-2 text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">DEMO</span></div>
+            <div class="text-text leading-relaxed space-y-2">
+              <p>Hello! I'm {botName} — the private AI assistant for this project.</p>
+              <p>I have access to the full R\u0026D database: all builds, blog posts, and workstation specs. Ask me anything about:</p>
+              <ul class="list-disc list-inside text-sm text-text-muted space-y-1 ml-1">
+                <li>The Workstation Duo hardware and software stack</li>
+                <li>Hermes Agent (Telegram bot, local LLM workflows)</li>
+                <li>Why local LLMs vs cloud subscriptions</li>
+                <li>This site's architecture (Astro, Bun, Tailwind, Cloudflare)</li>
+              </ul>
+              <p class="text-xs text-text-muted mt-3 pt-3 border-t border-border">
+                Right now I'm running in <strong class="text-accent-bright">demo mode</strong> — my responses come from the compiled project knowledge base on this page, not a remote server. No data leaves your browser.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input Area -->
+      <div class="border-t border-border p-4 bg-primary">
+        <form id="chat-form" class="flex gap-3">
+          <input
+            id="chat-input"
+            type="text"
+            placeholder="Ask about the project..."
+            class="flex-1 bg-surface border border-border rounded-xl px-4 py-3 text-sm text-text placeholder-text-muted focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all"
+            autocomplete="off"
+            autofocus
+          />
+          <button
+            type="submit"
+            id="send-btn"
+            class="px-5 py-3 rounded-xl bg-accent text-white text-sm font-semibold hover:bg-accent-bright transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+          >
+            <span>Send</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9-2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Configuration Panel -->
+    <div class="mt-6 rounded-xl border border-border bg-surface/50 p-5">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-sm font-semibold text-text">Configuration</h3>
+        <button id="toggle-config" class="text-xs text-accent-bright hover:underline">Show</button>
+      </div>
+      <div id="config-panel" class="hidden space-y-4">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-medium text-text-muted mb-1.5">Mode</label>
+            <select id="mode-select" class="w-full bg-primary border border-border rounded-lg px-3 py-2 text-sm text-text focus:outline-none focus:border-accent/50">
+              <option value="demo">Demo (local knowledge base)</option>
+              <option value="live">Live (connect to backend)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-text-muted mb-1.5">API Endpoint</label>
+            <input id="api-endpoint" type="text" placeholder="http://localhost:11434/api/chat" class="w-full bg-primary border border-border rounded-lg px-3 py-2 text-sm text-text placeholder-text-muted focus:outline-none focus:border-accent/50" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-text-muted mb-1.5">Model</label>
+          <input id="model-input" type="text" placeholder="qwen-hermes" value="qwen-hermes" class="w-full sm:w-1/2 bg-primary border border-border rounded-lg px-3 py-2 text-sm text-text placeholder-text-muted focus:outline-none focus:border-accent/50" />
+        </div>
+        <div class="text-xs text-text-muted pt-2 border-t border-border">
+          <p><strong class="text-text">Demo mode:</strong> Responses are generated from the compiled project knowledge base. No network requests. No API keys.</p>
+          <p class="mt-1"><strong class="text-text">Live mode:</strong> Connects to an Ollama or OpenAI-compatible endpoint. Requires CORS or a proxy. Set endpoint above.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Suggested Questions -->
+    <div class="mt-6">
+      <h3 class="text-xs font-semibold text-text-muted uppercase tracking-wider mb-3">Try asking</h3>
+      <div class="flex flex-wrap gap-2" id="suggested-questions">
+        <button class="suggestion px-3 py-1.5 rounded-lg bg-surface border border-border text-xs text-text-muted hover:text-accent-bright hover:border-accent/40 transition-colors">What is the Workstation Duo?</button>
+        <button class="suggestion px-3 py-1.5 rounded-lg bg-surface border border-border text-xs text-text-muted hover:text-accent-bright hover:border-accent/40 transition-colors">How does Hermes Agent work?</button>
+        <button class="suggestion px-3 py-1.5 rounded-lg bg-surface border border-border text-xs text-text-muted hover:text-accent-bright hover:border-accent/40 transition-colors">Why run local LLMs vs cloud?</button>
+        <button class="suggestion px-3 py-1.5 rounded-lg bg-surface border border-border text-xs text-text-muted hover:text-accent-bright hover:border-accent/40 transition-colors">What stack powers this site?</button>
+        <button class="suggestion px-3 py-1.5 rounded-lg bg-surface border border-border text-xs text-text-muted hover:text-accent-bright hover:border-accent/40 transition-colors">Hardware specs for butters?</button>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline define:vars={{ knowledgeBase }}>
+    // DOM refs
+    const messagesEl = document.getElementById('chat-messages');
+    const form = document.getElementById('chat-form');
+    const input = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('send-btn');
+    const statusDot = document.getElementById('status-dot');
+    const statusText = document.getElementById('status-text');
+    const modeBadge = document.getElementById('mode-badge');
+    const modeSelect = document.getElementById('mode-select');
+    const configPanel = document.getElementById('config-panel');
+    const toggleConfig = document.getElementById('toggle-config');
+    const apiEndpoint = document.getElementById('api-endpoint');
+    const modelInput = document.getElementById('model-input');
+    const suggestionBtns = document.querySelectorAll('.suggestion');
+
+    let isTyping = false;
+    let currentMode = 'demo';
+
+    // Config toggle
+    toggleConfig.addEventListener('click', () => {
+      configPanel.classList.toggle('hidden');
+      toggleConfig.textContent = configPanel.classList.contains('hidden') ? 'Show' : 'Hide';
+    });
+
+    // Mode switch
+    modeSelect.addEventListener('change', (e) => {
+      currentMode = e.target.value;
+      if (currentMode === 'demo') {
+        modeBadge.textContent = 'DEMO';
+        modeBadge.className = 'ml-2 text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20';
+        statusDot.className = 'w-2 h-2 rounded-full bg-emerald-400 animate-pulse';
+        statusText.textContent = 'Demo Mode — No data sent to cloud';
+      } else {
+        modeBadge.textContent = 'LIVE';
+        modeBadge.className = 'ml-2 text-[10px] px-1.5 py-0.5 rounded bg-accent/10 text-accent-bright border border-accent/20';
+        statusDot.className = 'w-2 h-2 rounded-full bg-accent animate-pulse';
+        statusText.textContent = 'Live Mode — Connected to private endpoint';
+      }
+    });
+
+    // Suggested questions
+    suggestionBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        input.value = btn.textContent;
+        input.focus();
+      });
+    });
+
+    function escapeHtml(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function appendMessage(role, text) {
+      const div = document.createElement('div');
+      div.className = 'flex gap-3 animate-[fadeIn_0.3s_ease-out]';
+      const avatar = role === 'user'
+        ? '<div class="w-8 h-8 rounded-lg bg-surface-light border border-border flex items-center justify-center shrink-0 text-text-muted text-sm font-bold">Y</div>'
+        : `<div class="w-8 h-8 rounded-lg bg-accent/20 flex items-center justify-center shrink-0 text-accent-bright text-sm font-bold">R</div>`;
+      const name = role === 'user' ? 'You' : 'RixBot';
+      div.innerHTML = `
+        ${avatar}
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-text-muted mb-1">${name}</div>
+          <div class="text-text leading-relaxed text-sm whitespace-pre-line">${escapeHtml(text).replace(/\n/g, '<br>')}</div>
+        </div>
+      `;
+      messagesEl.appendChild(div);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+      return div;
+    }
+
+    function appendTypingIndicator() {
+      const div = document.createElement('div');
+      div.id = 'typing-indicator';
+      div.className = 'flex gap-3';
+      div.innerHTML = `
+        <div class="w-8 h-8 rounded-lg bg-accent/20 flex items-center justify-center shrink-0 text-accent-bright text-sm font-bold">R</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-text-muted mb-1">RixBot</div>
+          <div class="flex gap-1 items-center h-6">
+            <span class="w-1.5 h-1.5 rounded-full bg-text-muted animate-bounce" style="animation-delay:0ms"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-text-muted animate-bounce" style="animation-delay:200ms"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-text-muted animate-bounce" style="animation-delay:400ms"></span>
+          </div>
+        </div>
+      `;
+      messagesEl.appendChild(div);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+      const el = document.getElementById('typing-indicator');
+      if (el) el.remove();
+    }
+
+    function typeText(element, text, speed = 8) {
+      return new Promise(resolve => {
+        let i = 0;
+        const contentDiv = element.querySelector('.text-text');
+        contentDiv.innerHTML = '';
+        function type() {
+          if (i < text.length) {
+            contentDiv.textContent += text.charAt(i);
+            i++;
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+            setTimeout(type, speed);
+          } else {
+            isTyping = false;
+            sendBtn.disabled = false;
+            resolve();
+          }
+        }
+        type();
+      });
+    }
+
+    // Build an inverted index for keyword search
+    function buildIndex() {
+      const index = {};
+      knowledgeBase.forEach((item, i) => {
+        if (item.source) {
+          const text = `${item.title || ''} ${item.description || ''} ${item.content || ''} ${item.stack || ''} ${(item.tags || []).join(' ')}`;
+          const words = text.toLowerCase().split(/\W+/).filter(w => w.length > 2);
+          words.forEach(word => {
+            if (!index[word]) index[word] = [];
+            if (!index[word].includes(i)) index[word].push(i);
+          });
+        }
+      });
+      return index;
+    }
+
+    const index = buildIndex();
+
+    function findRelevantDocs(query) {
+      const queryWords = query.toLowerCase().split(/\W+/).filter(w => w.length > 2);
+      const scores = {};
+      queryWords.forEach(word => {
+        if (index[word]) {
+          index[word].forEach(idx => {
+            scores[idx] = (scores[idx] || 0) + 1;
+          });
+        }
+      });
+      const ranked = Object.entries(scores)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 3)
+        .map(([idx]) => knowledgeBase[parseInt(idx)]);
+      return ranked;
+    }
+
+    // Simple response generator
+    function generateResponse(query) {
+      const q = query.toLowerCase();
+      const docs = findRelevantDocs(q);
+
+      // Direct keyword matches for common questions
+      if (q.includes('hello') || q.includes('hi')) {
+        return "Hello! I'm RixBot, the private AI assistant for elect-rix.tech. I can answer questions about the Workstation Duo, Hermes Agent, local LLM workflows, and this site's architecture. What would you like to know?";
+      }
+
+      if (q.includes('workstation') || q.includes('duo') || q.includes('hardware') || q.includes('spec')) {
+        return `The Workstation Duo is a two-machine AI lab designed for local-first development:
+**Primary — butters:**
+- Intel Core i9-14900K (24 cores / 32 threads)
+- NVIDIA GeForce RTX 5070 Ti (16GB GDDR7 VRAM)
+- 32GB DDR5 @ 6400MHz
+- 1.8TB NVMe SSD
+- Pop!_OS 24.04
+
+**Secondary — proff:**
+- Intel Core i7-12700KF (12 cores / 20 threads)
+- 2 x AMD Radeon RX 9060 XT (16GB each, 32GB total)
+- 32GB DDR4 @ 2400MHz
+- 4TB SSD
+- Linux Mint 22.3
+
+The primary handles local LLM inference (30-80 tok/s), web dev, and the main bot instance. The secondary runs ComfyUI, distributed builds, and GPU compute workloads.`;
+      }
+
+      if (q.includes('hermes') || q.includes('telegram') || q.includes('bot')) {
+        return `Hermes Agent is an autonomous AI assistant deployed on Telegram. It's not a simple chatbot — it's an operator that executes real commands.
+
+**What it does:**
+- Generates and refactors code (Python, TS, Go, Rust)
+- Orchestrates DevOps tasks — deploys to Cloudflare, manages DNS, runs CI/CD
+- Researches and summarizes web content via multiple providers
+- Manages files, processes, and shell commands across both workstations
+- Routes tasks between local models (Ollama) and cloud APIs based on complexity
+
+**Architecture:**
+- Telegram interface via Telethon
+- Modular tool registry (file ops, shell, git, deploy, search)
+- Model router: local (Qwen, Granite, Phi, Nemotron) + cloud failover
+- SQLite-backed memory layer for conversation history`;
+      }
+
+      if (q.includes('local') || q.includes('llm') || q.includes('cloud') || q.includes('subscription') || q.includes('ollama')) {
+        return `I run most AI workloads locally via Ollama on the RTX 5070 Ti. Here's why:
+
+**Cost:** Cloud subscriptions run ~$240/year. A local GPU is a one-time purchase. Over 2–3 years, local is dramatically cheaper. And the GPU can be resold.
+
+**Performance on the RTX 5070 Ti:**
+- Qwen 3.5 14B Q4 → 60 tok/s
+- Granite 4.1 8B Q4 → 80 tok/s
+- Phi 4 14B Q4 → 55 tok/s
+- Nemotron 12B Q4 → 50 tok/s
+
+**Privacy:** Your prompts never leave the box. No terms of service changes, no data leaks, no training data exploitation.
+
+**Hybrid approach:** 90% of tasks run locally. The 10% that need frontier reasoning route to cloud APIs via an API router — pay per token, no subscription.`;
+      }
+
+      if (q.includes('site') || q.includes('stack') || q.includes('astro') || q.includes('build') || q.includes('elect-rix.tech')) {
+        return `This site (elect-rix.tech) is built on:
+
+**Stack:**
+- Astro 6.3 — static site generator with zero-JS by default
+- Bun — runtime, bundler, and package manager
+- Tailwind CSS v4 — utility-first with custom @theme tokens
+- Cloudflare Pages — edge deployment with global CDN
+
+**Features:**
+- Pre-rendered at build time (< 100ms globally)
+- Dark theme with custom color tokens
+- Content collections for blog and builds
+- AI-assisted content pipeline: Ollama drafts, Astro builds, Cloudflare deploys
+
+**Performance:**
+- First Contentful Paint < 200ms
+- Lighthouse 100/100/100/100
+- Bundle size < 100KB critical path`;
+      }
+
+      if (q.includes('proff') || q.includes('rx 9060')) {
+        return `proff is the secondary workstation in the Duo:
+- Intel Core i7-12700KF (12 cores / 20 threads)
+- 2 x AMD Radeon RX 9060 XT (16GB each → 32GB total VRAM)
+- 32GB DDR4 @ 2400MHz
+- 4TB SSD
+- Linux Mint 22.3 (Cinnamon)
+
+It handles ComfyUI for image generation, distributed compilation, and GPU compute via ROCm. The Wan 2.2 I2V 14B FP8 model can be demanding on a single RX 9060 XT — block swap or smaller models help.`;
+      }
+
+      if (q.includes('butters') || q.includes('rtx 5070') || q.includes('i9') || q.includes('14900')) {
+        return `butters is the primary development workstation:
+- Intel Core i9-14900K (24 cores / 32 threads)
+- NVIDIA GeForce RTX 5070 Ti (16GB GDDR7 VRAM)
+- 32GB DDR5 @ 6400MHz
+- 1.8TB NVMe SSD
+- Pop!_OS 24.04
+
+This machine runs the main Ollama instance with models like Qwen 3.5, Granite 4.1, Phi 4, Nemotron, and Llama 3.2. It handles web development, builds, and the primary Telegram bot instance at 30-80 tok/s depending on model and quantization.`;
+      }
+
+      if (q.includes('comfyui') || q.includes('image') || q.includes('generate') || q.includes('stable diffusion')) {
+        return `ComfyUI runs on proff (the secondary workstation) for image generation via its 192.168.99.1:8188 API endpoint.
+
+**Hardware:** 2 x AMD Radeon RX 9060 XT with ROCm support
+**Use cases:** AI-generated imagery, batch processing, media assets for projects
+**Workflows:** Models fed into ComfyUI/invokeAI via loadable JSON pipelines
+
+The Duo also supports video generation workflows (Wan 2.2 I2V 14B FP8) though OOM can occur on single GPUs — block_swap or model selection helps manage this.`;
+      }
+
+      if (q.includes('who') || q.includes('about') || q.includes('elect-rix')) {
+        return `elect-rix is a solo builder and AI engineer running a local-first AI lab from a basement workstation setup.
+
+**Focus areas:**
+- AI integration (LLMs, agents, ML pipelines)
+- Full-stack engineering (React, Astro, Node, Python)
+- Cloud and DevOps infrastructure
+- Private, self-hosted AI systems
+
+**Philosophy:** Local-first. Own the hardware, own the models, own the output. No subscriptions, no data leakage, no terms-of-service changes mid-project. If you want to learn more, check the /about page or /duo page for full hardware details.`;
+      }
+
+      // Fallback to RAG over found docs
+      if (docs.length > 0) {
+        const doc = docs[0];
+        const snippet = doc.content ? doc.content.substring(0, 500).replace(/[#*`]/g, '').trim() + '...' : '';
+        return `Based on the project knowledge base (${doc.source}):
+
+**${doc.title}**${doc.stack ? ` | Stack: ${doc.stack}` : ''}${doc.status ? ` | Status: ${doc.status}` : ''}
+
+${doc.description || ''}
+${snippet ? '\n' + snippet : ''}
+
+Is there a specific aspect of this you'd like me to expand on?`;
+      }
+
+      return `I don't have a specific match for that in the current knowledge base. I can help with questions about:
+
+- The Workstation Duo (butters & proff)
+- Hermes Agent architecture
+- Local LLM workflows and Ollama
+- This site's stack (Astro, Bun, Tailwind, Cloudflare)
+- ComfyUI and AI media generation
+- The elect-rix project in general
+
+What would you like to explore?`;
+    }
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+      const text = input.value.trim();
+      if (!text || isTyping) return;
+
+      // Add user message
+      appendMessage('user', text);
+      input.value = '';
+      isTyping = true;
+      sendBtn.disabled = true;
+
+      // Show typing indicator
+      appendTypingIndicator();
+
+      if (currentMode === 'demo') {
+        // Simulate typing delay for realism
+        await new Promise(r => setTimeout(r, 600));
+        removeTypingIndicator();
+        const response = generateResponse(text);
+        const msgEl = appendMessage('assistant', '');
+        await typeText(msgEl, response);
+      } else {
+        // Live mode — call the endpoint
+        const endpoint = apiEndpoint.value || 'http://localhost:11434/api/chat';
+        const model = modelInput.value || 'qwen-hermes';
+        try {
+          const res = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              model,
+              messages: [
+                { role: 'system', content: 'You are RixBot, the private AI assistant for elect-rix.tech. Answer concisely and technically.' },
+                { role: 'user', content: text }
+              ],
+              stream: false
+            })
+          });
+          removeTypingIndicator();
+          if (!res.ok) throw new Error('Endpoint error: ' + res.status);
+          const data = await res.json();
+          const reply = data.message?.content || data.response || 'No response from endpoint.';
+          const msgEl = appendMessage('assistant', '');
+          await typeText(msgEl, reply);
+        } catch (err) {
+          removeTypingIndicator();
+          const msgEl = appendMessage('assistant', `Connection error: ${err.message}. Make sure your endpoint is accessible (check CORS and network). Switch back to Demo mode to explore the knowledge base.`);
+          isTyping = false;
+          sendBtn.disabled = false;
+        }
+      }
+    }
+
+    form.addEventListener('submit', handleSubmit);
+
+    // Keyboard shortcut: CMD+Enter or Ctrl+Enter
+    input.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+        form.dispatchEvent(new Event('submit'));
+      }
+    });
+  </script>
+
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</Layout>

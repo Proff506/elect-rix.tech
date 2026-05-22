@@ -6,10 +6,10 @@ status: Running
 stack: Python · Telethon · Ollama · Docker
 slug: hermes-agent
 date: 2025-04-15
-updated: 2025-05-20
+updated: 2026-06-19
 ---
 
-Hermes is an autonomous AI agent that lives on Telegram and manages real tasks. It's not a chatbot — it's an operator that reads messages, executes commands, writes code, deploys applications, and reports back. All running on the Workstation Duo with zero cloud AI dependency.
+Hermes is an autonomous AI agent that lives on Telegram and manages real tasks. It's not a chatbot — it's an operator that reads messages, executes commands, writes code, deploys applications, and reports back. Running primarily on local infrastructure with cloud APIs available for frontier tasks when needed.
 
 ## What It Does
 

@@ -6,7 +6,7 @@ status: Live
 stack: Astro · Bun · Tailwind · Cloudflare Pages
 slug: elect-rix-site
 date: 2025-05-10
-updated: 2025-05-22
+updated: 2026-05-19
 ---
 
 The site you're reading right now. A static site built with Astro, styled with Tailwind CSS v4, and deployed to Cloudflare Pages — all from a basement workstation running Pop!_OS.

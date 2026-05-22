@@ -6,7 +6,7 @@ status: Active
 stack: Pop!_OS · Linux Mint · Ollama · Docker · Cloudflare
 slug: workstation-duo
 date: 2025-03-01
-updated: 2025-05-20
+updated: 2026-06-20
 ---
 
 The Workstation Duo is a two-machine AI lab designed for local-first development. Every piece of infrastructure is self-hosted, private, and under your control.
@@ -15,20 +15,20 @@ The Workstation Duo is a two-machine AI lab designed for local-first development
 
 - **CPU**: Intel Core i9-14900K (24 cores / 32 threads)
 - **GPU**: NVIDIA GeForce RTX 5070 Ti (16GB GDDR7 VRAM)
-- **RAM**: 32GB DDR5-6000
-- **Storage**: 1.8TB NVMe Gen 4 SSD
-- **OS**: Pop!_OS 22.04
+- **RAM**: 32GB DDR5 @6400MHz
+- **Storage**: 1.8TB NVMe SSD
+- **OS**: Pop!_OS 24.04
 - **Role**: Primary development, local LLM inference, web hosting
 
 This machine runs Ollama with models like Qwen 3.5, Granite 4.1, Phi 4, Nemotron, and Llama 3.2. At 30-80 tok/s depending on model and quantization, it's fast enough for real interactive work. It handles all web development, builds, and the primary Telegram bot instance.
 
 ## Secondary Workstation — proff
 
-- **CPU**: Intel Core i7 (8 cores / 16 threads)
-- **GPU**: Dual AMD RX 9060 XT (32GB VRAM total)
-- **RAM**: 32GB DDR4-3200
-- **Storage**: 2TB SATA SSD
-- **OS**: Linux Mint 21 (Cinnamon)
+- **CPU**: Intel Core i7-12700KF (12 cores / 20 threads)
+- **GPU**: 2 x 16GB AMD Radeon RX 9060 XT (32GB VRAM total)
+- **RAM**: 32GB DDR4 @2400MHz
+- **Storage**: 4TB SSD
+- **OS**: Linux Mint 22.3 (Cinnamon)
 - **Role**: Distributed builds, GPU compute, media generation
 
 This machine handles distributed compilation, ComfyUI for image generation, and GPU workloads that would tie up the primary workstation. With ROCm support, both AMD cards are usable for compute tasks.

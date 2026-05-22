@@ -4,9 +4,10 @@ description: Cloud LLM subscriptions cost $20/month and send your data to third 
 pubDate: 2025-05-20
 tags: ['local-ai', 'ollama', 'privacy', 'workstation-duo']
 slug: why-local-llms
+category: 'Engineering'
 ---
 
-I haven't paid for a cloud LLM subscription since I set up Ollama. The reasoning isn't just about cost — it's about owning your tools.
+I run most of my AI workloads locally via Ollama. Cloud APIs handle the occasional frontier task. The reasoning isn't just about cost — it's about owning your tools.
 
 ## The Cost Reality
 
@@ -14,12 +15,11 @@ Cloud LLM subscriptions run $240/year. For that you get a web interface, API acc
 
 A local setup:
 
-- **GPU**: RTX 5070 Ti — $700-800 one-time
-- **Electricity**: ~$15-25/month if you run inference 8 hours/day
+- **GPU**: RTX 5070 Ti — $749 MSRP; street prices vary significantly by region, tariffs, and retailer
 - **Models**: Free, community-trained, or self-hosted
 - **Privacy**: Your data never leaves the box
 
-Over two years, the local setup is cheaper. Over three, it's dramatically cheaper. And you can sell the GPU.
+The GPU is a one-time purchase. Models are free. Over two years, you're ahead compared to a cloud subscription. Over three, dramatically so. And you can sell the GPU if you ever move on.
 
 ## Performance On Modern Hardware
 

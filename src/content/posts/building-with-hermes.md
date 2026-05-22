@@ -4,6 +4,7 @@ description: From a blank Astro project to a deployed site in one session. Here'
 pubDate: 2025-05-21
 tags: ['astro', 'ai-workflow', 'hermes-agent', 'build-log']
 slug: building-with-hermes
+category: 'Engineering'
 ---
 
 This site was built by an AI agent named Hermes. Not assisted by — built by. I gave the instructions, checked the output, and directed the vision. The agent handled every line of code, every deployment step, and every content file.
