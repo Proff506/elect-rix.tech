@@ -2,42 +2,53 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="About — elect-rix.tech" description="AI-powered engineering by elect-rix. Full-stack builds, local LLM workflows, hands-on consulting.">
+<Layout title="About — elect-rix.tech" description="AI that works when the cloud doesn't. Resilience, privacy, and verifiable trust — built in, not bolted on.">
   <section class="max-w-3xl mx-auto px-6 pt-24 pb-16">
     <header class="mb-10">
       <h1 class="text-4xl font-extrabold tracking-tight mb-4">About</h1>
-      <p class="text-lg text-text-muted leading-relaxed">The builder behind the bots. What I do, how I work, and why local AI matters.</p>
+      <p class="text-lg text-text-muted leading-relaxed">Why this exists, what I build, and how local-first architecture changes everything.</p>
     </header>
 
     <div class="space-y-8">
       <section>
-        <h2 class="text-2xl font-bold mb-3">Who I Am</h2>
-        <p class="text-text-muted leading-relaxed">
-          I'm elect-rix — a solo builder and AI engineer running a two-workstation development lab. I don't work at a big tech company. I don't have a team. What I have is two powerful machines, a stack of local AI models, and the obsessive drive to build things that work.
-        </p>
-      </section>
-
-      <section>
-        <h2 class="text-2xl font-bold mb-3">What I Do</h2>
+        <h2 class="text-2xl font-bold mb-3">The Problem</h2>
         <div class="space-y-3 text-text-muted leading-relaxed">
-          <p><strong class="text-text">AI Integration —</strong> I wire large language models into real applications. Not demos — production systems that handle real workloads, maintain context, and deliver reliable results. Local models via Ollama, cloud APIs when needed, always with proper tooling and agent orchestration.</p>
-          <p><strong class="text-text">Full-Stack Engineering —</strong> I build complete products from database to pixel. TypeScript, React, Astro, Node, Python — whatever fits the problem. I care about architecture, type safety, and performance.</p>
-          <p><strong class="text-text">Cloud & DevOps —</strong> I deploy to AWS, Cloudflare, and self-hosted infrastructure. IaC, CI/CD, container orchestration, automated backups. If it breaks at 3am, it should fix itself.</p>
-          <p><strong class="text-text">Consulting —</strong> I advise teams on AI strategy, architecture decisions, and hands-on implementation. I review code, design systems, and mentor engineers.</p>
+          <p>89% of collaborative robots send telemetry home by default. 43% of operators have had critical failures when the cloud drops. Worker trust in cobots falls 34% after six months of use. Audit comes, and nobody can prove what their systems did — or didn't — send.</p>
+          <p>The industry built for always-on connectivity. The real world isn't always on. Systems that depend on the cloud to think, to verify, to function — these fail at the worst possible moment. And the data they leak in the meantime isn't a configuration issue. It's an architecture problem.</p>
         </div>
       </section>
 
       <section>
-        <h2 class="text-2xl font-bold mb-3">How I Work</h2>
+        <h2 class="text-2xl font-bold mb-3">The Position</h2>
         <div class="space-y-3 text-text-muted leading-relaxed">
-          <p>I work from the Workstation Duo — two machines in my home lab. The primary workstation runs Pop!_OS with an RTX 5070 Ti for local LLM inference. The secondary handles distributed builds and GPU compute on Linux Mint. Everything is private by default. Your data never touches a third-party API unless you explicitly ask for it.</p>
-          <p>I use AI as a collaborator, not a replacement. The models handle the boilerplate, the research, and the repetitive tasks. I handle the architecture, the edge cases, and the judgment calls. That's the only way to build systems that actually work.</p>
+          <p><strong class="text-text">Integrity</strong> — the system does exactly what it claims. No hidden behavior, no secret telemetry, no "trust us." Provable. Auditable. The logs show what happened, and nothing happened that isn't in the logs.</p>
+          <p><strong class="text-text">Loyalty</strong> — the system stays working for <em>you</em>. Not for its vendor. Not for the cloud. When the connection drops, it keeps running. When the API changes, it keeps running. When the vendor pivots, it keeps running. Offline by design, cloud-optional by choice.</p>
+          <p><strong class="text-text">Honesty</strong> — you can verify everything. Telemetry transparency: see every packet, prove nothing leaves. Behavior transparency: inspect what the agent does, not just what it says. Trust measured in evidence, not faith.</p>
+          <p>These aren't values on a poster. They're testable properties of a system. A system either sends data home or it doesn't. A system either runs offline or it doesn't. A log either shows what happened or it doesn't. You can't fake these with a configuration toggle. They have to be built in.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-3">The Path</h2>
+        <div class="space-y-3 text-text-muted leading-relaxed">
+          <p><strong class="text-text">Consultancy</strong> — Audit your AI deployment. Find the cloud-dependency gaps, the telemetry leaks, the compliance risks. Close them by design, not by configuration. The problems we find inform what gets built next.</p>
+          <p><strong class="text-text">Product</strong> — An offline-capable AI agent layer. Drop it on your edge hardware. It works when the cloud doesn't. Zero telemetry by design. Verifiable trust in every operation. What consultancy teaches about real needs, product ships as working code.</p>
+          <p><strong class="text-text">Platform</strong> — The standard for resilient, private, verifiable AI. Not just our code — the definition of what "trust you can verify" means in practice. Auditable. Interoperable. Open where it matters.</p>
+          <p>Each lane feeds the next. Connect with partners and clients who share these values. Build. Improve. Repeat. Like an intelligent design should.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-3">The Builder</h2>
+        <div class="space-y-3 text-text-muted leading-relaxed">
+          <p>elect-rix is a solo operation running a two-workstation AI lab. Primary: Pop!_OS with an RTX 5070 Ti for local LLM inference. Secondary: Linux Mint with dual GPUs for distributed builds and compute. Everything self-hosted. Everything private by default.</p>
+          <p>I use AI as a collaborator, not a replacement. The models handle the boilerplate, the research, the repetitive tasks. I handle the architecture, the edge cases, and the judgment calls. That's the only way to build systems that actually work — and keep working when conditions change.</p>
         </div>
       </section>
 
       <section>
         <h2 class="text-2xl font-bold mb-3">Get in Touch</h2>
-        <p class="text-text-muted leading-relaxed mb-4">Interested in working together? Have a project that needs AI integration or full-stack engineering? Let's talk.</p>
+        <p class="text-text-muted leading-relaxed mb-4">Building something that needs to work when the cloud doesn't? Want an audit of your AI deployment's resilience and privacy posture? Let's talk.</p>
         <a href="mailto:hello@elect-rix.tech" class="inline-flex items-center px-5 py-2.5 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright transition-colors">
           hello@elect-rix.tech
         </a>

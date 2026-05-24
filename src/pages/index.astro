@@ -4,23 +4,23 @@ import { Image } from 'astro:assets';
 
 const services = [
   {
-    title: 'AI Integration',
-    description: 'Connect LLMs, agents, and ML pipelines into your products. Local or cloud — your data stays yours.',
-    icon: '🤖',
+    title: 'Resilience Engineering',
+    description: 'AI systems that run when the cloud doesn\'t. Offline-capable agents, local inference, and fallback architectures that keep working under failure.',
+    icon: '🛡️',
   },
   {
-    title: 'Full-Stack Engineering',
-    description: 'React, Astro, Node, Python — clean architecture, typed APIs, and performance that scales.',
-    icon: '⚡',
+    title: 'Privacy Architecture',
+    description: 'Zero telemetry by design, not by configuration. Your data stays on your hardware. Audit every packet. Prove nothing leaves.',
+    icon: '🔒',
   },
   {
-    title: 'Cloud & DevOps',
-    description: 'Deploy anywhere. AWS, Cloudflare, self-hosted. CI/CD, IaC, and automated workflows.',
-    icon: '☁️',
+    title: 'Verifiable Trust',
+    description: 'Trust measured in logs, not promises. Inspectable behavior, transparent operations, and proof that your systems do exactly what they claim.',
+    icon: '✅',
   },
   {
-    title: 'Consulting',
-    description: 'Strategic technology decisions, architecture reviews, and hands-on mentorship for your team.',
+    title: 'Integration & Consulting',
+    description: 'From audit to deployment. Find the gaps in your AI stack — cloud dependency, telemetry leaks, compliance risks — and close them by design.',
     icon: '🎯',
   },
 ];
@@ -59,7 +59,7 @@ const builds = [
 const posts = Object.values(import.meta.glob('../content/posts/*.md', { eager: true })).slice(0, 3);
 ---
 
-<Layout title="elect-rix.tech — AI Engineering & Full-Stack Development" description="AI-powered engineering. Full-stack builds, local LLM workflows, and hands-on consulting by elect-rix.">
+<Layout title="elect-rix.tech — AI That Works When the Cloud Doesn't" description="Resilient, private, verifiable AI systems. Integrity, loyalty, honesty — built in, not bolted on.">
   <!-- Hero -->
   <section class="relative overflow-hidden">
     <div class="max-w-5xl mx-auto px-6 pt-32 pb-20 text-center">
@@ -68,11 +68,11 @@ const posts = Object.values(import.meta.glob('../content/posts/*.md', { eager: t
         Available for projects
       </div>
       <h1 class="text-5xl sm:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6">
-        Built by AI.<br />
-        <span class="text-accent-bright">Shipped by humans.</span>
+        Make it work.<br />
+        <span class="text-accent-bright">Trust you can verify.</span>
       </h1>
       <p class="text-lg sm:text-xl text-text-muted max-w-2xl mx-auto leading-relaxed mb-10">
-        Local LLMs, full-stack engineering, and cloud infrastructure — elect-rix builds autonomous systems and ships products that scale.
+        When the cloud drops, your systems shouldn't. When the audit comes, your data should be yours to account for. AI that works offline, leaks nothing, and proves it — built in, not bolted on.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="/builds" class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright transition-colors">
@@ -90,17 +90,17 @@ const posts = Object.values(import.meta.glob('../content/posts/*.md', { eager: t
     <div class="max-w-5xl mx-auto px-6 py-20">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div>
-          <h2 class="text-3xl font-bold tracking-tight mb-4">Who is elect-rix?</h2>
+          <h2 class="text-3xl font-bold tracking-tight mb-4">Built Different</h2>
           <div class="space-y-4 text-text-muted leading-relaxed">
             <p>
-              I'm a solo builder running a two-workstation AI lab. One machine handles local LLM inference with Ollama and 16GB VRAM. The other manages distributed builds and GPU compute. Everything is self-hosted, private, and fast.
+              One builder. Two workstations. Local LLM inference on real hardware, not a cloud API with a quota. Everything is self-hosted, private, and runs offline.
             </p>
             <p>
-              I build autonomous AI agents, full-stack web applications, and cloud infrastructure. My tools are local-first — your data never leaves the box unless you want it to. From prototype to production, the Workstation Duo delivers.
+              The AI industry builds for connectivity. I build for what happens when it fails. Resilience isn't a feature you add — it's architecture you commit to. Your data doesn't leave the box. Your systems don't drop when the cloud does. Your trust is verifiable, not taken on faith.
             </p>
           </div>
-          <a href="/duo" class="inline-flex items-center gap-2 text-accent-bright font-medium mt-6 hover:underline">
-            Meet the Workstation Duo →
+          <a href="/about" class="inline-flex items-center gap-2 text-accent-bright font-medium mt-6 hover:underline">
+            Why it matters →
           </a>
         </div>
         <div class="p-6 rounded-xl border border-border bg-primary">
@@ -135,8 +135,8 @@ const posts = Object.values(import.meta.glob('../content/posts/*.md', { eager: t
   <!-- Services -->
   <section class="max-w-5xl mx-auto px-6 py-20">
     <div class="text-center mb-14">
-      <h2 class="text-3xl font-bold tracking-tight mb-3">What I Do</h2>
-      <p class="text-text-muted max-w-xl mx-auto">End-to-end engineering — from AI agents to production deployments.</p>
+      <h2 class="text-3xl font-bold tracking-tight mb-3">What I Build</h2>
+      <p class="text-text-muted max-w-xl mx-auto">Resilient, private, verifiable — not features. Architecture.</p>
     </div>
     <div class="grid sm:grid-cols-2 gap-6">
       {services.map((s) => (

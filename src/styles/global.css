@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --color-primary: #0a0a0f;
@@ -26,22 +27,29 @@ body {
   color: #fff;
 }
 
-/* Markdown content styles */
-.prose p { margin-bottom: 1.25em; line-height: 1.75; }
-.prose h2 { font-size: 1.75rem; font-weight: 700; margin: 1.5em 0 0.75em; letter-spacing: -0.025em; }
-.prose h3 { font-size: 1.375rem; font-weight: 600; margin: 1.25em 0 0.5em; }
-.prose ul { list-style-type: disc; padding-left: 1.5em; margin-bottom: 1.25em; }
-.prose ol { list-style-type: decimal; padding-left: 1.5em; margin-bottom: 1.25em; }
-.prose li { margin-bottom: 0.375em; }
-.prose a { color: var(--color-accent-bright); text-decoration: underline; text-underline-offset: 2px; }
+/* Override prose defaults with site tokens */
+.prose {
+  --tw-prose-body: var(--color-text);
+  --tw-prose-headings: var(--color-text);
+  --tw-prose-lead: var(--color-text-muted);
+  --tw-prose-links: var(--color-accent-bright);
+  --tw-prose-bold: var(--color-text);
+  --tw-prose-counters: var(--color-text-muted);
+  --tw-prose-bullets: var(--color-text-muted);
+  --tw-prose-hr: var(--color-border);
+  --tw-prose-quotes: var(--color-text-muted);
+  --tw-prose-quote-borders: var(--color-accent);
+  --tw-prose-captions: var(--color-text-muted);
+  --tw-prose-code: var(--color-text);
+  --tw-prose-pre-code: var(--color-text);
+  --tw-prose-pre-bg: var(--color-surface);
+  --tw-prose-th-borders: var(--color-border);
+  --tw-prose-td-borders: var(--color-border);
+}
+.prose a { text-underline-offset: 2px; }
 .prose a:hover { color: #a5b4fc; }
-.prose code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.875em; background: var(--color-surface-light); padding: 0.125em 0.375em; border-radius: 0.25em; border: 1px solid var(--color-border); }
-.prose pre { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 0.75em; padding: 1em; overflow-x: auto; margin-bottom: 1.25em; }
-.prose pre code { padding: 0; background: none; border: none; }
-.prose blockquote { border-left: 3px solid var(--color-accent); padding-left: 1em; margin: 1.25em 0; color: var(--color-text-muted); font-style: italic; }
-.prose hr { border: none; height: 1px; background: var(--color-border); margin: 2em 0; }
+.prose code { font-family: 'JetBrains Mono', ui-monospace, monospace; background: var(--color-surface-light); border: 1px solid var(--color-border); }
+.prose pre { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 0.75em; }
+.prose blockquote { font-style: italic; }
 .prose img { border-radius: 0.5em; border: 1px solid var(--color-border); }
-.prose table { width: 100%; border-collapse: collapse; margin-bottom: 1.25em; }
-.prose th, .prose td { padding: 0.5em 0.75em; text-align: left; border-bottom: 1px solid var(--color-border); }
-.prose th { font-weight: 600; color: var(--color-text); }
-.prose strong { color: var(--color-text); font-weight: 600; }
+.prose strong { font-weight: 600; }
