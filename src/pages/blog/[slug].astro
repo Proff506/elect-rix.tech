@@ -13,10 +13,7 @@ const { post, slug } = Astro.props;
 const { Content } = post;
 
 const category = post.frontmatter.category || 'Engineering';
-const isBasement = category === 'From The Basement';
-const categoryClass = isBasement
-  ? 'bg-purple-500/10 text-purple-300 border-purple-500/20'
-  : 'bg-accent/10 text-accent-bright border-accent/20';
+const categoryClass = 'bg-accent/10 text-accent-bright border-accent/20';
 ---
 
 <Layout title={`${post.frontmatter.title} — elect-rix.tech`} description={post.frontmatter.description}>
@@ -26,7 +23,7 @@ const categoryClass = isBasement
         <time class="text-sm text-text-muted">
           {new Date(post.frontmatter.pubDate || Date.now()).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
         </time>
-        {isBasement && (
+        {category && (
           <span class={`text-xs px-2.5 py-0.5 rounded-full font-medium border ${categoryClass}`}>
             {category}
           </span>

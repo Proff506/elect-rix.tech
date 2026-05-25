@@ -12,7 +12,7 @@ const posts = defineCollection({
     heroImage: z.string().optional(),
     draft: z.boolean().default(false),
     tags: z.array(z.string()).default([]),
-    category: z.enum(['Engineering', 'From The Basement', 'Commentary']).default('Engineering'),
+    category: z.enum(['Engineering']).default('Engineering'),
   }),
 });
 

@@ -5,7 +5,7 @@ import { Image } from 'astro:assets';
 const services = [
   {
     title: 'Resilience Engineering',
-    description: 'AI systems that run when the cloud doesn\'t. Offline-capable agents, local inference, and fallback architectures that keep working under failure.',
+    description: 'AI systems that run when the cloud doesn\'t. Protected even when the lights go out.',
     icon: '🛡️',
   },
   {
@@ -27,13 +27,6 @@ const services = [
 
 const builds = [
   {
-    name: 'RixBot',
-    category: 'AI Agent Platform',
-    description: 'Private AI chatbot with full R\u0026D knowledge base access. Demo mode with zero cloud dependency, live mode via Ollama endpoint.',
-    stack: 'Astro · JS · RAG',
-    status: 'Live',
-  },
-  {
     name: 'Hermes Agent Bot',
     category: 'AI Agent Platform',
     description: 'Autonomous AI assistant deployed on Telegram. Manages coding tasks, research, and DevOps — 24/7.',
@@ -48,9 +41,9 @@ const builds = [
     status: 'Live',
   },
   {
-    name: 'Workstation Duo',
+    name: 'The Lab',
     category: 'Lab Infrastructure',
-    description: 'Two-machine setup: local LLM inference, distributed builds, GPU compute, and self-hosted services.',
+    description: 'Dedicated infrastructure for local AI inference, distributed compute, and self-hosted services.',
     stack: 'Pop!_OS · Ollama · Docker',
     status: 'Active',
   },
@@ -59,7 +52,7 @@ const builds = [
 const posts = Object.values(import.meta.glob('../content/posts/*.md', { eager: true })).slice(0, 3);
 ---
 
-<Layout title="elect-rix.tech — AI That Works When the Cloud Doesn't" description="Resilient, private, verifiable AI systems. Integrity, loyalty, honesty — built in, not bolted on.">
+<Layout title="elect-rix.tech — Protect Your Data. Even When the Lights Go Out." description="Protect your data. Even when the lights go out. Resilient, private, verifiable AI systems. Integrity, loyalty, honesty — built in, not bolted on.">
   <!-- Hero -->
   <section class="relative overflow-hidden">
     <div class="max-w-5xl mx-auto px-6 pt-32 pb-20 text-center">
@@ -72,13 +65,13 @@ const posts = Object.values(import.meta.glob('../content/posts/*.md', { eager: t
         <span class="text-accent-bright">Trust you can verify.</span>
       </h1>
       <p class="text-lg sm:text-xl text-text-muted max-w-2xl mx-auto leading-relaxed mb-10">
-        When the cloud drops, your systems shouldn't. When the audit comes, your data should be yours to account for. AI that works offline, leaks nothing, and proves it — built in, not bolted on.
+        Protect your data. Even when the lights go out. When the cloud drops, your systems shouldn't. When the audit comes, your data should be yours to account for. AI that works offline, leaks nothing, and proves it — built in, not bolted on.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="/builds" class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright transition-colors">
           See Builds →
         </a>
-        <a href="mailto:hello@elect-rix.tech" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-border text-text font-semibold hover:bg-surface-light transition-colors">
+        <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-border text-text font-semibold hover:bg-surface-light transition-colors">
           Get in Touch
         </a>
       </div>
@@ -93,7 +86,7 @@ const posts = Object.values(import.meta.glob('../content/posts/*.md', { eager: t
           <h2 class="text-3xl font-bold tracking-tight mb-4">Built Different</h2>
           <div class="space-y-4 text-text-muted leading-relaxed">
             <p>
-              One builder. Two workstations. Local LLM inference on real hardware, not a cloud API with a quota. Everything is self-hosted, private, and runs offline.
+              One builder. Dedicated infrastructure. Local LLM inference on owned hardware, not a cloud API with a quota. Everything is self-hosted, private, and runs offline by architecture.
             </p>
             <p>
               The AI industry builds for connectivity. I build for what happens when it fails. Resilience isn't a feature you add — it's architecture you commit to. Your data doesn't leave the box. Your systems don't drop when the cloud does. Your trust is verifiable, not taken on faith.
@@ -105,26 +98,29 @@ const posts = Object.values(import.meta.glob('../content/posts/*.md', { eager: t
         </div>
         <div class="p-6 rounded-xl border border-border bg-primary">
           <div class="space-y-4">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent-bright">🖥️</div>
-              <div>
-                <div class="font-medium">Primary Workstation</div>
-                <div class="text-sm text-text-muted">Intel i9-14900K · RTX 5070 Ti · 32GB DDR5 · Pop!_OS</div>
-              </div>
+            <div class="flex items-center justify-between">
+              <span class="text-text-muted">Local LLM</span>
+              <span class="text-accent-bright font-semibold">Ollama</span>
             </div>
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent-bright">🖥️</div>
-              <div>
-                <div class="font-medium">Secondary Workstation</div>
-                <div class="text-sm text-text-muted">Intel i7-12700KF · Dual RX 9060 XT · 32GB DDR4 · Linux Mint</div>
-              </div>
+            <div class="flex items-center justify-between">
+              <span class="text-text-muted">Container Platform</span>
+              <span class="text-accent-bright font-semibold">Docker</span>
             </div>
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent-bright">🧠</div>
-              <div>
-                <div class="font-medium">Local AI Stack</div>
-                <div class="text-sm text-text-muted">Ollama · Qwen · Granite · Phi · Nemotron</div>
-              </div>
+            <div class="flex items-center justify-between">
+              <span class="text-text-muted">Orchestration</span>
+              <span class="text-accent-bright font-semibold">Docker Swarm</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-text-muted">Operating System</span>
+              <span class="text-accent-bright font-semibold">Pop!_OS</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-text-muted">GPU</span>
+              <span class="text-accent-bright font-semibold">RTX 5070 Ti</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-text-muted">Processor</span>
+              <span class="text-accent-bright font-semibold">Core i9 14900K</span>
             </div>
           </div>
         </div>
@@ -133,79 +129,111 @@ const posts = Object.values(import.meta.glob('../content/posts/*.md', { eager: t
   </section>
 
   <!-- Services -->
-  <section class="max-w-5xl mx-auto px-6 py-20">
-    <div class="text-center mb-14">
-      <h2 class="text-3xl font-bold tracking-tight mb-3">What I Build</h2>
-      <p class="text-text-muted max-w-xl mx-auto">Resilient, private, verifiable — not features. Architecture.</p>
-    </div>
-    <div class="grid sm:grid-cols-2 gap-6">
-      {services.map((s) => (
-        <div class="group p-6 rounded-xl border border-border bg-surface hover:bg-surface-light transition-all hover:-translate-y-0.5">
-          <div class="text-3xl mb-4">{s.icon}</div>
-          <h3 class="text-lg font-semibold mb-2">{s.title}</h3>
-          <p class="text-text-muted leading-relaxed text-sm">{s.description}</p>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- Featured Builds -->
-  <section class="border-y border-border bg-surface/50">
-    <div class="max-w-5xl mx-auto px-6 py-20">
-      <div class="flex items-end justify-between mb-10">
-        <div>
-          <h2 class="text-3xl font-bold tracking-tight mb-2">Featured Builds</h2>
-          <p class="text-text-muted">Projects shipping from the Workstation Duo.</p>
-        </div>
-        <a href="/builds" class="text-sm text-accent-bright font-medium hover:underline hidden sm:block">View All →</a>
+  <section class="py-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">What I Do</h2>
+        <p class="text-text-muted text-lg max-w-2xl mx-auto">
+          Not features. Principles. Every engagement starts with these four commitments.
+        </p>
       </div>
-      <div class="grid sm:grid-cols-3 gap-5">
-        {builds.map((b) => (
-          <div class="p-5 rounded-xl border border-border bg-primary hover:bg-surface-light transition-all group">
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-accent/10 text-accent-bright">{b.category}</span>
-              <span class="text-xs text-emerald-400 font-medium flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>{b.status}
-              </span>
+      <div class="grid sm:grid-cols-2 gap-6">
+        {services.map((service) => (
+          <div class="p-6 rounded-xl border border-border bg-primary hover:border-accent/30 transition-colors group">
+            <div class="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+              {service.icon}
             </div>
-            <h3 class="font-semibold mb-2 group-hover:text-accent-bright transition-colors">{b.name}</h3>
-            <p class="text-sm text-text-muted leading-relaxed mb-4">{b.description}</p>
-            <div class="text-xs text-text-muted font-mono">{b.stack}</div>
+            <h3 class="text-xl font-semibold mb-3">{service.title}</h3>
+            <p class="text-text-muted leading-relaxed">{service.description}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Latest Posts -->
-  <section class="max-w-5xl mx-auto px-6 py-20">
-    <div class="flex items-end justify-between mb-10">
-      <div>
-        <h2 class="text-3xl font-bold tracking-tight mb-2">From the Blog</h2>
-        <p class="text-text-muted">Experiments, tutorials, and lessons learned.</p>
+  <!-- Builds -->
+  <section class="border-y border-border bg-surface/50 py-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Current Builds</h2>
+        <p class="text-text-muted text-lg max-w-2xl mx-auto">
+          Shipping from the lab. Production-grade systems built entirely on owned infrastructure.
+        </p>
       </div>
-      <a href="/blog" class="text-sm text-accent-bright font-medium hover:underline hidden sm:block">All Posts →</a>
-    </div>
-    <div class="space-y-4">
-      {posts.map((post: any) => (
-        <article class="group p-5 rounded-xl border border-border bg-surface hover:bg-surface-light transition-colors">
-          <a href={`/blog/${post.frontmatter.slug || post.file.split('/').pop().replace('.md','')}`} class="flex flex-col sm:flex-row sm:items-center gap-4">
-            <time class="text-sm text-text-muted whitespace-nowrap w-32 shrink-0">
-              {new Date(post.frontmatter.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
-            </time>
+      <div class="space-y-6">
+        {builds.map((build) => (
+          <a 
+            href={`/builds`}
+            class="flex flex-col lg:flex-row lg:items-center gap-6 p-6 rounded-xl border border-border bg-primary hover:border-accent transition-all group"
+          >
             <div class="flex-1 min-w-0">
-              <div class="flex items-center gap-2">
-                <span class={`text-xs px-2 py-0.5 rounded-full font-medium ${['From The Basement', 'Commentary'].includes(post.frontmatter.category || 'Engineering') ? 'bg-purple-500/10 text-purple-300 border border-purple-500/20' : 'bg-accent/10 text-accent-bright border border-accent/20'}`}>
-                  {post.frontmatter.category || 'Engineering'}
+              <div class="flex items-center gap-3 mb-2">
+                <h3 class="text-xl font-semibold group-hover:text-accent-bright transition-colors">
+                  {build.name}
+                </h3>
+                <span class="px-3 py-1 rounded-full bg-surface-light text-sm font-medium">
+                  {build.category}
+                </span>
+                <span class="px-3 py-1 rounded-full bg-surface-light text-sm font-medium text-accent-bright">
+                  {build.status}
                 </span>
               </div>
-              <h3 class="font-semibold group-hover:text-accent-bright transition-colors truncate mt-1">{post.frontmatter.title}</h3>
-              <p class="text-sm text-text-muted truncate">{post.frontmatter.description}</p>
+              <p class="text-text-muted mb-3 leading-relaxed">{build.description}</p>
+              <div class="flex items-center gap-2 text-sm text-text-muted">
+                <span class="font-semibold">Stack:</span>
+                <span>{build.stack}</span>
+              </div>
             </div>
-            <span class="text-accent-bright opacity-0 group-hover:opacity-100 transition-opacity shrink-0">→</span>
           </a>
-        </article>
-      ))}
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Posts -->
+  <section class="py-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Latest Posts</h2>
+        <p class="text-text-muted text-lg max-w-2xl mx-auto">
+          Writing on resilience, privacy, and verifiable trust in AI systems.
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-3 gap-6">
+        {posts.map((post) => {
+          const data = (post as { frontmatter: { title: string, description: string, date: string } }).frontmatter;
+          const url = (post as { url: string }).url;
+          return (
+            <a 
+              href={url}
+              class="p-6 rounded-xl border border-border bg-primary hover:border-accent transition-all group"
+            >
+              <div class="text-sm text-accent-bright mb-3">{data.date}</div>
+              <h3 class="text-lg font-semibold mb-3 group-hover:text-accent-bright transition-colors">
+                {data.title}
+              </h3>
+              <p class="text-text-muted text-sm leading-relaxed">
+                {data.description}
+              </p>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-y border-border bg-surface/50 py-20">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-6">
+        Start with an audit, not an apology.
+      </h2>
+      <p class="text-text-muted text-lg mb-10 leading-relaxed">
+        I help teams find the risks in their AI stack — cloud dependency, privacy leaks, compliance gaps — before a regulator, a breach, or a lawsuit does. If you already know you have a problem, we start there. If you want proof you don't, we find that too.
+      </p>
+      <a href="/contact" class="inline-flex items-center justify-center px-8 py-4 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright transition-colors text-lg">
+        Get in Touch
+      </a>
     </div>
   </section>
 </Layout>

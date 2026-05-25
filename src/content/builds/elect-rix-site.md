@@ -25,7 +25,7 @@ Astro is the right tool for content sites. It produces zero-JS pages by default,
 
 ## AI-Assisted Workflow
 
-The entire site was designed and built with the help of local LLMs running on the Workstation Duo. From the copy to the component structure, from the color palette to the deployment pipeline — Hermes Agent (a custom AI agent) handled the implementation while elect-rix directed the vision.
+The entire site was designed and built with the help of local LLMs running in The Lab. From the copy to the component structure, from the color palette to the deployment pipeline — Hermes Agent (a custom AI agent) handled the implementation while elect-rix directed the vision.
 
 ## Performance
 

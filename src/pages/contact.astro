@@ -1,0 +1,116 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact — elect-rix.tech" description="Start a conversation. Protect your data. Even when the lights go out.">
+  <section class="relative overflow-hidden">
+    <div class="max-w-3xl mx-auto px-6 pt-32 pb-20">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent-bright text-sm font-medium mb-6 border border-accent/20">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Available for projects
+        </div>
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.1] mb-6">
+          Start a Conversation
+        </h1>
+        <p class="text-lg text-text-muted max-w-xl mx-auto leading-relaxed">
+          Protect your data. Even when the lights go out. Tell us what you are building and what you need to protect.
+        </p>
+      </div>
+
+      <form
+        action="https://formspree.io/f/mbdbaavo"
+        method="POST"
+        class="rounded-xl border border-border bg-primary p-6 sm:p-8 space-y-6"
+      >
+        <!-- Name -->
+        <div>
+          <label for="name" class="block text-sm font-medium text-text mb-2">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            placeholder="Your full name"
+            class="w-full px-4 py-3 rounded-lg bg-surface-light border border-border text-text placeholder-text-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors"
+          />
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="email" class="block text-sm font-medium text-text mb-2">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="you@company.com"
+            class="w-full px-4 py-3 rounded-lg bg-surface-light border border-border text-text placeholder-text-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors"
+          />
+        </div>
+
+        <!-- Company -->
+        <div>
+          <label for="company" class="block text-sm font-medium text-text mb-2">Company</label>
+          <input
+            type="text"
+            id="company"
+            name="company"
+            placeholder="Organization name (optional)"
+            class="w-full px-4 py-3 rounded-lg bg-surface-light border border-border text-text placeholder-text-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors"
+          />
+        </div>
+
+        <!-- Message -->
+        <div>
+          <label for="message" class="block text-sm font-medium text-text mb-2">What are you protecting?</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="5"
+            required
+            placeholder="Describe your environment, pain point, or timeline."
+            class="w-full px-4 py-3 rounded-lg bg-surface-light border border-border text-text placeholder-text-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors resize-y"
+          ></textarea>
+        </div>
+
+        <!-- Budget -->
+        <div>
+          <label for="budget" class="block text-sm font-medium text-text mb-2">Estimated Budget Range</label>
+          <select
+            id="budget"
+            name="budget"
+            class="w-full px-4 py-3 rounded-lg bg-surface-light border border-border text-text focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors appearance-none cursor-pointer"
+          >
+            <option value="" class="bg-surface-light">-- Select --</option>
+            <option value="under-5k" class="bg-surface-light">Under $5,000</option>
+            <option value="5k-15k" class="bg-surface-light">$5,000 – $15,000</option>
+            <option value="15k-50k" class="bg-surface-light">$15,000 – $50,000</option>
+            <option value="over-50k" class="bg-surface-light">Over $50,000</option>
+            <option value="not-sure" class="bg-surface-light">Not sure yet</option>
+          </select>
+        </div>
+
+        <!-- Formspree honeypot (anti-spam) -->
+        <input type="text" name="_gotcha" style="display:none" />
+
+        <!-- Redirect after submit -->
+        <input type="hidden" name="_next" value="https://elect-rix.tech/thanks" />
+
+        <button
+          type="submit"
+          class="w-full inline-flex items-center justify-center px-6 py-4 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright transition-colors text-lg"
+        >
+          Send Message
+        </button>
+      </form>
+
+      <div class="mt-10 text-center text-sm text-text-muted">
+        Prefer email?&nbsp;
+        <a href="mailto:contact@elect-rix.tech" class="text-accent-bright hover:underline font-medium">
+          contact@elect-rix.tech
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

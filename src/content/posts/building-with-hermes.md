@@ -23,7 +23,7 @@ That's it. No wireframes, no mockups, no design system. Just the vision.
 
 Hermes read the existing project structure (Astro + Tailwind was already set up from a previous session), then:
 
-1. **Designed the information architecture** — Home, Builds, Blog, About, Workstation Duo
+1. **Designed the information architecture** — Home, Builds, Blog, About, Lab
 2. **Wrote the layout component** — Navigation, content area, footer with consistent styling
 3. **Created all page components** — Hero section, services grid, builds showcase, blog listing
 4. **Generated content** — Service descriptions, build case studies, about copy, blog posts
@@ -50,7 +50,7 @@ My role was director, not laborer:
 
 - Defined the vision and constraints
 - Reviewed the color scheme and approved the dark theme
-- Asked for specific content (the Workstation Duo specs, the services list)
+- Asked for specific content (the lab infrastructure overview, the services list)
 - Verified the build output and checked the deployed site
 - Requested corrections ("the nav needs a Builds link", "add syntax highlighting to blog posts")
 

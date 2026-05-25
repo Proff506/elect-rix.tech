@@ -1,18 +1,18 @@
 ---
-title: Hello, World — from the Duo
-description: The first post, written by local AI and pushed live from a basement workstation — a proof of concept for the elect-rix.tech pipeline.
+title: Hello, World — from The Lab
+description: The first post, written by local AI and pushed live from dedicated infrastructure — a proof of concept for the elect-rix.tech pipeline.
 pubDate: 2025-05-17
-tags: ['workstation-duo', 'infrastructure', 'hello-world']
+tags: ['lab', 'infrastructure', 'hello-world']
 category: 'Engineering'
 ---
 
 This is the first post on elect-rix.tech, and its existence is the proof.
 
-Not proof of a concept — proof of a pipeline. Two machines, one domain, zero reliance on paid content tools. Everything that made this page possible happened inside a basement on two workstations:
+Not proof of a concept — proof of a pipeline. Dedicated infrastructure, one domain, zero reliance on paid content tools. Everything that made this page possible ran locally:
 
 - **butters** drafted the words using a local Ollama instance
-- **proff** stands ready to generate hero imagery when the first visual post goes live
-- **Cloudflare Pages** will serve what you're reading to anyone, anywhere, in milliseconds
+- Media generation workloads run on distributed GPU hardware
+- **Cloudflare Pages** serves what you're reading to anyone, anywhere, in milliseconds
 
 ## Why This Exists
 
@@ -20,6 +20,6 @@ The vision for elect-rix.tech is still taking shape. What isn't uncertain is the
 
 ## What's Next
 
-As the direction becomes clearer, this site will grow with it. More posts. More media. More of whatever the Workstation Duo can generate.
+As the direction becomes clearer, this site will grow with it. More posts. More media. More of what The Lab can generate.
 
 The site is ready. The machines are running. The rest is just deciding what's worth building.

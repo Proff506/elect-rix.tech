@@ -2,7 +2,7 @@
 title: Why I Run Local LLMs — No Subscription, No Cloud
 description: Cloud LLM subscriptions cost $20/month and send your data to third parties. A local setup costs nothing per token, works offline, and keeps your prompts private. Here's the math.
 pubDate: 2025-05-20
-tags: ['local-ai', 'ollama', 'privacy', 'workstation-duo']
+tags: ['local-ai', 'ollama', 'privacy', 'lab']
 slug: why-local-llms
 category: 'Engineering'
 ---

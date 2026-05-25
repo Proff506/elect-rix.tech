@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const capabilities = [
+  {
+    name: 'Local Inference',
+    description: 'Multiple concurrent LLMs running on dedicated GPU hardware. Inference stays on-prem, never routed through a third-party API. Zero telemetry by architecture.',
+    icon: '🧠',
+  },
+  {
+    name: 'Distributed Compute',
+    description: 'Multi-machine workload distribution for batch inference, model testing, and reproducible benchmarking. No cloud instances, no per-token billing.',
+    icon: '⚡',
+  },
+  {
+    name: 'Self-Hosted Services',
+    description: 'Containerized infrastructure — everything from CI runners to AI agents runs under the same roof. No vendor lock-in, no surprise terms-of-service changes.',
+    icon: '🔧',
+  },
+  {
+    name: 'Offline-First Operations',
+    description: 'Designed to keep working when connectivity drops. Local models, local storage, local decision-making. Resilience as architecture, not afterthought.',
+    icon: '📡',
+  },
+];
+
+const software = [
+  { name: 'Ollama', desc: 'Local LLM inference server. Runs open-weight models with full control over context, temperature, and system prompts.', link: 'https://ollama.com' },
+  { name: 'Astro', desc: 'Static site generator. This site is Astro + Bun + Tailwind, built locally.', link: 'https://astro.build' },
+  { name: 'Bun', desc: 'JavaScript runtime and bundler. Fast, native TypeScript, and built for static-site workloads.', link: 'https://bun.sh' },
+  { name: 'Tailwind CSS v4', desc: 'Utility-first CSS. Uses @theme directive for custom design tokens.', link: 'https://tailwindcss.com' },
+  { name: 'Docker', desc: 'Containerized services. Everything that can be containerized, is.', link: 'https://docker.com' },
+  { name: 'Cloudflare', desc: 'Edge deployment. DNS, Pages, and Workers for global distribution.', link: 'https://cloudflare.com' },
+];
+---
+
+<Layout title="The Lab — elect-rix.tech" description="Protect your data. Even when the lights go out. Dedicated AI infrastructure. Local inference, distributed compute, zero cloud dependency — by architecture, not configuration.">
+  <section class="max-w-4xl mx-auto px-6 pt-24 pb-16">
+    <header class="text-center mb-16">
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">The Lab</h1>
+      <p class="text-lg text-text-muted max-w-2xl mx-auto">The hardware isn't the story — what it enables is. Dedicated infrastructure for local AI inference, distributed compute, and self-hosted services that don't phone home.</p>
+    </header>
+
+    <!-- Capabilities — what the lab DOES, not what cards are inside -->
+    <div class="space-y-4 mb-16">
+      <h2 class="text-2xl font-bold mb-6">Capabilities</h2>
+      {capabilities.map((c) => (
+        <div class="p-6 rounded-xl border border-border bg-surface">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent-bright shrink-0">{c.icon}</div>
+            <div>
+              <h3 class="text-lg font-semibold mb-1">{c.name}</h3>
+              <p class="text-sm text-text-muted leading-relaxed">{c.description}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Software Stack -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold mb-6">Software Stack</h2>
+      <div class="grid sm:grid-cols-2 gap-4">
+        {software.map((s) => (
+          <a href={s.link} target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl border border-border bg-surface hover:bg-surface-light transition-colors group">
+            <div class="font-semibold mb-1 group-hover:text-accent-bright transition-colors">{s.name} →</div>
+            <div class="text-sm text-text-muted">{s.desc}</div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Philosophy -->
+    <div class="p-6 rounded-xl border border-border bg-surface">
+      <h2 class="text-2xl font-bold mb-4">Why Local?</h2>
+      <div class="space-y-3 text-text-muted leading-relaxed">
+        <p>Every prompt to a closed cloud service becomes training data. Every file uploaded to a remote API is stored, analyzed, and potentially reproduced. For client work, proprietary code, and regulated data, that's unacceptable.</p>
+        <p>Local models run at production speeds on modern hardware. They're private, cost nothing per token, and work offline. You don't need a monthly subscription to get capable AI — you need the right architecture and the discipline to keep it local.</p>
+        <p>When cloud is used, it's chosen consciously — not by default. That's the difference.</p>
+      </div>
+    </div>
+  </section>
+</Layout>
