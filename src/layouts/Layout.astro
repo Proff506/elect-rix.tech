@@ -7,8 +7,8 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description = 'Protect your data. Even when the lights go out. Resilient, private, verifiable — built in, not bolted on.', ogImage } = Astro.props;
 const siteUrl = 'https://elect-rix.tech';
+const { title, description = 'Protect your data. Even when the lights go out. Resilient, private, verifiable — built in, not bolted on.', ogImage = siteUrl + '/og-default.png' } = Astro.props;
 ---
 
 <!doctype html>
@@ -31,6 +31,7 @@ const siteUrl = 'https://elect-rix.tech';
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -61,7 +62,7 @@ const siteUrl = 'https://elect-rix.tech';
 
     <footer class="border-t border-border py-8 mt-20">
       <div class="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-text-muted">
-        <span>© 2025 elect-rix.tech</span>
+        <span>© {new Date().getFullYear()} elect-rix.tech</span>
         <span>Resilience, privacy, trust — built in, not bolted on.</span>
       </div>
     </footer>
