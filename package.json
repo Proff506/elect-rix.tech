@@ -10,16 +10,19 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "astro build && wrangler pages deploy dist --project-name elect-rix"
+    "build:clean": "rm -rf dist && astro build",
+    "deploy": "astro build && wrangler pages deploy dist --project-name elect-rix --branch main",
+    "deploy:dry": "astro build && echo '[DRY RUN] Would deploy to Cloudflare Pages project: elect-rix'",
+    "preview:dist": "astro build && npx wrangler pages dev dist"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.3.0",
-    "astro": "^6.3.3",
+    "astro": "^6.3.7",
     "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
-    "wrangler": "^4.92.0"
+    "wrangler": "^4.94.0"
   }
 }
