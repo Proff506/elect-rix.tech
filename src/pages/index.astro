@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
 
 const services = [
   {
@@ -24,32 +23,6 @@ const services = [
     icon: '🎯',
   },
 ];
-
-const builds = [
-  {
-    name: 'Hermes Agent Bot',
-    category: 'AI Agent Platform',
-    description: 'Autonomous AI assistant deployed on Telegram. Manages coding tasks, research, and DevOps — 24/7.',
-    stack: 'Python · Telethon · Ollama · Docker',
-    status: 'Running',
-  },
-  {
-    name: 'elect-rix.tech',
-    category: 'Personal Site',
-    description: 'This site — Astro, Bun, Tailwind. Built locally, deployed to Cloudflare Pages, generated with AI assistance.',
-    stack: 'Astro · Bun · Tailwind',
-    status: 'Live',
-  },
-  {
-    name: 'The Lab',
-    category: 'Lab Infrastructure',
-    description: 'Dedicated infrastructure for local AI inference, distributed compute, and self-hosted services.',
-    stack: 'Pop!_OS · Ollama · Docker',
-    status: 'Active',
-  },
-];
-
-const posts = Object.values(import.meta.glob('../content/posts/*.md', { eager: true })).slice(0, 3);
 ---
 
 <Layout title="elect-rix.tech — Protect Your Data. Even When the Lights Go Out." description="Protect your data. Even when the lights go out. Resilient, private, verifiable AI systems. Integrity, loyalty, honesty — built in, not bolted on.">
@@ -74,6 +47,9 @@ const posts = Object.values(import.meta.glob('../content/posts/*.md', { eager: t
         <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-border text-text font-semibold hover:bg-surface-light transition-colors">
           Get in Touch
         </a>
+      </div>
+      <div class="mt-12 rounded-xl border border-border overflow-hidden max-w-3xl mx-auto">
+        <img src="/resilience-offline-shield.png" alt="Resilient system shielded from network chaos" class="w-full h-auto" />
       </div>
     </div>
   </section>
@@ -137,6 +113,9 @@ const posts = Object.values(import.meta.glob('../content/posts/*.md', { eager: t
           Not features. Principles. Every engagement starts with these four commitments.
         </p>
       </div>
+      <div class="rounded-xl border border-border overflow-hidden max-w-3xl mx-auto mb-12">
+        <img src="/duo-cyber-industrial-hero.png" alt="AI infrastructure brain — central processing with distributed circuits" class="w-full h-auto" />
+      </div>
       <div class="grid sm:grid-cols-2 gap-6">
         {services.map((service) => (
           <div class="p-6 rounded-xl border border-border bg-primary hover:border-accent/30 transition-colors group">
@@ -147,77 +126,6 @@ const posts = Object.values(import.meta.glob('../content/posts/*.md', { eager: t
             <p class="text-text-muted leading-relaxed">{service.description}</p>
           </div>
         ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Builds -->
-  <section class="border-y border-border bg-surface/50 py-20">
-    <div class="max-w-5xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Current Builds</h2>
-        <p class="text-text-muted text-lg max-w-2xl mx-auto">
-          Shipping from the lab. Production-grade systems built entirely on owned infrastructure.
-        </p>
-      </div>
-      <div class="space-y-6">
-        {builds.map((build) => (
-          <a 
-            href={`/builds`}
-            class="flex flex-col lg:flex-row lg:items-center gap-6 p-6 rounded-xl border border-border bg-primary hover:border-accent transition-all group"
-          >
-            <div class="flex-1 min-w-0">
-              <div class="flex items-center gap-3 mb-2">
-                <h3 class="text-xl font-semibold group-hover:text-accent-bright transition-colors">
-                  {build.name}
-                </h3>
-                <span class="px-3 py-1 rounded-full bg-surface-light text-sm font-medium">
-                  {build.category}
-                </span>
-                <span class="px-3 py-1 rounded-full bg-surface-light text-sm font-medium text-accent-bright">
-                  {build.status}
-                </span>
-              </div>
-              <p class="text-text-muted mb-3 leading-relaxed">{build.description}</p>
-              <div class="flex items-center gap-2 text-sm text-text-muted">
-                <span class="font-semibold">Stack:</span>
-                <span>{build.stack}</span>
-              </div>
-            </div>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Recent Posts -->
-  <section class="py-20">
-    <div class="max-w-5xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Latest Posts</h2>
-        <p class="text-text-muted text-lg max-w-2xl mx-auto">
-          Writing on resilience, privacy, and verifiable trust in AI systems.
-        </p>
-      </div>
-      <div class="grid sm:grid-cols-3 gap-6">
-        {posts.map((post) => {
-          const data = (post as { frontmatter: { title: string, description: string, date: string } }).frontmatter;
-          const url = (post as { url: string }).url;
-          return (
-            <a 
-              href={url}
-              class="p-6 rounded-xl border border-border bg-primary hover:border-accent transition-all group"
-            >
-              <div class="text-sm text-accent-bright mb-3">{data.date}</div>
-              <h3 class="text-lg font-semibold mb-3 group-hover:text-accent-bright transition-colors">
-                {data.title}
-              </h3>
-              <p class="text-text-muted text-sm leading-relaxed">
-                {data.description}
-              </p>
-            </a>
-          );
-        })}
       </div>
     </div>
   </section>
