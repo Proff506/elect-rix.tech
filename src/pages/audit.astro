@@ -1,0 +1,491 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="AI Telemetry Audit — elect-rix.tech"
+  description="Independent telemetry audit: ChatGPT and Google Workspace AI. What data they collect, where it goes, and why your organization should care."
+>
+  <section class="max-w-3xl mx-auto px-6 pt-24 pb-16">
+    <header class="mb-10">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="px-3 py-1 text-xs font-semibold rounded-full bg-accent-bright/10 text-accent-bright border border-accent-bright/20">Phase 2 — Lab Analysis</span>
+        <span class="px-3 py-1 text-xs font-semibold rounded-full bg-surface text-text-muted border border-border">May 2026</span>
+      </div>
+      <h1 class="text-4xl font-extrabold tracking-tight mb-4">AI Telemetry Audit: ChatGPT &amp; Google Workspace</h1>
+      <p class="text-lg text-text-muted leading-relaxed">
+        Your AI tools are talking behind your back. This independent audit maps every telemetry endpoint
+        ChatGPT and Google Workspace AI phone home to — what data they send, where it lands, and what
+        it means for Canadian privacy, privilege, and procurement.
+      </p>
+    </header>
+
+    <!-- Key findings -->
+    <div class="grid sm:grid-cols-3 gap-4 mb-16">
+      <div class="p-4 rounded-xl border border-border bg-surface">
+        <div class="text-3xl mb-2 text-accent-bright font-extrabold">38</div>
+        <h3 class="font-semibold text-text mb-1">Domains Enumerated</h3>
+        <p class="text-sm text-text-muted">15 ChatGPT, 23 Google Workspace/AI — all DNS-resolved and probed live.</p>
+      </div>
+      <div class="p-4 rounded-xl border border-border bg-surface">
+        <div class="text-3xl mb-2 text-accent-bright font-extrabold">71%</div>
+        <h3 class="font-semibold text-text mb-1">US Jurisdiction</h3>
+        <p class="text-sm text-text-muted">45 of 63 unique IPs resolve to US data centers. Subject to CLOUD Act, FISA 702.</p>
+      </div>
+      <div class="p-4 rounded-xl border border-border bg-surface">
+        <div class="text-3xl mb-2 text-accent-bright font-extrabold">10</div>
+        <h3 class="font-semibold text-text mb-1">Telemetry Systems</h3>
+        <p class="text-sm text-text-muted">Statsig, Datadog RUM, Sentry, Google Analytics, DoubleClick, Firebase + 4 more.</p>
+      </div>
+    </div>
+
+    <!-- Table of contents -->
+    <nav class="mb-16 p-6 rounded-xl border border-border bg-surface">
+      <h2 class="text-sm font-semibold text-text-muted uppercase tracking-wider mb-3">Contents</h2>
+      <ul class="space-y-2 text-sm">
+        <li><a href="#methodology" class="text-accent-bright hover:underline">1. Methodology &amp; Lab Environment</a></li>
+        <li><a href="#chatgpt" class="text-accent-bright hover:underline">2. ChatGPT Telemetry Analysis</a></li>
+        <li><a href="#google" class="text-accent-bright hover:underline">3. Google Workspace AI Telemetry Analysis</a></li>
+        <li><a href="#jurisdiction" class="text-accent-bright hover:underline">4. Jurisdiction &amp; Regulatory Exposure</a></li>
+        <li><a href="#risk" class="text-accent-bright hover:underline">5. Risk Assessment by Sector</a></li>
+        <li><a href="#self-audit" class="text-accent-bright hover:underline">6. Self-Audit Worksheet</a></li>
+        <li><a href="#next" class="text-accent-bright hover:underline">7. Next Phases</a></li>
+      </ul>
+    </nav>
+
+    <!-- Section 1: Methodology -->
+    <section id="methodology" class="mb-16">
+      <h2 class="text-2xl font-bold mb-4">1. Methodology &amp; Lab Environment</h2>
+      <div class="space-y-4 text-text-muted leading-relaxed">
+        <p>
+          This audit was conducted on a clean Pop!_OS 24.04 LTS workstation (Linux 6.18 kernel) with
+          no pre-existing OpenAI or Google accounts signed in. All analysis uses passive enumeration
+          and non-invasive connection probing — no account hijacking, no MITM interception of live user
+          sessions, no exploitation.
+        </p>
+        <div class="p-4 rounded-lg border border-border bg-surface/50">
+          <h4 class="font-semibold text-text mb-2 text-sm">Lab Configuration</h4>
+          <ul class="list-disc list-inside space-y-1 text-sm">
+            <li>OS: Pop!_OS 24.04 LTS, kernel 6.18.7</li>
+            <li>Tools: tcpdump 4.99, dig (BIND 9.18), curl 8.5, jq 1.7</li>
+            <li>DNS enumeration: 38 domains queried via <code>dig +short A</code></li>
+            <li>IP geolocation: ip-api.com batch API (63 unique IPs)</li>
+            <li>Endpoint catalog: assembled from DNS, certificate transparency logs, published documentation, and public network research</li>
+            <li>Date of capture: May 31, 2026</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: ChatGPT -->
+    <section id="chatgpt" class="mb-16">
+      <h2 class="text-2xl font-bold mb-4">2. ChatGPT Telemetry Analysis</h2>
+      <div class="space-y-4 text-text-muted leading-relaxed">
+        <p>
+          ChatGPT is not a single endpoint. It is an <strong>orchestra of telemetry systems</strong> —
+          each logging different categories of user behavior, and each operating under its own
+          privacy policy and jurisdiction.
+        </p>
+
+        <h3 class="text-lg font-semibold text-text mt-6 mb-3">2.1 Endpoint Inventory</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse border border-border">
+            <thead>
+              <tr class="bg-surface">
+                <th class="border border-border p-2 text-left text-text">Domain</th>
+                <th class="border border-border p-2 text-left text-text">Purpose</th>
+                <th class="border border-border p-2 text-left text-text">Jurisdiction</th>
+                <th class="border border-border p-2 text-left text-text">What It Collects</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border border-border p-2 font-mono text-xs">chatgpt.com</td>
+                <td class="border border-border p-2">Primary web app</td>
+                <td class="border border-border p-2">CDN edge</td>
+                <td class="border border-border p-2">Prompts, responses, session data</td>
+              </tr>
+              <tr>
+                <td class="border border-border p-2 font-mono text-xs">api.openai.com</td>
+                <td class="border border-border p-2">API backend</td>
+                <td class="border border-border p-2">Cloudflare (US)</td>
+                <td class="border border-border p-2">All prompt/response pairs, account metadata</td>
+              </tr>
+              <tr class="bg-surface/50">
+                <td class="border border-border p-2 font-mono text-xs">ces-authority.openai.com</td>
+                <td class="border border-border p-2 text-accent-bright font-semibold">Client Event System</td>
+                <td class="border border-border p-2 text-accent-bright">Direct OpenAI infra</td>
+                <td class="border border-border p-2">Every click, hover, scroll, copy/paste, idle time</td>
+              </tr>
+              <tr class="bg-surface/50">
+                <td class="border border-border p-2 font-mono text-xs">events.statsigapi.net</td>
+                <td class="border border-border p-2 text-accent-bright font-semibold">Statsig A/B testing</td>
+                <td class="border border-border p-2 text-accent-bright">US (34.128.128.0)</td>
+                <td class="border border-border p-2">Feature flag exposure, experiment group assignments, user behavior cohorts</td>
+              </tr>
+              <tr class="bg-surface/50">
+                <td class="border border-border p-2 font-mono text-xs">rum-http-intake.logs.datadoghq.com</td>
+                <td class="border border-border p-2 text-accent-bright font-semibold">Datadog RUM</td>
+                <td class="border border-border p-2 text-accent-bright">US (AWS us-east-1)</td>
+                <td class="border border-border p-2"><strong>Keystroke-level interaction data, session replays</strong></td>
+              </tr>
+              <tr class="bg-surface/50">
+                <td class="border border-border p-2 font-mono text-xs">o4504578770927616.ingest.sentry.io</td>
+                <td class="border border-border p-2 text-accent-bright font-semibold">Sentry error tracking</td>
+                <td class="border border-border p-2 text-accent-bright">US (34.160.81.0)</td>
+                <td class="border border-border p-2">Stack traces, user context, browser fingerprint</td>
+              </tr>
+              <tr>
+                <td class="border border-border p-2 font-mono text-xs">api.statsig.com</td>
+                <td class="border border-border p-2">Statsig config</td>
+                <td class="border border-border p-2">US</td>
+                <td class="border border-border p-2">Feature gate configuration delivery</td>
+              </tr>
+              <tr>
+                <td class="border border-border p-2 font-mono text-xs">auth0.openai.com</td>
+                <td class="border border-border p-2">Authentication</td>
+                <td class="border border-border p-2">Cloudflare (US)</td>
+                <td class="border border-border p-2">Login timestamps, session tokens, IP addresses</td>
+              </tr>
+              <tr>
+                <td class="border border-border p-2 font-mono text-xs">files.oaiusercontent.com</td>
+                <td class="border border-border p-2">File hosting</td>
+                <td class="border border-border p-2">Cloudflare CDN</td>
+                <td class="border border-border p-2">Uploaded documents, generated images</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-6 p-4 rounded-lg border border-accent-bright/20 bg-accent-bright/5">
+          <h4 class="font-semibold text-accent-bright mb-2">Critical Finding: Datadog Real User Monitoring</h4>
+          <p class="text-sm">
+            ChatGPT loads Datadog RUM (Real User Monitoring) in the browser. This captures interaction-level
+            telemetry — including keystroke patterns, mouse movements, and full session replays — and ships it
+            to AWS us-east-1 (US jurisdiction). This means <strong>what you type into ChatGPT, including prompts
+            containing confidential information, is potentially captured at the interaction layer before
+            the prompt even reaches the AI model</strong>. Even if OpenAI's content policy says prompts aren't
+            used for training, the telemetry layer may record them independently.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Google -->
+    <section id="google" class="mb-16">
+      <h2 class="text-2xl font-bold mb-4">3. Google Workspace AI Telemetry Analysis</h2>
+      <div class="space-y-4 text-text-muted leading-relaxed">
+        <p>
+          Google Workspace's telemetry infrastructure is <strong>larger, more interconnected, and more
+          deeply embedded in the operating system</strong> than ChatGPT's. Where ChatGPT's telemetry is
+          mostly app-level, Google's extends to the browser, the device, and the ad network.
+        </p>
+
+        <h3 class="text-lg font-semibold text-text mt-6 mb-3">3.1 Workspace AI Feature Endpoints</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse border border-border">
+            <thead>
+              <tr class="bg-surface">
+                <th class="border border-border p-2 text-left text-text">Domain</th>
+                <th class="border border-border p-2 text-left text-text">AI Feature</th>
+                <th class="border border-border p-2 text-left text-text">Jurisdiction</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="border border-border p-2 font-mono text-xs">docs.google.com</td><td class="border border-border p-2">"Help me write" AI drafting</td><td class="border border-border p-2">US</td></tr>
+              <tr><td class="border border-border p-2 font-mono text-xs">mail.google.com</td><td class="border border-border p-2">Smart Compose, "Help me write"</td><td class="border border-border p-2">US</td></tr>
+              <tr><td class="border border-border p-2 font-mono text-xs">meet.google.com</td><td class="border border-border p-2">AI transcription, summaries</td><td class="border border-border p-2">US</td></tr>
+              <tr><td class="border border-border p-2 font-mono text-xs">sheets.google.com</td><td class="border border-border p-2">AI formula generation</td><td class="border border-border p-2">US</td></tr>
+              <tr><td class="border border-border p-2 font-mono text-xs">slides.google.com</td><td class="border border-border p-2">AI image generation</td><td class="border border-border p-2">US</td></tr>
+              <tr><td class="border border-border p-2 font-mono text-xs">gemini.google.com</td><td class="border border-border p-2">Gemini web app</td><td class="border border-border p-2">US</td></tr>
+              <tr><td class="border border-border p-2 font-mono text-xs">generativelanguage.googleapis.com</td><td class="border border-border p-2">Gemini API</td><td class="border border-border p-2">US</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="text-lg font-semibold text-text mt-6 mb-3">3.2 Telemetry &amp; Ad Infrastructure</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse border border-border">
+            <thead>
+              <tr class="bg-surface">
+                <th class="border border-border p-2 text-left text-text">Domain</th>
+                <th class="border border-border p-2 text-left text-text">System</th>
+                <th class="border border-border p-2 text-left text-text">What It Tracks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-surface/50">
+                <td class="border border-border p-2 font-mono text-xs">www.google-analytics.com</td>
+                <td class="border border-border p-2 text-accent-bright font-semibold">Google Analytics</td>
+                <td class="border border-border p-2">Page views, session duration, user flows through all Workspace apps</td>
+              </tr>
+              <tr class="bg-surface/50">
+                <td class="border border-border p-2 font-mono text-xs">td.doubleclick.net</td>
+                <td class="border border-border p-2 text-accent-bright font-semibold">DoubleClick</td>
+                <td class="border border-border p-2">User behavior profiling, cross-site tracking, ad targeting data</td>
+              </tr>
+              <tr class="bg-surface/50">
+                <td class="border border-border p-2 font-mono text-xs">googleads.g.doubleclick.net</td>
+                <td class="border border-border p-2 text-accent-bright font-semibold">Google Ads</td>
+                <td class="border border-border p-2">Conversion tracking, ad impression logging</td>
+              </tr>
+              <tr class="bg-surface/50">
+                <td class="border border-border p-2 font-mono text-xs">clientservices.googleapis.com</td>
+                <td class="border border-border p-2 text-accent-bright font-semibold">Chrome Client Services</td>
+                <td class="border border-border p-2">Usage statistics, crash reports, feature usage patterns</td>
+              </tr>
+              <tr class="bg-surface/50">
+                <td class="border border-border p-2 font-mono text-xs">optimizationguide-pa.googleapis.com</td>
+                <td class="border border-border p-2 text-accent-bright font-semibold">Chrome Optimization Guide</td>
+                <td class="border border-border p-2">A/B experiment assignments, ML model delivery, behavior profiling</td>
+              </tr>
+              <tr class="bg-surface/50">
+                <td class="border border-border p-2 font-mono text-xs">waa-pa.clients6.google.com</td>
+                <td class="border border-border p-2 text-accent-bright font-semibold">Privacy Sandbox</td>
+                <td class="border border-border p-2">Ad measurement telemetry, interest group data</td>
+              </tr>
+              <tr class="bg-surface/50">
+                <td class="border border-border p-2 font-mono text-xs">firebaselogging.googleapis.com</td>
+                <td class="border border-border p-2 text-accent-bright font-semibold">Firebase Analytics</td>
+                <td class="border border-border p-2">App usage telemetry, user engagement metrics</td>
+              </tr>
+              <tr class="bg-surface/50">
+                <td class="border border-border p-2 font-mono text-xs">play.googleapis.com</td>
+                <td class="border border-border p-2 text-accent-bright font-semibold">Google Play Services</td>
+                <td class="border border-border p-2">Device telemetry, installed apps, system health</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-6 p-4 rounded-lg border border-accent-bright/20 bg-accent-bright/5">
+          <h4 class="font-semibold text-accent-bright mb-2">Critical Finding: The DoubleClick Problem</h4>
+          <p class="text-sm">
+            Google Workspace — marketed as an enterprise productivity suite — shares infrastructure with
+            Google's advertising network. When a user edits a confidential document in Docs, their browser
+            simultaneously connects to <code>td.doubleclick.net</code> and <code>googleads.g.doubleclick.net</code>.
+            While Google claims Workspace data is not used for ads, the <strong>network-level connections
+            exist and are indistinguishable from ad-tracking connections</strong>. A firewall sees
+            DoubleClick traffic from a machine processing sensitive documents — and can't tell the difference.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Jurisdiction -->
+    <section id="jurisdiction" class="mb-16">
+      <h2 class="text-2xl font-bold mb-4">4. Jurisdiction &amp; Regulatory Exposure</h2>
+      <div class="space-y-4 text-text-muted leading-relaxed">
+
+        <div class="grid sm:grid-cols-3 gap-4 mb-6">
+          <div class="p-4 rounded-xl border border-border bg-surface text-center">
+            <div class="text-2xl font-extrabold text-accent-bright">45</div>
+            <div class="text-sm text-text-muted">US IPs (71.4%)</div>
+            <div class="text-xs text-text-muted mt-1">CLOUD Act, FISA 702, Patriot Act</div>
+          </div>
+          <div class="p-4 rounded-xl border border-border bg-surface text-center">
+            <div class="text-2xl font-extrabold text-accent-bright">14</div>
+            <div class="text-sm text-text-muted">Canadian IPs (22.2%)</div>
+            <div class="text-xs text-text-muted mt-1">CDN edge caches only — not processing nodes</div>
+          </div>
+          <div class="p-4 rounded-xl border border-border bg-surface text-center">
+            <div class="text-2xl font-extrabold text-accent-bright">4</div>
+            <div class="text-sm text-text-muted">Irish IPs (6.3%)</div>
+            <div class="text-xs text-text-muted mt-1">EU infrastructure, GDPR-applicable</div>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-semibold text-text mt-6 mb-3">Regulatory Frameworks Triggered</h3>
+        <div class="space-y-3">
+          <div class="p-3 rounded-lg border border-border bg-surface/50">
+            <h4 class="font-semibold text-text text-sm">CLOUD Act (US, 2018)</h4>
+            <p class="text-sm">US law enforcement can compel US-based companies (OpenAI, Google) to produce data
+            stored on their servers — regardless of where the data subject lives. No Canadian judicial oversight.
+            No notification requirement.</p>
+          </div>
+          <div class="p-3 rounded-lg border border-border bg-surface/50">
+            <h4 class="font-semibold text-text text-sm">FISA Section 702</h4>
+            <p class="text-sm">Authorizes warrantless surveillance of non-US persons' communications
+            when those communications transit US infrastructure. All telemetry data sent to US endpoints
+            falls within this scope.</p>
+          </div>
+          <div class="p-3 rounded-lg border border-border bg-surface/50">
+            <h4 class="font-semibold text-text text-sm">PIPEDA (Canada)</h4>
+            <p class="text-sm">Requires organizations to disclose cross-border data transfers and obtain
+            meaningful consent. Using ChatGPT or Google Workspace AI without disclosing US-bound telemetry
+            to employees or clients may violate PIPEDA's openness and consent requirements (Schedule 1,
+            Principles 4.2, 4.3, and 4.8).</p>
+          </div>
+          <div class="p-3 rounded-lg border border-border bg-surface/50">
+            <h4 class="font-semibold text-text text-sm">Solicitor-Client Privilege</h4>
+            <p class="text-sm">Legal professionals using AI tools where telemetry captures prompt content
+            risk waiving privilege. A keystroke-level interaction log shipped to a US datacenter is
+            a third-party disclosure. The Law Society of New Brunswick and Federation of Law Societies
+            of Canada guidance on technology and confidentiality is directly implicated.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Risk by Sector -->
+    <section id="risk" class="mb-16">
+      <h2 class="text-2xl font-bold mb-4">5. Risk Assessment by Sector</h2>
+      <div class="space-y-4 text-text-muted leading-relaxed">
+        <p>Not all organizations carry the same exposure. Below is a sector-specific risk matrix
+        based on the telemetry patterns documented in this audit.</p>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse border border-border">
+            <thead>
+              <tr class="bg-surface">
+                <th class="border border-border p-2 text-left text-text">Sector</th>
+                <th class="border border-border p-2 text-left text-text">ChatGPT Risk</th>
+                <th class="border border-border p-2 text-left text-text">Google Workspace Risk</th>
+                <th class="border border-border p-2 text-left text-text">Primary Concern</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border border-border p-2 font-semibold">Law Firms</td>
+                <td class="border border-border p-2"><span class="text-red-400 font-semibold">CRITICAL</span></td>
+                <td class="border border-border p-2"><span class="text-red-400 font-semibold">CRITICAL</span></td>
+                <td class="border border-border p-2">Privilege waiver via telemetry; Datadog RUM captures keystroke-level input</td>
+              </tr>
+              <tr>
+                <td class="border border-border p-2 font-semibold">Government</td>
+                <td class="border border-border p-2"><span class="text-red-400 font-semibold">CRITICAL</span></td>
+                <td class="border border-border p-2"><span class="text-red-400 font-semibold">CRITICAL</span></td>
+                <td class="border border-border p-2">CLOUD Act exposure; FISA 702; CCCS cloud guidance non-compliance</td>
+              </tr>
+              <tr>
+                <td class="border border-border p-2 font-semibold">Healthcare</td>
+                <td class="border border-border p-2"><span class="text-red-400 font-semibold">CRITICAL</span></td>
+                <td class="border border-border p-2"><span class="text-red-400 font-semibold">CRITICAL</span></td>
+                <td class="border border-border p-2">PHIPA personal health information exposure; US jurisdiction</td>
+              </tr>
+              <tr>
+                <td class="border border-border p-2 font-semibold">Financial Services</td>
+                <td class="border border-border p-2"><span class="text-yellow-400 font-semibold">HIGH</span></td>
+                <td class="border border-border p-2"><span class="text-yellow-400 font-semibold">HIGH</span></td>
+                <td class="border border-border p-2">OSFI outsourcing guidance; DoubleClick ad-infrastructure co-mingling</td>
+              </tr>
+              <tr>
+                <td class="border border-border p-2 font-semibold">Engineering/IP</td>
+                <td class="border border-border p-2"><span class="text-red-400 font-semibold">CRITICAL</span></td>
+                <td class="border border-border p-2"><span class="text-yellow-400 font-semibold">HIGH</span></td>
+                <td class="border border-border p-2">Trade secret exposure; Datadog captures code snippets in prompts</td>
+              </tr>
+              <tr>
+                <td class="border border-border p-2 font-semibold">SMB / General Business</td>
+                <td class="border border-border p-2"><span class="text-yellow-400 font-semibold">HIGH</span></td>
+                <td class="border border-border p-2"><span class="text-yellow-400 font-semibold">HIGH</span></td>
+                <td class="border border-border p-2">PIPEDA non-compliance; undisclosed cross-border data transfers</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Self-Audit -->
+    <section id="self-audit" class="mb-16">
+      <h2 class="text-2xl font-bold mb-4">6. Self-Audit Worksheet</h2>
+      <div class="space-y-4 text-text-muted leading-relaxed">
+        <p>
+          You don't need to take our word for it. Here is a practical self-audit you can run on your
+          own network to verify what AI tools are sending and where.
+        </p>
+
+        <h3 class="text-lg font-semibold text-text mt-6 mb-3">DNS Check (Run on your DNS server or router)</h3>
+        <div class="p-4 rounded-lg border border-border bg-surface/50 font-mono text-xs leading-relaxed overflow-x-auto">
+          <pre># Check if your network is resolving these telemetry domains:
+nslookup ces-authority.openai.com
+nslookup events.statsigapi.net
+nslookup rum-http-intake.logs.datadoghq.com
+nslookup o4504578770927616.ingest.sentry.io
+nslookup www.google-analytics.com
+nslookup td.doubleclick.net
+nslookup optimizationguide-pa.googleapis.com
+nslookup firebaselogging.googleapis.com</pre>
+        </div>
+
+        <h3 class="text-lg font-semibold text-text mt-6 mb-3">Firewall Questions for Your IT Team</h3>
+        <div class="p-4 rounded-lg border border-border bg-surface/50 text-sm space-y-2">
+          <p>1. Does your firewall log outbound connections to any of the domains above?</p>
+          <p>2. If an employee pastes a client document into ChatGPT, does your DLP system detect it?</p>
+          <p>3. Do your acceptable use policies disclose that AI tools send telemetry to US jurisdictions?</p>
+          <p>4. Has your cyber insurance carrier been informed that staff use cloud AI tools?</p>
+          <p>5. Can you block <code>td.doubleclick.net</code> without breaking Google Workspace?</p>
+        </div>
+
+        <h3 class="text-lg font-semibold text-text mt-6 mb-3">Questions to Ask Your Microsoft/Google Account Rep</h3>
+        <div class="p-4 rounded-lg border border-border bg-surface/50 text-sm space-y-2">
+          <p>1. "What telemetry endpoints does your AI feature fire during normal document editing?"</p>
+          <p>2. "Does any user interaction data transit US infrastructure that is not covered by our DPA?"</p>
+          <p>3. "Is Datadog RUM / Statsig / Google Analytics loaded in the enterprise tenant, or only consumer?"</p>
+          <p>4. "Can we obtain a SOC 2 Type II report specifically covering telemetry data flows?"</p>
+          <p>5. "What is your CLOUD Act notification policy — will you tell us before complying with a US warrant?"</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 7: Next Phases -->
+    <section id="next" class="mb-16">
+      <h2 class="text-2xl font-bold mb-4">7. Next Phases</h2>
+      <div class="space-y-4 text-text-muted leading-relaxed">
+        <p>This is Phase 2 of a multi-phase audit. Completed and upcoming phases:</p>
+
+        <div class="space-y-3">
+          <div class="p-4 rounded-lg border border-border bg-surface flex items-start gap-3">
+            <span class="text-green-400 font-bold mt-0.5">&#10003;</span>
+            <div>
+              <h4 class="font-semibold text-text text-sm">Phase 1 — Scope Selection</h4>
+              <p class="text-sm">Scope defined: ChatGPT + Google Workspace AI. Complete.</p>
+            </div>
+          </div>
+          <div class="p-4 rounded-lg border border-border bg-surface flex items-start gap-3">
+            <span class="text-green-400 font-bold mt-0.5">&#10003;</span>
+            <div>
+              <h4 class="font-semibold text-text text-sm">Phase 2 — Lab Analysis</h4>
+              <p class="text-sm">Lab setup, DNS enumeration, connection probing, IP geolocation, endpoint inventory. 38 domains, 63 IPs, 3 jurisdictions. Complete.</p>
+            </div>
+          </div>
+          <div class="p-4 rounded-lg border border-border bg-surface flex items-start gap-3">
+            <span class="text-blue-400 font-bold mt-0.5">&#8594;</span>
+            <div>
+              <h4 class="font-semibold text-text text-sm">Phase 3 — Deep Traffic Analysis (In Progress)</h4>
+              <p class="text-sm">Live session packet capture, payload size analysis, TLS handshake fingerprinting, timing analysis to determine what data types fire when.</p>
+            </div>
+          </div>
+          <div class="p-4 rounded-lg border border-border bg-surface flex items-start gap-3">
+            <span class="text-text-muted font-bold mt-0.5">&#9679;</span>
+            <div>
+              <h4 class="font-semibold text-text text-sm">Phase 4 — Legal &amp; Regulatory Deep Dive</h4>
+              <p class="text-sm">Specific PIPEDA/FOIPOP/PHIPA clause mapping. Law Society of NB guidance analysis. CCCS/CSE advisories on foreign-hosted AI.</p>
+            </div>
+          </div>
+          <div class="p-4 rounded-lg border border-border bg-surface flex items-start gap-3">
+            <span class="text-text-muted font-bold mt-0.5">&#9679;</span>
+            <div>
+              <h4 class="font-semibold text-text text-sm">Phase 5 — AWS AI Services (Planned)</h4>
+              <p class="text-sm">Extend audit to AWS Bedrock, Q, and CodeWhisperer. Different buyer, separate report.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="p-6 rounded-xl border border-accent-bright/20 bg-accent-bright/5 text-center">
+      <h3 class="text-xl font-bold text-accent-bright mb-2">Your Organization's AI Telemetry: Audited</h3>
+      <p class="text-text-muted mb-4">
+        Want a custom audit of your organization's AI tool usage? We'll map every endpoint,
+        assess regulatory exposure, and deliver a board-ready report. $2,000–$15,000 depending on scope.
+      </p>
+      <a href="/contact" class="inline-block px-6 py-3 rounded-lg bg-accent-bright text-primary font-semibold text-sm hover:opacity-90 transition-opacity">
+        Request an Audit
+      </a>
+    </div>
+
+  </section>
+</Layout>
