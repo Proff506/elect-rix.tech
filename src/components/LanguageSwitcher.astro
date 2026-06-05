@@ -1,0 +1,32 @@
+---
+import { ui, type Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+  pathname: string;
+}
+
+const { lang, pathname } = Astro.props;
+
+// Compute the opposite language URL
+const otherLang: Lang = lang === 'en' ? 'fr' : 'en';
+let otherPath: string;
+
+if (lang === 'en') {
+  // English page -> French page
+  otherPath = '/fr' + pathname;
+} else {
+  // French page -> English page
+  otherPath = pathname.replace(/^\/fr/, '') || '/';
+}
+
+const label = ui[lang].lang.label;
+---
+
+<a
+  href={otherPath}
+  class="text-sm font-medium text-text-muted hover:text-text transition-colors px-2 py-1 rounded-md border border-border hover:bg-surface-light"
+  aria-label={`Switch to ${otherLang}`}
+>
+  {label}
+</a>

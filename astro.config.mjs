@@ -7,6 +7,13 @@ export default defineConfig({
   site: 'https://elect-rix.tech',
   output: 'static',
   integrations: [sitemap()],
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'fr'],
+    routing: {
+      prefixDefaultLocale: false
+    }
+  },
   vite: {
     plugins: [tailwindcss()],
     build: {

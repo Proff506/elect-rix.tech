@@ -1,0 +1,490 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  lang="fr"
+  title="Sécurité et conformité — elect-rix.tech"
+  description="Posture de sécurité, cybersécurité et conformité d'elect-rix.tech — préparée pour l'approvisionnement gouvernemental et réglementé."
+>
+  <section class="max-w-3xl mx-auto px-6 pt-24 pb-16">
+    <header class="mb-10">
+      <h1 class="text-4xl font-extrabold tracking-tight mb-4">Sécurité et conformité</h1>
+      <p class="text-lg text-text-muted leading-relaxed">
+        Pas seulement une affirmation — une pile. Cette page documente notre architecture de sécurité,
+        notre alignement réglementaire et notre gouvernance. Construite pour la diligence raisonnable en approvisionnement.
+      </p>
+    </header>
+
+    <!-- Trust badges / pillars -->
+    <div class="grid sm:grid-cols-3 gap-4 mb-16">
+      <div class="p-4 rounded-xl border border-border bg-surface text-center">
+        <div class="text-2xl mb-2">🇨🇦</div>
+        <h3 class="font-semibold text-text mb-1">Souveraineté canadienne</h3>
+        <p class="text-sm text-text-muted">Les données restent au Canada. Infrastructure hébergée au Canada ou contrôlée par le client.</p>
+      </div>
+      <div class="p-4 rounded-xl border border-border bg-surface text-center">
+        <div class="text-2xl mb-2">🛡️</div>
+        <h3 class="font-semibold text-text mb-1">Conception sécuritaire</h3>
+        <p class="text-sm text-text-muted">Zéro télémétrie par défaut. Accès au besoin de savoir. Déconnectable.</p>
+      </div>
+      <div class="p-4 rounded-xl border border-border bg-surface text-center">
+        <div class="text-2xl mb-2">📋</div>
+        <h3 class="font-semibold text-text mb-1">Prête pour l'approvisionnement</h3>
+        <p class="text-sm text-text-muted">SPAC, CCCS et documentation SR&ED. Ouverte à l'audit.</p>
+      </div>
+    </div>
+
+    <!-- Table of contents -->
+    <nav class="mb-16 p-6 rounded-xl border border-border bg-surface">
+      <h2 class="text-sm font-semibold text-text-muted uppercase tracking-wider mb-3">Contenu</h2>
+      <ul class="space-y-2 text-sm">
+        <li><a href="#sovereignty" class="text-accent-bright hover:underline">1. Souveraineté et résidence des données</a></li>
+        <li><a href="#security" class="text-accent-bright hover:underline">2. Architecture de sécurité</a></li>
+        <li><a href="#cyber" class="text-accent-bright hover:underline">3. Posture de cybersécurité</a></li>
+        <li><a href="#access" class="text-accent-bright hover:underline">4. Contrôle d'accès et identité</a></li>
+        <li><a href="#privacy" class="text-accent-bright hover:underline">5. Confidentialité et traitement des données</a></li>
+        <li><a href="#compliance" class="text-accent-bright hover:underline">6. Conformité réglementaire</a></li>
+        <li><a href="#gov" class="text-accent-bright hover:underline">7. Préparation à l'approvisionnement gouvernemental</a></li>
+        <li><a href="#fwi" class="text-accent-bright hover:underline">8. Cadre d'inspection Fall Wall</a></li>
+        <li><a href="#sr-ed" class="text-accent-bright hover:underline">9. SR&ED et crédits d'impôt à l'innovation</a></li>
+        <li><a href="#checklist" class="text-accent-bright hover:underline">10. Liste de vérification de diligence raisonnable</a></li>
+      </ul>
+    </nav>
+
+    <!-- Section 1: Data Sovereignty -->
+    <section id="sovereignty" class="mb-16">
+      <h2 class="text-2xl font-bold mb-4">1. Souveraineté et résidence des données</h2>
+      <p class="text-text-muted leading-relaxed mb-6">
+        Pour les clients gouvernementaux et réglementés, la souveraineté des données est non négociable. Nous la traitons comme une architecture, pas une politique.
+      </p>
+
+      <div class="space-y-4 mb-6">
+        <div class="p-4 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-1">Infrastructure canadienne par défaut</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Laboratoire principal physiquement situé au <strong class="text-text">Nouveau-Brunswick, Canada</strong>.</li>
+            <li>Toutes les données client traitées et stockées au Canada, sauf demande explicite contraire.</li>
+            <li>Les déploiements cloud utilisent uniquement des régions canadiennes (nœuds CDN Cloudflare, pas de calcul).</li>
+          </ul>
+        </div>
+
+        <div class="p-4 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-1">Aucune dépendance de données étrangère</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Aucun service cloud géré américain pour les charges de travail Protégées.</li>
+            <li>Aucun service d'analyse, de suivi ou de télémétrie tiers avec traitement de données à l'étranger.</li>
+            <li>L'inférence IA s'exécute sur matériel local — aucune donnée envoyée à OpenAI, Anthropic ou autres API étrangères.</li>
+          </ul>
+        </div>
+
+        <div class="p-4 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-1">Environnements contrôlés par le client</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Travail livré à une <strong class="text-text">infrastructure contrôlée par le client</strong> dans la mesure du possible.</li>
+            <li>Accès au référentiel accordé au client — nous ne détenons jamais les seules clés.</li>
+            <li>Déploiement sur site pris en charge pour les environnements isolés ou sensibles.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Security Architecture -->
+    <section id="security" class="mb-16">
+      <h2 class="text-2xl font-bold mb-4">2. Architecture de sécurité</h2>
+      <p class="text-text-muted leading-relaxed mb-6">
+        La sécurité est en couches — pas un seul outil. Chaque couche est inspectable et vérifiable.
+      </p>
+
+      <div class="space-y-5">
+        <div class="p-5 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-2">Couche 1 : Sécurité physique</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Matériel dédié dans un espace privé à accès contrôlé.</li>
+            <li>Aucune colocation ni centre de données partagé.</li>
+            <li>Matériel propriétaire, pas loué ou emprunté au cloud.</li>
+          </ul>
+        </div>
+
+        <div class="p-5 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-2">Couche 2 : Sécurité réseau</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Développement local uniquement. Aucun accès distant aux machines de build.</li>
+            <li>Règles de pare-feu en refus par défaut. Seuls les ports requis sont ouverts.</li>
+            <li>VPN requis pour toute administration à distance (site à site, pas de point d'accès public).</li>
+          </ul>
+        </div>
+
+        <div class="p-5 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-2">Couche 3 : Sécurité applicative</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Sortie statique (Astro + Bun) — aucune surface d'attaque côté serveur à l'exécution.</li>
+            <li>Dépendances épinglées et auditées (bun.lock, pas de versions flottantes).</li>
+            <li>Aucun traqueur JavaScript tiers, ni analytique, ni script externe.</li>
+            <li><strong class="text-text">Zéro télémétrie à l'exécution</strong> : aucune donnée ne quitte le navigateur vers elect-rix ou des tiers.</li>
+          </ul>
+        </div>
+
+        <div class="p-5 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-2">Couche 4 : Sécurité de la chaîne d'approvisionnement</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Builds déterministes : même source → même résultat, à chaque fois.</li>
+            <li>Hash de commit Git = identifiant de déploiement. Traçabilité un-à-un.</li>
+            <li>Tous les outils de build open source et vérifiables (Astro, Bun, Tailwind).</li>
+            <li>Pertinent pour les exigences de <strong class="text-text">SBOM</strong> (Software Bill of Materials).</li>
+          </ul>
+        </div>
+
+        <div class="p-5 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-2">Couche 5 : Sécurité humaine</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Un principal nommé avec pleine responsabilité. Aucune entité écran, aucun sous-traitant caché.</li>
+            <li>Base du besoin de savoir pour toutes les données client.</li>
+            <li>ACN et confidentialité liant tout le personnel.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Cybersecurity Posture -->
+    <section id="cyber" class="mb-16">
+      <h2 class="text-2xl font-bold mb-4">3. Posture de cybersécurité</h2>
+      <p class="text-text-muted leading-relaxed mb-6">
+        Alignée avec les directives du <strong class="text-text">Centre canadien pour la cybersécurité (CCCS)</strong> et les exigences d'approvisionnement émergentes.
+      </p>
+
+      <div class="space-y-4 mb-6">
+        <div class="p-4 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-1">Alignement ITSG-33 / ITSG-37</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Contrôles de sécurité mappés sur la base de référence du gouvernement canadien lorsque applicable.</li>
+            <li>Contrôles d'accès (AC), d'audit (AU) et d'intégrité système (SI) documentés.</li>
+            <li>Catégorisation de sécurité disponible pour les charges de travail Protégé B sur demande.</li>
+          </ul>
+        </div>
+
+        <div class="p-4 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-1">Préparation en réponse aux incidents</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Plan de réponse aux incidents défini : détecter → contenir → éradiquer → récupérer → documenter.</li>
+            <li>Notification client dans les 24 heures de toute suspicion de brèche de données.</li>
+            <li>Canaux de signalement à la GRC et au CCCS documentés pour les incidents applicables.</li>
+          </ul>
+        </div>
+
+        <div class="p-4 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-1">Surveillance continue</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Journaux système locaux conservés pour analyse médico-légale.</li>
+            <li>Accès au référentiel journalisé via Git (commits signés, piste d'audit).</li>
+            <li>Aucun angle mort : chaque build a un hash de commit ; chaque commit a un auteur.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Access Control & Identity -->
+    <section id="access" class="mb-16">
+      <h2 class="text-2xl font-bold mb-4">4. Contrôle d'accès et identité</h2>
+
+      <div class="space-y-4 mb-6">
+        <div class="p-4 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-1">Authentification</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Authentification à deux facteurs (2FA) appliquée sur tous les systèmes.</li>
+            <li>Aucune identité partagée. Comptes individuels uniquement.</li>
+            <li>Gestionnaires de mots de passe utilisés pour le stockage sécurisé des identifiants.</li>
+          </ul>
+        </div>
+
+        <div class="p-4 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-1">Autorisation</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Contrôle d'accès basé sur les rôles (RBAC) pour les environnements clients.</li>
+            <li>Besoin de savoir : seuls les individus travaillant directement sur un projet y ont accès.</li>
+            <li>Sous-traitants (éventuels) provisionnés avec des comptes aux privilèges minimaux et limités dans le temps.</li>
+          </ul>
+        </div>
+
+        <div class="p-4 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-1">Gestion du cycle de vie</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Accès automatiquement révoqué à la fin du projet ou en cas de résiliation.</li>
+            <li>Rotation des identifiants en cas de suspicion de compromission.</li>
+            <li>Aucun accès administrateur permanent aux systèmes de production client.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Privacy & Data Handling -->
+    <section id="privacy" class="mb-16">
+      <h2 class="text-2xl font-bold mb-4">5. Confidentialité et traitement des données</h2>
+      <p class="text-text-muted leading-relaxed mb-6">
+        La confidentialité n'est pas de la conformité — c'est un principe fondamental. Nous concevons des systèmes qui ne collectent rien par défaut.
+      </p>
+
+      <div class="space-y-5">
+        <div class="p-5 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-2">Alignement LPRPDE / LACRPCP</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li><strong class="text-text">Minimisation des données</strong> : nous ne collectons que ce qui est requis pour le projet.</li>
+            <li><strong class="text-text">Limitation de la finalité</strong> : les données sont utilisées uniquement à la fin déclarée, pas pour l'analytique ou l'entraînement d'IA.</li>
+            <li><strong class="text-text">Base du consentement</strong> : consentement explicite et documenté avant tout traitement de données personnelles.</li>
+            <li><strong class="text-text">Accès et correction</strong> : les clients peuvent demander toutes les données que nous détenons ; les corrections sont faites rapidement.</li>
+          </ul>
+        </div>
+
+        <div class="p-5 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-2">Architecture sans télémétrie</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Nos sites Web et outils <strong class="text-text">n'envoient jamais</strong> de données comportementales à des tiers.</li>
+            <li>Pas de Google Analytics, ni Pixel Meta, ni Hotjar, ni Mixpanel.</li>
+            <li>Aucun suivi CDN au-delà de la mise en cache périphérique de base (Cloudflare, pas de cookies).</li>
+            <li>C'est vérifiable : inspectez l'onglet réseau sur n'importe quelle page elect-rix.tech — zéro donnée sortante.</li>
+          </ul>
+        </div>
+
+        <div class="p-5 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-2">Conservation et destruction des données</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Données client conservées uniquement pendant la durée de l'engagement.</li>
+            <li>Après le projet : retour de tous les artefacts ou destruction selon instruction écrite.</li>
+            <li>Aucune copie conservée dans des lecteurs personnels, courriels ou stockage non sécurisé.</li>
+            <li>Certificats de destruction disponibles sur demande.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Regulatory Compliance -->
+    <section id="compliance" class="mb-16">
+      <h2 class="text-2xl font-bold mb-4">6. Conformité réglementaire</h2>
+      <p class="text-text-muted leading-relaxed mb-6">
+        elect-rix.tech est structurée pour s'aligner sur les cadres réglementaires fédéraux et provinciaux canadiens.
+      </p>
+
+      <div class="rounded-xl border border-border overflow-hidden mb-6">
+        <table class="w-full text-sm">
+          <thead class="bg-surface-light">
+            <tr>
+              <th class="text-left px-4 py-3 font-semibold text-text">Réglementation / Cadre</th>
+              <th class="text-left px-4 py-3 font-semibold text-text">Alignement</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-border">
+            <tr>
+              <td class="px-4 py-3 font-medium">LPRPDE</td>
+              <td class="px-4 py-3 text-text-muted">Confidentialité par conception. Minimisation des données. Zéro télémétrie. Basé sur le consentement.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium">LACRPCP (NB / NS / PEI / TN)</td>
+              <td class="px-4 py-3 text-text-muted">Traitement des dossiers gouvernementaux. Contrôles d'accès. Protocoles de destruction.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium">ITSG-33 / ITSG-37</td>
+              <td class="px-4 py-3 text-text-muted">Base de référence des contrôles de sécurité. Évaluation des risques. Piste d'audit.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium">Directives cyber du CCCS</td>
+              <td class="px-4 py-3 text-text-muted">Intégrité de la chaîne d'approvisionnement. Préparation SBOM. Réponse aux incidents.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium">WCAG 2.1 AA</td>
+              <td class="px-4 py-3 text-text-muted">Accessibilité visée pour tous les livrables publics.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium">Programme SR&ED du Canada</td>
+              <td class="px-4 py-3 text-text-muted">Documentation R&D. Dépenses éligibles suivies. Documents contemporains.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-text-muted leading-relaxed">
+        <strong class="text-text">Avis de non-responsabilité :</strong> elect-rix.tech est une entreprise individuelle. Bien que nous alignions nos pratiques sur ces cadres, nous ne sommes pas un auditeur certifié ni un cabinet d'avocats. Pour des exigences de certification formelles, nous pouvons engager des tiers certifiés en votre nom.
+      </p>
+    </section>
+
+    <!-- Section 7: Government Procurement Readiness -->
+    <section id="gov" class="mb-16">
+      <h2 class="text-2xl font-bold mb-4">7. Préparation à l'approvisionnement gouvernemental</h2>
+      <p class="text-text-muted leading-relaxed mb-6">
+        L'approvisionnement du secteur public exige des preuves, pas des promesses. Voici comment nous atteignons ce seuil.
+      </p>
+
+      <div class="space-y-5">
+        <div class="p-5 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-2">Préparation SPAC / Services partagés Canada</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Résidence des données au Canada par défaut — aligné avec les attentes des charges de travail Protégées.</li>
+            <li>Responsabilité du personnel : un principal canadien nommé, aucun sous-traitant caché.</li>
+            <li>Cote de fiabilité et vérification d'antécédents disponibles sur demande pour les engagements sensibles.</li>
+          </ul>
+        </div>
+
+        <div class="p-5 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-2">Adapté aux petites entreprises / entrepreneurs individuels</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Admissible aux contrats réservés aux petites et moyennes entreprises (PME).</li>
+            <li>Approvisionnement simplifié : engagement direct, pas de tiers multiples complexes.</li>
+            <li>Entreprise contrôlée par des Canadiens admissible aux retombées industrielles régionales (RIR).</li>
+          </ul>
+        </div>
+
+        <div class="p-5 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-2">Documentation et piste d'audit</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Chaque livrable a une piste de provenance versionnée et signée (Git).</li>
+            <li>Documentation complète du projet disponible pour audit : exigences, conception, résultats de tests.</li>
+            <li>Dossiers financiers tenus pour le SR&ED et la conformité fiscale.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 8: Fall Wall Inspection (FWI) -->
+    <section id="fwi" class="mb-16">
+      <h2 class="text-2xl font-bold mb-4">8. Cadre d'inspection Fall Wall</h2>
+      <p class="text-text-muted leading-relaxed mb-6">
+        L'inspection Fall Wall (FWI) est notre méthodologie propriétaire de vérification de la sécurité — une vérification systématique des barrières qui maintiennent les systèmes en sécurité. Quand un mur tombe, qu'est-ce qui l'attrape ?
+      </p>
+
+      <div class="space-y-5">
+        <div class="p-5 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-2">1. Les cinq murs</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li><strong class="text-text">Périmètre</strong> : limites réseau, pare-feu, VPN.</li>
+            <li><strong class="text-text">Identité</strong> : authentification, autorisation, cycle de vie des accès.</li>
+            <li><strong class="text-text">Données</strong> : chiffrement au repos, en transit et en utilisation.</li>
+            <li><strong class="text-text">Application</strong> : codage sécurisé, analyse des dépendances, intégrité à l'exécution.</li>
+            <li><strong class="text-text">Humain</strong> : formation, politiques, réponse aux incidents, responsabilité.</li>
+          </ul>
+        </div>
+
+        <div class="p-5 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-2">2. Protocole d'inspection</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Chaque mur est testé indépendamment : que se passe-t-il s'il échoue ?</li>
+            <li>Analyse de défaillance en cascade : l'échec d'un mur compromet-il le suivant ?</li>
+            <li><strong class="text-text">Équipe rouge</strong> : simulation de scénarios de brèche et mesure de la réponse.</li>
+            <li><strong class="text-text">Équipe bleue</strong> : vérification des capacités de détection, de confinement et de récupération.</li>
+          </ul>
+        </div>
+
+        <div class="p-5 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-2">3. Documentation et certification</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Résultats FWI documentés par engagement, disponibles pour le client.</li>
+            <li>Points de remédiation suivis jusqu'à leur fermeture avant la mise en production.</li>
+            <li>Réinspection déclenchée par : nouvelles menaces, changements d'infrastructure ou incidents.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="text-text-muted leading-relaxed mt-6">
+        FWI a été développé par elect-rix.tech pour combler un gap en approvisionnement : les acheteurs ont besoin de <strong class="text-text">preuves</strong> de sécurité, pas seulement d'<strong class="text-text">assurances</strong>. C'est notre réponse à « comment savoir que c'est sécurisé ? »
+      </p>
+    </section>
+
+    <!-- Section 9: SR&ED -->
+    <section id="sr-ed" class="mb-16">
+      <h2 class="text-2xl font-bold mb-4">9. SR&ED et crédits d'impôt à l'innovation</h2>
+      <p class="text-text-muted leading-relaxed mb-6">
+        elect-rix.tech suit activement ses activités de recherche et développement pour les programmes de crédits d'impôt canadiens.
+      </p>
+
+      <div class="space-y-4 mb-6">
+        <div class="p-4 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-1">Activités R&D éligibles</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Optimisation de l'inférence IA locale (nouveaux algorithmes, quantification, réglage matériel).</li>
+            <li>Architecture de systèmes résilients (conception hors ligne d'abord, motifs déconnectables).</li>
+            <li>Calcul préservant la confidentialité (architectures zéro-télémétrie, apprentissage fédéré).</li>
+            <li>Systèmes de build déterministes et outillage de chaîne d'approvisionnement.</li>
+          </ul>
+        </div>
+
+        <div class="p-4 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-1">Documentation contemporaine</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Carnets de laboratoire dans Git : datés, versionnés et signés.</li>
+            <li>Suivi du temps pour toutes les heures R&D éligibles par projet.</li>
+            <li>Dossiers de dépenses pour matériaux, équipement et coûts de sous-traitants qualifiés.</li>
+          </ul>
+        </div>
+
+        <div class="p-4 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-1">Structure des crédits d'impôt</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>Entreprise individuelle : Crédit d'impôt à l'investissement (CII) SR&ED à <strong class="text-text">35 % (fédéral) + 15 % (provincial NB)</strong>.</li>
+            <li>Admissible aux crédits majorés jusqu'à la transition vers une SPCC (cible : revenus 60 K$+).</li>
+            <li>Traitement des remboursements : typiquement reçu dans les 120 jours du dépôt pour les petits demandeurs.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 10: Vendor Due Diligence Checklist -->
+    <section id="checklist" class="mb-16">
+      <h2 class="text-2xl font-bold mb-4">10. Liste de vérification de diligence raisonnable</h2>
+      <p class="text-text-muted leading-relaxed mb-4">
+        Utilisez cette liste pour évaluer <strong class="text-text">n'importe quel</strong> fournisseur, incluant elect-rix.tech, pour l'approvisionnement gouvernemental ou réglementé.
+      </p>
+      <div class="p-6 rounded-xl border border-border bg-surface">
+        <ul class="space-y-3 text-text-muted">
+          <li class="flex items-start gap-3">
+            <span class="text-accent-bright mt-0.5">☐</span>
+            <span><strong class="text-text">Résidence des données</strong> : Où les données sont-elles créées, traitées et stockées ?</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-accent-bright mt-0.5">☐</span>
+            <span><strong class="text-text">Chaîne d'approvisionnement</strong> : Le fournisseur peut-il fournir un SBOM ou un inventaire de dépendances ?</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-accent-bright mt-0.5">☐</span>
+            <span><strong class="text-text">Vérification du personnel</strong> : Partie responsable nommée ? Vérifications d'antécédents disponibles ?</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-accent-bright mt-0.5">☐</span>
+            <span><strong class="text-text">Réponse aux incidents</strong> : Plan défini ? SLA de notification client ?</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-accent-bright mt-0.5">☐</span>
+            <span><strong class="text-text">Assurance</strong> : Couverture E&O / responsabilité cyber ? Adéquate pour la valeur du contrat ?</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-accent-bright mt-0.5">☐</span>
+            <span><strong class="text-text">Accessibilité</strong> : Conformité WCAG revendiquée ? Vérifiée ?</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-accent-bright mt-0.5">☐</span>
+            <span><strong class="text-text">Piste d'audit</strong> : Gestion de versions ? Commits signés ? Journaux de déploiement ?</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-accent-bright mt-0.5">☐</span>
+            <span><strong class="text-text">Retombées autochtones / régionales</strong> : Admissible RIR ? Embauche locale ?</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-accent-bright mt-0.5">☐</span>
+            <span><strong class="text-text">Résiliation</strong> : Retour / destruction des données ? Certificat de destruction ?</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-accent-bright mt-0.5">☐</span>
+            <span><strong class="text-text">Sous-traitants</strong> : Nommés ? Liés par une confidentialité équivalente ?</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="text-center pt-8">
+      <h2 class="text-2xl font-bold mb-4">Questions d'approvisionnement ?</h2>
+      <p class="text-text-muted mb-6">Pour le SR&ED, la préparation aux contrats gouvernementaux, ou la documentation de diligence raisonnable :</p>
+      <a href="mailto:hello@elect-rix.tech" class="inline-flex items-center px-5 py-2.5 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright transition-colors">
+        hello@elect-rix.tech
+      </a>
+      <p class="mt-6 text-sm text-text-muted font-medium">elect-rix.tech — Intégrité. Loyauté. Honnêteté. — Testées.</p>
+    </section>
+  </section>
+</Layout>

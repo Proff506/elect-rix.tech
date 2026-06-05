@@ -1,18 +1,52 @@
 ---
 import '../styles/global.css';
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import { ui, useTranslations, type Lang } from '../i18n/translations';
 
 interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  lang?: Lang;
 }
 
 const siteUrl = 'https://elect-rix.tech';
-const { title, description = 'Protect your data. Even when the lights go out. Resilient, private, verifiable — built in, not bolted on.', ogImage = siteUrl + '/og-default.png' } = Astro.props;
+const { title, description = 'Protect your data. Even when the lights go out. Resilient, private, verifiable — built in, not bolted on.', ogImage = siteUrl + '/og-default.png', lang = 'en' } = Astro.props;
+
+const t = useTranslations(lang);
+const pathname = Astro.url.pathname;
+
+const otherLang: Lang = lang === 'en' ? 'fr' : 'en';
+let otherPath: string;
+if (lang === 'en') {
+  otherPath = '/fr' + pathname;
+} else {
+  otherPath = pathname.replace(/^\/fr/, '') || '/';
+}
+
+const navItems = [
+  { label: t('nav.home'), href: '/' },
+  { label: t('nav.about'), href: '/about' },
+  { label: t('nav.trust'), href: '/trust' },
+  { label: t('nav.safety'), href: '/safety' },
+  { label: t('nav.audit'), href: '/audit' },
+  { label: t('nav.report'), href: '/hyperscaler-audit' },
+  { label: t('nav.lab'), href: '/lab' },
+  { label: t('nav.contact'), href: '/contact' },
+];
+
+// For French pages, prepend /fr to priority pages that have translations
+const frenchPages = new Set(['/', '/trust', '/safety']);
+const resolvedNav = navItems.map(item => {
+  if (lang === 'fr' && frenchPages.has(item.href)) {
+    return { ...item, href: '/fr' + item.href };
+  }
+  return item;
+});
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,6 +67,11 @@ const { title, description = 'Protect your data. Even when the lights go out. Re
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="en" href={siteUrl + (lang === 'en' ? pathname : otherPath)} />
+    <link rel="alternate" hreflang="fr" href={siteUrl + (lang === 'fr' ? pathname : otherPath)} />
+    <link rel="alternate" hreflang="x-default" href={siteUrl + (lang === 'en' ? pathname : otherPath)} />
+
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -42,18 +81,12 @@ const { title, description = 'Protect your data. Even when the lights go out. Re
   <body class="antialiased">
     <nav class="fixed top-0 w-full z-50 border-b border-border bg-primary/80 backdrop-blur-md">
       <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="/" class="text-xl font-bold tracking-tight text-accent-bright">elect-rix.tech</a>
-        <div class="flex gap-6 text-sm font-medium">
-          <a href="/" class="text-text-muted hover:text-text transition-colors">Home</a>
-          <a href="/builds" class="text-text-muted hover:text-text transition-colors">Builds</a>
-          <a href="/blog" class="text-text-muted hover:text-text transition-colors">Blog</a>
-          <a href="/about" class="text-text-muted hover:text-text transition-colors">About</a>
-          <a href="/trust" class="text-text-muted hover:text-text transition-colors">Trust</a>
-          <a href="/safety" class="text-text-muted hover:text-text transition-colors">Safety</a>
-          <a href="/audit" class="text-text-muted hover:text-text transition-colors">Audit</a>
-          <a href="/hyperscaler-audit" class="text-text-muted hover:text-text transition-colors">Report</a>
-          <a href="/lab" class="text-text-muted hover:text-text transition-colors">Lab</a>
-          <a href="/contact" class="text-text-muted hover:text-text transition-colors">Contact</a>
+        <a href={lang === 'fr' ? '/fr/' : '/'} class="text-xl font-bold tracking-tight text-accent-bright">elect-rix.tech</a>
+        <div class="flex gap-6 text-sm font-medium items-center">
+          {resolvedNav.map(item => (
+            <a href={item.href} class="text-text-muted hover:text-text transition-colors">{item.label}</a>
+          ))}
+          <LanguageSwitcher lang={lang} pathname={pathname} />
         </div>
       </div>
     </nav>
@@ -64,8 +97,8 @@ const { title, description = 'Protect your data. Even when the lights go out. Re
 
     <footer class="border-t border-border py-8 mt-20">
       <div class="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-text-muted">
-        <span>© {new Date().getFullYear()} elect-rix.tech</span>
-        <span>Resilience, privacy, trust — built in, not bolted on.</span>
+        <span>{t('footer.rights').replace('{year}', String(new Date().getFullYear()))}</span>
+        <span>{t('footer.tagline')}</span>
       </div>
     </footer>
   </body>
