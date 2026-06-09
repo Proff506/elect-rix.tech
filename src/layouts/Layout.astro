@@ -82,7 +82,7 @@ const resolvedNav = navItems.map(item => {
       <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center gap-4">
         <a href={lang === 'fr' ? '/fr/' : '/'} class="shrink-0 flex items-center gap-2 text-lg sm:text-xl font-bold tracking-tight text-accent-bright" aria-label="elect-rix.tech home">
           <img src="/brand/vault-door.svg" alt="" class="h-8 w-8 rounded-full" loading="eager" />
-          <span>elect-rix.tech</span>
+          <span class="hidden sm:inline">elect-rix.tech</span>
         </a>
         <div class="ml-auto hidden lg:flex gap-6 text-sm font-medium items-center whitespace-nowrap">
           {resolvedNav.map(item => (
@@ -90,10 +90,9 @@ const resolvedNav = navItems.map(item => {
           ))}
           <LanguageSwitcher lang={lang} pathname={pathname} />
         </div>
-        <div class="ml-auto flex lg:hidden items-center gap-2 text-sm font-medium">
-          <a href={lang === 'fr' ? '/fr/' : '/'} class="hidden min-[360px]:inline-flex px-2.5 py-1.5 rounded-md text-text-muted hover:text-text transition-colors">{t('nav.home')}</a>
+        <div class="ml-auto flex lg:hidden items-center gap-2 text-sm font-medium whitespace-nowrap">
           <a href="/hyperscaler-audit" class="inline-flex px-3 py-1.5 rounded-md border border-accent/40 text-accent-bright hover:bg-accent/10 transition-colors">Report</a>
-          <a href="/contact" class="hidden min-[360px]:inline-flex px-2.5 py-1.5 rounded-md text-text-muted hover:text-text transition-colors">{t('nav.contact')}</a>
+          <a href="/contact" class="hidden min-[340px]:inline-flex px-2.5 py-1.5 rounded-md text-text-muted hover:text-text transition-colors">{t('nav.contact')}</a>
         </div>
       </div>
     </nav>
