@@ -73,7 +73,7 @@ import Layout from '../layouts/Layout.astro';
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
             <li>No US-managed cloud services for Protected workloads.</li>
             <li>No third-party analytics, tracking, or telemetry services with foreign data processing.</li>
-            <li>AI inference runs on local hardware — no data sent to OpenAI, Anthropic, or other foreign APIs.</li>
+            <li>For protected/client workloads, AI inference is local or client-controlled by default; client data is not sent to foreign AI APIs unless explicitly requested and approved in writing.</li>
           </ul>
         </div>
 
@@ -118,16 +118,16 @@ import Layout from '../layouts/Layout.astro';
           <h3 class="font-semibold text-text mb-2">Layer 3: Application Security</h3>
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
             <li>Static site output (Astro + Bun) — no server-side attack surface at runtime.</li>
-            <li>Dependencies pinned and audited (bun.lock, no floating versions).</li>
+            <li>Dependencies are lockfile-controlled through <code>bun.lock</code>; dependency review and audit artifacts can be provided where required.</li>
             <li>No third-party JavaScript trackers, analytics, or external scripts.</li>
-            <li><strong class="text-text">Zero runtime telemetry</strong>: no data leaves the browser to elect-rix or third parties.</li>
+            <li><strong class="text-text">Zero runtime telemetry by design</strong>: ordinary content pages do not load third-party analytics, trackers, or external scripts.</li>
           </ul>
         </div>
 
         <div class="p-5 rounded-xl border border-border bg-surface">
           <h3 class="font-semibold text-text mb-2">Layer 4: Supply Chain Security</h3>
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
-            <li>Deterministic builds: same source → same output, every time.</li>
+            <li>Builds are lockfile-controlled and static output can be reproduced from source for review.</li>
             <li>Git commit hash = deployment identifier. One-to-one traceability.</li>
             <li>All build tools open-source and verifiable (Astro, Bun, Tailwind).</li>
             <li>Relevant to <strong class="text-text">SBOM</strong> (Software Bill of Materials) requirements.</li>
@@ -156,7 +156,7 @@ import Layout from '../layouts/Layout.astro';
         <div class="p-4 rounded-xl border border-border bg-surface">
           <h3 class="font-semibold text-text mb-1">ITSG-33 / ITSG-37 Alignment</h3>
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
-            <li>Security controls mapped to Canadian government baseline where applicable.</li>
+            <li>Designed to map to Canadian government security baselines where applicable; formal control mapping can be produced per engagement.</li>
             <li>Access control (AC), audit (AU), system integrity (SI) controls documented.</li>
             <li>Security categorization available for Protected B workloads upon request.</li>
           </ul>
@@ -175,8 +175,8 @@ import Layout from '../layouts/Layout.astro';
           <h3 class="font-semibold text-text mb-1">Continuous Monitoring</h3>
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
             <li>Local system logs retained for forensic analysis.</li>
-            <li>Repository access logged via Git (signed commits, audit trail).</li>
-            <li>No blind spots: every build has a commit hash; every commit has an author.</li>
+            <li>Repository history is maintained in Git with author, timestamp, and deployment traceability; signed commits can be used for engagements requiring stronger provenance.</li>
+            <li>Each build can be traced back to source history and deployment records.</li>
           </ul>
         </div>
       </div>
@@ -190,7 +190,7 @@ import Layout from '../layouts/Layout.astro';
         <div class="p-4 rounded-xl border border-border bg-surface">
           <h3 class="font-semibold text-text mb-1">Authentication</h3>
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
-            <li>Two-factor authentication (2FA) enforced on all systems.</li>
+            <li>Two-factor authentication (2FA) enforced on administrative and third-party service accounts wherever supported.</li>
             <li>No shared credentials. Individual accounts only.</li>
             <li>Password managers used for secure credential storage.</li>
           </ul>
@@ -237,10 +237,21 @@ import Layout from '../layouts/Layout.astro';
         <div class="p-5 rounded-xl border border-border bg-surface">
           <h3 class="font-semibold text-text mb-2">No Telemetry Architecture</h3>
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
-            <li>Our websites and tools <strong class="text-text">never</strong> send behavior data to third parties.</li>
+            <li>Public elect-rix pages do not load third-party analytics or behavioral tracking scripts.</li>
             <li>No Google Analytics, no Meta Pixel, no Hotjar, no Mixpanel.</li>
-            <li>No CDN-based tracking beyond basic edge caching (Cloudflare, no cookies).</li>
-            <li>This is verifiable: inspect the network tab on ordinary content pages — no third-party font, analytics, or tracking requests are loaded by the site.</li>
+            <li>No elect-rix analytics cookies are set; Cloudflare is used for public-site delivery, caching, and baseline edge protection.</li>
+            <li>This is verifiable: inspect the network tab on ordinary content pages — no third-party font, analytics, or tracking scripts are loaded by the site.</li>
+          </ul>
+        </div>
+
+        <div class="p-5 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-2">Public Site Verification Notes</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>elect-rix.tech is served as a static site; there is no application server handling visitor form data on ordinary content pages.</li>
+            <li>No client-side scripts are loaded by this page.</li>
+            <li>No analytics, advertising pixels, or behavior-tracking tools are installed.</li>
+            <li>No analytics cookies are set by elect-rix.</li>
+            <li>Cloudflare is used for public-site delivery, caching, TLS, and baseline edge protection only; edge-level operational logging is not used as elect-rix marketing analytics.</li>
           </ul>
         </div>
 
@@ -301,7 +312,7 @@ import Layout from '../layouts/Layout.astro';
       </div>
 
       <p class="text-text-muted leading-relaxed">
-        <strong class="text-text">Disclaimer:</strong> elect-rix.tech is a sole proprietorship. While elect-rix aligns its practices with these frameworks, it is not a certified auditor or law firm. For formal certification requirements, certified third parties can be engaged on your behalf.
+        <strong class="text-text">Disclaimer:</strong> elect-rix operates as a trade name / brand of RixBot Technologies Inc., a New Brunswick incorporated company. While elect-rix aligns its practices with these frameworks, it is not a certified auditor or law firm. For formal certification requirements, certified third parties can be engaged on your behalf.
       </p>
     </section>
 
@@ -323,18 +334,18 @@ import Layout from '../layouts/Layout.astro';
         </div>
 
         <div class="p-5 rounded-xl border border-border bg-surface">
-          <h3 class="font-semibold text-text mb-2">Small Business / Sole Proprietor Friendly</h3>
+          <h3 class="font-semibold text-text mb-2">Small Business / Canadian-Controlled Supplier</h3>
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
-            <li>Eligible for set-aside contracts for small and medium enterprises (SMEs).</li>
+            <li>May qualify for SME-focused procurement streams where program rules apply.</li>
             <li>Streamlined procurement: direct engagement, no complex subcontractor tiers.</li>
-            <li>Canadian-controlled business eligible for industrial regional benefits (IRB).</li>
+            <li>Regional-benefit documentation can be provided where relevant.</li>
           </ul>
         </div>
 
         <div class="p-5 rounded-xl border border-border bg-surface">
           <h3 class="font-semibold text-text mb-2">Documentation & Audit Trail</h3>
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
-            <li>Every deliverable has a version-controlled, signed provenance trail (Git).</li>
+            <li>Deliverables can be maintained with version-controlled provenance in Git; signed provenance can be added where required by the engagement.</li>
             <li>Full project documentation available for audit: requirements, design, test results.</li>
             <li>Financial records maintained for SR&ED and tax compliance.</li>
           </ul>
@@ -346,7 +357,7 @@ import Layout from '../layouts/Layout.astro';
     <section id="fwi" class="mb-16">
       <h2 class="text-2xl font-bold mb-4">8. Fall Wall Inspection Framework</h2>
       <p class="text-text-muted leading-relaxed mb-6">
-        Fall Wall Inspection (FWI) is our proprietary safety verification methodology — a systematic check of the barriers that keep systems safe. When a wall falls, what catches it?
+        Fall Wall Inspection (FWI) is our internal safety verification methodology — a systematic check of the barriers that keep systems safe. When a wall falls, what catches it?
       </p>
 
       <div class="space-y-5">
@@ -372,7 +383,7 @@ import Layout from '../layouts/Layout.astro';
         </div>
 
         <div class="p-5 rounded-xl border border-border bg-surface">
-          <h3 class="font-semibold text-text mb-2">3. Documentation & Certification</h3>
+          <h3 class="font-semibold text-text mb-2">3. Documentation & Attestation</h3>
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
             <li>FWI results documented per engagement, available to client.</li>
             <li>Remediation items tracked to closure before go-live.</li>
@@ -400,14 +411,14 @@ import Layout from '../layouts/Layout.astro';
             <li>Local AI inference optimization (new algorithms, quantization, hardware tuning).</li>
             <li>Resilient system architecture (offline-first, air-gappable design patterns).</li>
             <li>Privacy-preserving computation (zero-telemetry architectures, federated learning).</li>
-            <li>Deterministic build systems and supply chain tooling.</li>
+            <li>Reproducible build practices and supply chain tooling.</li>
           </ul>
         </div>
 
         <div class="p-4 rounded-xl border border-border bg-surface">
           <h3 class="font-semibold text-text mb-1">Contemporaneous Documentation</h3>
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
-            <li>Lab notebooks in Git: dated, versioned, and signed.</li>
+            <li>Lab notebooks in Git: dated, versioned, and attributable; signing can be applied where required.</li>
             <li>Time tracking for all eligible R&D hours by project.</li>
             <li>Expense records for qualified materials, equipment, and subcontractor costs.</li>
           </ul>
@@ -416,9 +427,9 @@ import Layout from '../layouts/Layout.astro';
         <div class="p-4 rounded-xl border border-border bg-surface">
           <h3 class="font-semibold text-text mb-1">Tax Credit Structure</h3>
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
-            <li>Sole proprietorship: SR&ED Investment Tax Credit (ITC) at <strong class="text-text">35% (federal) + 15% (NB provincial)</strong>.</li>
-            <li>Eligible for enhanced credits until CCPC transition (target: revenue $60K+).</li>
-            <li>Refund processing: typically received within 120 days of filing for small claimants.</li>
+            <li>SR&ED eligibility and credit treatment depend on claimant structure, expenditures, and CRA/provincial rules.</li>
+            <li>elect-rix maintains contemporaneous R&D records to support potential SR&ED claims where applicable.</li>
+            <li>Formal tax-credit positions should be confirmed with qualified accounting or tax counsel before filing.</li>
           </ul>
         </div>
       </div>

@@ -74,7 +74,7 @@ import Layout from '../../layouts/Layout.astro';
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
             <li>Aucun service cloud géré américain pour les charges de travail Protégées.</li>
             <li>Aucun service d'analyse, de suivi ou de télémétrie tiers avec traitement de données à l'étranger.</li>
-            <li>L'inférence IA s'exécute sur matériel local — aucune donnée envoyée à OpenAI, Anthropic ou autres API étrangères.</li>
+            <li>Pour les charges de travail protégées/client, l'inférence IA est locale ou contrôlée par le client par défaut ; les données client ne sont pas envoyées à des API IA étrangères sauf demande explicite et approbation écrite.</li>
           </ul>
         </div>
 
@@ -119,16 +119,16 @@ import Layout from '../../layouts/Layout.astro';
           <h3 class="font-semibold text-text mb-2">Couche 3 : Sécurité applicative</h3>
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
             <li>Sortie statique (Astro + Bun) — aucune surface d'attaque côté serveur à l'exécution.</li>
-            <li>Dépendances épinglées et auditées (bun.lock, pas de versions flottantes).</li>
+            <li>Les dépendances sont contrôlées par le fichier <code>bun.lock</code> ; les preuves de revue ou d'audit peuvent être fournies lorsque requis.</li>
             <li>Aucun traqueur JavaScript tiers, ni analytique, ni script externe.</li>
-            <li><strong class="text-text">Zéro télémétrie à l'exécution</strong> : aucune donnée ne quitte le navigateur vers elect-rix ou des tiers.</li>
+            <li><strong class="text-text">Zéro télémétrie à l'exécution par conception</strong> : les pages de contenu ordinaires ne chargent pas d'analytique, de traqueurs ou de scripts externes tiers.</li>
           </ul>
         </div>
 
         <div class="p-5 rounded-xl border border-border bg-surface">
           <h3 class="font-semibold text-text mb-2">Couche 4 : Sécurité de la chaîne d'approvisionnement</h3>
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
-            <li>Builds déterministes : même source → même résultat, à chaque fois.</li>
+            <li>Les builds sont contrôlés par fichier de verrouillage et la sortie statique peut être reproduite depuis la source pour examen.</li>
             <li>Hash de commit Git = identifiant de déploiement. Traçabilité un-à-un.</li>
             <li>Tous les outils de build open source et vérifiables (Astro, Bun, Tailwind).</li>
             <li>Pertinent pour les exigences de <strong class="text-text">SBOM</strong> (Software Bill of Materials).</li>
@@ -157,7 +157,7 @@ import Layout from '../../layouts/Layout.astro';
         <div class="p-4 rounded-xl border border-border bg-surface">
           <h3 class="font-semibold text-text mb-1">Alignement ITSG-33 / ITSG-37</h3>
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
-            <li>Contrôles de sécurité mappés sur la base de référence du gouvernement canadien lorsque applicable.</li>
+            <li>Conçu pour se mapper aux bases de référence de sécurité du gouvernement canadien lorsque applicable ; une cartographie formelle des contrôles peut être produite par engagement.</li>
             <li>Contrôles d'accès (AC), d'audit (AU) et d'intégrité système (SI) documentés.</li>
             <li>Catégorisation de sécurité disponible pour les charges de travail Protégé B sur demande.</li>
           </ul>
@@ -176,8 +176,8 @@ import Layout from '../../layouts/Layout.astro';
           <h3 class="font-semibold text-text mb-1">Surveillance continue</h3>
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
             <li>Journaux système locaux conservés pour analyse médico-légale.</li>
-            <li>Accès au référentiel journalisé via Git (commits signés, piste d'audit).</li>
-            <li>Aucun angle mort : chaque build a un hash de commit ; chaque commit a un auteur.</li>
+            <li>L'historique du référentiel est maintenu dans Git avec auteur, horodatage et traçabilité de déploiement ; les commits signés peuvent être utilisés pour les engagements exigeant une provenance plus forte.</li>
+            <li>Chaque build peut être retracé vers l'historique source et les dossiers de déploiement.</li>
           </ul>
         </div>
       </div>
@@ -191,7 +191,7 @@ import Layout from '../../layouts/Layout.astro';
         <div class="p-4 rounded-xl border border-border bg-surface">
           <h3 class="font-semibold text-text mb-1">Authentification</h3>
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
-            <li>Authentification à deux facteurs (2FA) appliquée sur tous les systèmes.</li>
+            <li>Authentification à deux facteurs (2FA) appliquée aux comptes administratifs et services tiers lorsque prise en charge.</li>
             <li>Aucune identité partagée. Comptes individuels uniquement.</li>
             <li>Gestionnaires de mots de passe utilisés pour le stockage sécurisé des identifiants.</li>
           </ul>
@@ -238,10 +238,21 @@ import Layout from '../../layouts/Layout.astro';
         <div class="p-5 rounded-xl border border-border bg-surface">
           <h3 class="font-semibold text-text mb-2">Architecture sans télémétrie</h3>
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
-            <li>Nos sites Web et outils <strong class="text-text">n'envoient jamais</strong> de données comportementales à des tiers.</li>
+            <li>Les pages publiques elect-rix ne chargent pas de scripts d'analytique ou de suivi comportemental tiers.</li>
             <li>Pas de Google Analytics, ni Pixel Meta, ni Hotjar, ni Mixpanel.</li>
-            <li>Aucun suivi CDN au-delà de la mise en cache périphérique de base (Cloudflare, pas de cookies).</li>
-            <li>C'est vérifiable : inspectez l'onglet réseau sur n'importe quelle page elect-rix.tech — zéro donnée sortante.</li>
+            <li>Aucun cookie d'analytique elect-rix n'est défini ; Cloudflare est utilisé pour la livraison du site public, la mise en cache et la protection de base en périphérie.</li>
+            <li>C'est vérifiable : inspectez l'onglet réseau sur les pages de contenu ordinaires — aucune police, analytique ou script de suivi tiers n'est chargé par le site.</li>
+          </ul>
+        </div>
+
+        <div class="p-5 rounded-xl border border-border bg-surface">
+          <h3 class="font-semibold text-text mb-2">Notes de vérification du site public</h3>
+          <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
+            <li>elect-rix.tech est servi comme site statique ; aucun serveur applicatif ne traite les données de formulaires visiteurs sur les pages de contenu ordinaires.</li>
+            <li>Aucun script côté client n'est chargé par cette page.</li>
+            <li>Aucun outil d'analytique, pixel publicitaire ou suivi comportemental n'est installé.</li>
+            <li>Aucun cookie d'analytique n'est défini par elect-rix.</li>
+            <li>Cloudflare est utilisé uniquement pour la livraison du site public, la mise en cache, TLS et la protection de base en périphérie ; les journaux opérationnels en périphérie ne sont pas utilisés comme analytique marketing elect-rix.</li>
           </ul>
         </div>
 
@@ -302,7 +313,7 @@ import Layout from '../../layouts/Layout.astro';
       </div>
 
       <p class="text-text-muted leading-relaxed">
-        <strong class="text-text">Avis de non-responsabilité :</strong> elect-rix.tech est une entreprise individuelle. Bien que nous alignions nos pratiques sur ces cadres, nous ne sommes pas un auditeur certifié ni un cabinet d'avocats. Pour des exigences de certification formelles, nous pouvons engager des tiers certifiés en votre nom.
+        <strong class="text-text">Avis de non-responsabilité :</strong> elect-rix opère comme nom commercial / marque de RixBot Technologies Inc., une société incorporée au Nouveau-Brunswick. Bien que nous alignions nos pratiques sur ces cadres, nous ne sommes pas un auditeur certifié ni un cabinet d'avocats. Pour des exigences de certification formelles, nous pouvons engager des tiers certifiés en votre nom.
       </p>
     </section>
 
@@ -324,18 +335,18 @@ import Layout from '../../layouts/Layout.astro';
         </div>
 
         <div class="p-5 rounded-xl border border-border bg-surface">
-          <h3 class="font-semibold text-text mb-2">Adapté aux petites entreprises / entrepreneurs individuels</h3>
+          <h3 class="font-semibold text-text mb-2">Petite entreprise / fournisseur contrôlé par des Canadiens</h3>
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
-            <li>Admissible aux contrats réservés aux petites et moyennes entreprises (PME).</li>
+            <li>Peut se qualifier pour certains volets d'approvisionnement axés sur les PME lorsque les règles du programme s'appliquent.</li>
             <li>Approvisionnement simplifié : engagement direct, pas de tiers multiples complexes.</li>
-            <li>Entreprise contrôlée par des Canadiens admissible aux retombées industrielles régionales (RIR).</li>
+            <li>La documentation des retombées régionales peut être fournie lorsque pertinente.</li>
           </ul>
         </div>
 
         <div class="p-5 rounded-xl border border-border bg-surface">
           <h3 class="font-semibold text-text mb-2">Documentation et piste d'audit</h3>
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
-            <li>Chaque livrable a une piste de provenance versionnée et signée (Git).</li>
+            <li>Les livrables peuvent être maintenus avec une provenance versionnée dans Git ; une provenance signée peut être ajoutée lorsque requise par l'engagement.</li>
             <li>Documentation complète du projet disponible pour audit : exigences, conception, résultats de tests.</li>
             <li>Dossiers financiers tenus pour le SR&ED et la conformité fiscale.</li>
           </ul>
@@ -347,7 +358,7 @@ import Layout from '../../layouts/Layout.astro';
     <section id="fwi" class="mb-16">
       <h2 class="text-2xl font-bold mb-4">8. Cadre d'inspection Fall Wall</h2>
       <p class="text-text-muted leading-relaxed mb-6">
-        L'inspection Fall Wall (FWI) est notre méthodologie propriétaire de vérification de la sécurité — une vérification systématique des barrières qui maintiennent les systèmes en sécurité. Quand un mur tombe, qu'est-ce qui l'attrape ?
+        L'inspection Fall Wall (FWI) est notre méthodologie interne de vérification de la sécurité — une vérification systématique des barrières qui maintiennent les systèmes en sécurité. Quand un mur tombe, qu'est-ce qui l'attrape ?
       </p>
 
       <div class="space-y-5">
@@ -373,7 +384,7 @@ import Layout from '../../layouts/Layout.astro';
         </div>
 
         <div class="p-5 rounded-xl border border-border bg-surface">
-          <h3 class="font-semibold text-text mb-2">3. Documentation et certification</h3>
+          <h3 class="font-semibold text-text mb-2">3. Documentation et attestation</h3>
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
             <li>Résultats FWI documentés par engagement, disponibles pour le client.</li>
             <li>Points de remédiation suivis jusqu'à leur fermeture avant la mise en production.</li>
@@ -401,14 +412,14 @@ import Layout from '../../layouts/Layout.astro';
             <li>Optimisation de l'inférence IA locale (nouveaux algorithmes, quantification, réglage matériel).</li>
             <li>Architecture de systèmes résilients (conception hors ligne d'abord, motifs déconnectables).</li>
             <li>Calcul préservant la confidentialité (architectures zéro-télémétrie, apprentissage fédéré).</li>
-            <li>Systèmes de build déterministes et outillage de chaîne d'approvisionnement.</li>
+            <li>Pratiques de build reproductibles et outillage de chaîne d'approvisionnement.</li>
           </ul>
         </div>
 
         <div class="p-4 rounded-xl border border-border bg-surface">
           <h3 class="font-semibold text-text mb-1">Documentation contemporaine</h3>
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
-            <li>Carnets de laboratoire dans Git : datés, versionnés et signés.</li>
+            <li>Carnets de laboratoire dans Git : datés, versionnés et attribuables ; la signature peut être appliquée lorsque requise.</li>
             <li>Suivi du temps pour toutes les heures R&D éligibles par projet.</li>
             <li>Dossiers de dépenses pour matériaux, équipement et coûts de sous-traitants qualifiés.</li>
           </ul>
@@ -417,9 +428,9 @@ import Layout from '../../layouts/Layout.astro';
         <div class="p-4 rounded-xl border border-border bg-surface">
           <h3 class="font-semibold text-text mb-1">Structure des crédits d'impôt</h3>
           <ul class="text-sm text-text-muted space-y-1 list-disc list-inside">
-            <li>Entreprise individuelle : Crédit d'impôt à l'investissement (CII) SR&ED à <strong class="text-text">35 % (fédéral) + 15 % (provincial NB)</strong>.</li>
-            <li>Admissible aux crédits majorés jusqu'à la transition vers une SPCC (cible : revenus 60 K$+).</li>
-            <li>Traitement des remboursements : typiquement reçu dans les 120 jours du dépôt pour les petits demandeurs.</li>
+            <li>L'admissibilité SR&ED et le traitement des crédits dépendent de la structure du demandeur, des dépenses et des règles de l'ARC/provinciales.</li>
+            <li>elect-rix maintient des dossiers R&D contemporains pour appuyer des demandes SR&ED potentielles lorsque applicable.</li>
+            <li>Les positions fiscales formelles devraient être confirmées avec un comptable ou conseiller fiscal qualifié avant le dépôt.</li>
           </ul>
         </div>
       </div>
