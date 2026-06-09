@@ -26,11 +26,10 @@ if (lang === 'en') {
 
 const navItems = [
   { label: t('nav.home'), href: '/' },
+  { label: t('nav.report'), href: '/hyperscaler-audit' },
   { label: t('nav.about'), href: '/about' },
   { label: t('nav.trust'), href: '/trust' },
   { label: t('nav.safety'), href: '/safety' },
-  { label: t('nav.audit'), href: '/audit' },
-  { label: t('nav.report'), href: '/hyperscaler-audit' },
   { label: t('nav.lab'), href: '/lab' },
   { label: t('nav.contact'), href: '/contact' },
 ];
@@ -73,20 +72,28 @@ const resolvedNav = navItems.map(item => {
     <link rel="alternate" hreflang="x-default" href={siteUrl + (lang === 'en' ? pathname : otherPath)} />
 
     <title>{title}</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/brand/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/brand/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="/brand/favicon-64x64.png" />
+    <link rel="apple-touch-icon" sizes="256x256" href="/brand/icon-256x256.png" />
   </head>
   <body class="antialiased">
     <nav class="fixed top-0 w-full z-50 border-b border-border bg-primary/80 backdrop-blur-md">
-      <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href={lang === 'fr' ? '/fr/' : '/'} class="text-xl font-bold tracking-tight text-accent-bright">elect-rix.tech</a>
-        <div class="flex gap-6 text-sm font-medium items-center">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center gap-4">
+        <a href={lang === 'fr' ? '/fr/' : '/'} class="shrink-0 flex items-center gap-2 text-lg sm:text-xl font-bold tracking-tight text-accent-bright" aria-label="elect-rix.tech home">
+          <img src="/brand/vault-door.svg" alt="" class="h-8 w-8 rounded-full" loading="eager" />
+          <span>elect-rix.tech</span>
+        </a>
+        <div class="ml-auto hidden lg:flex gap-6 text-sm font-medium items-center whitespace-nowrap">
           {resolvedNav.map(item => (
             <a href={item.href} class="text-text-muted hover:text-text transition-colors">{item.label}</a>
           ))}
           <LanguageSwitcher lang={lang} pathname={pathname} />
+        </div>
+        <div class="ml-auto flex lg:hidden items-center gap-2 text-sm font-medium">
+          <a href={lang === 'fr' ? '/fr/' : '/'} class="hidden min-[360px]:inline-flex px-2.5 py-1.5 rounded-md text-text-muted hover:text-text transition-colors">{t('nav.home')}</a>
+          <a href="/hyperscaler-audit" class="inline-flex px-3 py-1.5 rounded-md border border-accent/40 text-accent-bright hover:bg-accent/10 transition-colors">Report</a>
+          <a href="/contact" class="hidden min-[360px]:inline-flex px-2.5 py-1.5 rounded-md text-text-muted hover:text-text transition-colors">{t('nav.contact')}</a>
         </div>
       </div>
     </nav>

@@ -7,8 +7,8 @@ export const ui = {
       about: 'About',
       trust: 'Trust',
       safety: 'Safety',
-      audit: 'Audit',
-      report: 'Report',
+      audit: 'Legacy Audit',
+      report: 'Hyperscaler Report',
       lab: 'Lab',
       contact: 'Contact',
     },
@@ -22,20 +22,20 @@ export const ui = {
     },
     available: 'Available for projects',
     cta: {
-      seeBuilds: 'See Builds →',
-      getInTouch: 'Get in Touch',
-      whyItMatters: 'Why it matters →',
+      seeBuilds: 'Read the Hyperscaler Report →',
+      getInTouch: 'Discuss your exposure',
+      whyItMatters: 'Why local-first matters →',
     },
     home: {
-      heroTitle: 'Make it work.',
-      heroSubtitle: 'Trust you can verify.',
+      heroTitle: 'Hyperscaler AI telemetry is not a footnote.',
+      heroSubtitle: 'It is a risk surface.',
       heroBody:
-        'Protect your data. Even when the lights go out. When the cloud drops, your systems shouldn\'t. When the audit comes, your data should be yours to account for. AI that works offline, leaks nothing, and proves it — built in, not bolted on.',
+        'I map where cloud AI systems send data, what vendors disclose, what remains ambiguous, and why local-first infrastructure matters when privacy, continuity, and jurisdiction are not optional.',
       builtDifferent: 'Built Different',
       builtDifferentBody1:
-        'One builder. Dedicated infrastructure. Local LLM inference on owned hardware, not a cloud API with a quota. Everything is self-hosted, private, and runs offline by architecture.',
+        'One builder. Dedicated infrastructure. Local LLM inference on owned hardware, not a cloud API with a quota. The target architecture is self-hosted, private, and able to keep working when external services fail.',
       builtDifferentBody2:
-        'The AI industry builds for connectivity. I build for what happens when it fails. Resilience isn\'t a feature you add — it\'s architecture you commit to. Your data doesn\'t leave the box. Your systems don\'t drop when the cloud does. Your trust is verifiable, not taken on faith.',
+        'The AI industry builds for connectivity. I build for what happens when it fails. Resilience isn\'t a feature you add — it\'s architecture you commit to. Sensitive data stays under client control where possible. Systems should degrade gracefully when the cloud drops. Trust should be verifiable, not taken on faith.',
       whatIDo: 'What I Do',
       whatIDoBody: 'Not features. Principles. Every engagement starts with these four commitments.',
       services: {
@@ -47,7 +47,7 @@ export const ui = {
         privacy: {
           title: 'Privacy Architecture',
           description:
-            'Zero telemetry by design, not by configuration. Your data stays on your hardware. Audit every packet. Prove nothing leaves.',
+            'Telemetry minimized and made visible by design, not hidden behind policy. Keep sensitive data on owned hardware. Audit the flows. Prove the boundary.',
         },
         trust: {
           title: 'Verifiable Trust',
@@ -60,9 +60,9 @@ export const ui = {
             'From audit to deployment. Find the gaps in your AI stack — cloud dependency, telemetry leaks, compliance risks — and close them by design.',
         },
       },
-      startAudit: 'Start with an audit, not an apology.',
+      startAudit: 'Start with the report. Then decide what needs an audit.',
       startAuditBody:
-        'I help teams find the risks in their AI stack — cloud dependency, privacy leaks, compliance gaps — before a regulator, a breach, or a lawsuit does. If you already know you have a problem, we start there. If you want proof you don\'t, we find that too.',
+        'The hyperscaler report is the advance scout: a public map of common telemetry, jurisdiction, and dependency risks. If it matches what you are worried about, I can help turn that concern into evidence and a practical Local Vault path.',
     },
   },
   fr: {
@@ -73,8 +73,8 @@ export const ui = {
       about: 'À propos',
       trust: 'Confiance',
       safety: 'Sécurité',
-      audit: 'Audit',
-      report: 'Rapport',
+      audit: 'Audit ancien',
+      report: 'Rapport hyperscalers',
       lab: 'Lab',
       contact: 'Contact',
     },
@@ -88,13 +88,13 @@ export const ui = {
     },
     available: 'Disponible pour projets',
     cta: {
-      seeBuilds: 'Voir les builds →',
-      getInTouch: 'Nous joindre',
-      whyItMatters: 'Pourquoi ça compte →',
+      seeBuilds: 'Lire le rapport hyperscalers →',
+      getInTouch: 'Discuter de votre exposition',
+      whyItMatters: 'Pourquoi le local-first compte →',
     },
     home: {
-      heroTitle: 'Faites-le fonctionner.',
-      heroSubtitle: 'Une confiance vérifiable.',
+      heroTitle: 'La télémétrie IA hyperscaler n’est pas une note de bas de page.',
+      heroSubtitle: 'C’est une surface de risque.',
       heroBody:
         'Protégez vos données. Même quand les lumières s\'éteignent. Quand le cloud tombe, vos systèmes ne devraient pas. Quand l\'audit arrive, vos données devraient être les vôtres à rendre compte. Une IA qui fonctionne hors ligne, ne fuit rien et le prouve — intégrée, pas ajoutée.',
       builtDifferent: 'Conçu différemment',
@@ -127,7 +127,7 @@ export const ui = {
             "De l'audit au déploiement. Trouvez les lacunes dans votre pile IA — dépendance au cloud, fuites de télémétrie, risques de conformité — et éliminez-les par conception.",
         },
       },
-      startAudit: 'Commencez par un audit, pas des excuses.',
+      startAudit: 'Commencez par le rapport. Décidez ensuite ce qui doit être audité.',
       startAuditBody:
         "J'aide les équipes à trouver les risques dans leur pile IA — dépendance au cloud, fuites de confidentialité, lacunes de conformité — avant qu'un régulateur, une brèche ou un procès ne le fasse. Si vous savez déjà que vous avez un problème, nous commençons là. Si vous voulez prouver que vous n'en avez pas, nous le trouvons aussi.",
     },

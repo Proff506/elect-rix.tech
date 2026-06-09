@@ -9,7 +9,7 @@ const services = [
   },
   {
     title: 'Privacy Architecture',
-    description: 'Zero telemetry by design, not by configuration. Your data stays on your hardware. Audit every packet. Prove nothing leaves.',
+    description: 'Telemetry minimized and made visible by design, not hidden behind policy. Keep sensitive data on owned hardware. Audit the flows. Prove the boundary.',
     icon: '🔒',
   },
   {
@@ -25,27 +25,30 @@ const services = [
 ];
 ---
 
-<Layout title="elect-rix.tech — Protect Your Data. Even When the Lights Go Out." description="Protect your data. Even when the lights go out. Resilient, private, verifiable AI systems. Integrity, loyalty, honesty — built in, not bolted on.">
+<Layout title="elect-rix.tech — Hyperscaler AI Telemetry Report" description="Independent research on hyperscaler AI telemetry, cloud dependency, and practical local-first alternatives for organizations that need proof.">
   <!-- Hero -->
   <section class="relative overflow-hidden">
-    <div class="max-w-5xl mx-auto px-6 pt-32 pb-20 text-center">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-16 sm:pb-20 text-center">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent-bright text-sm font-medium mb-8 border border-accent/20">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
         Available for projects
       </div>
-      <h1 class="text-5xl sm:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6">
-        Make it work.<br />
-        <span class="text-accent-bright">Trust you can verify.</span>
+      <h1 class="text-[2rem] min-[360px]:text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08] mb-6">
+        Hyperscaler AI telemetry is not a footnote.<br class="hidden sm:block" />
+        <span class="text-accent-bright">It is a risk surface.</span>
       </h1>
       <p class="text-lg sm:text-xl text-text-muted max-w-2xl mx-auto leading-relaxed mb-10">
-        Protect your data. Even when the lights go out. When the cloud drops, your systems shouldn't. When the audit comes, your data should be yours to account for. AI that works offline, leaks nothing, and proves it — built in, not bolted on.
+        I map where cloud AI systems send data, what vendors disclose, what remains ambiguous, and why local-first infrastructure matters when privacy, continuity, and jurisdiction are not optional.
       </p>
-      <div class="flex justify-center">
-        <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright transition-colors">
-          Get in Touch
+      <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+        <a href="/hyperscaler-audit" class="inline-flex w-full sm:w-auto items-center justify-center px-5 sm:px-6 py-3 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright transition-colors">
+          Read the Hyperscaler Report
+        </a>
+        <a href="/contact" class="inline-flex w-full sm:w-auto items-center justify-center px-5 sm:px-6 py-3 rounded-lg border border-border text-text font-semibold hover:border-accent/60 hover:text-accent-bright transition-colors">
+          Discuss your exposure
         </a>
       </div>
-      <div class="mt-12 rounded-xl border border-border overflow-hidden max-w-3xl mx-auto">
+      <div class="mt-10 sm:mt-12 rounded-xl border border-border overflow-hidden max-w-3xl mx-auto shadow-2xl shadow-accent/5">
         <img src="/resilience-offline-shield.png" alt="Resilient system shielded from network chaos" class="w-full h-auto" />
       </div>
     </div>
@@ -53,47 +56,47 @@ const services = [
 
   <!-- About Preview -->
   <section class="border-y border-border bg-surface/50">
-    <div class="max-w-5xl mx-auto px-6 py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div>
           <h2 class="text-3xl font-bold tracking-tight mb-4">Built Different</h2>
           <div class="space-y-4 text-text-muted leading-relaxed">
             <p>
-              One builder. Dedicated infrastructure. Local LLM inference on owned hardware, not a cloud API with a quota. Everything is self-hosted, private, and runs offline by architecture.
+              One builder. Dedicated infrastructure. Local LLM inference on owned hardware, not a cloud API with a quota. The target architecture is self-hosted, private, and able to keep working when external services fail.
             </p>
             <p>
-              The AI industry builds for connectivity. I build for what happens when it fails. Resilience isn't a feature you add — it's architecture you commit to. Your data doesn't leave the box. Your systems don't drop when the cloud does. Your trust is verifiable, not taken on faith.
+              The AI industry builds for connectivity. I build for what happens when it fails. Resilience isn't a feature you add — it's architecture you commit to. Sensitive data stays under client control where possible. Systems should degrade gracefully when the cloud drops. Trust should be verifiable, not taken on faith.
             </p>
           </div>
           <a href="/about" class="inline-flex items-center gap-2 text-accent-bright font-medium mt-6 hover:underline">
             Why it matters →
           </a>
         </div>
-        <div class="p-6 rounded-xl border border-border bg-primary">
+        <div class="p-4 sm:p-6 rounded-xl border border-border bg-primary">
           <div class="space-y-4">
-            <div class="flex items-center justify-between">
+            <div class="flex flex-col min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between gap-1">
               <span class="text-text-muted">Local LLM</span>
-              <span class="text-accent-bright font-semibold">Ollama</span>
+              <span class="text-accent-bright font-semibold min-[380px]:text-right">Ollama</span>
             </div>
-            <div class="flex items-center justify-between">
+            <div class="flex flex-col min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between gap-1">
               <span class="text-text-muted">Container Platform</span>
-              <span class="text-accent-bright font-semibold">Docker</span>
+              <span class="text-accent-bright font-semibold min-[380px]:text-right">Docker</span>
             </div>
-            <div class="flex items-center justify-between">
+            <div class="flex flex-col min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between gap-1">
               <span class="text-text-muted">Orchestration</span>
-              <span class="text-accent-bright font-semibold">Docker</span>
+              <span class="text-accent-bright font-semibold min-[380px]:text-right">Docker</span>
             </div>
-            <div class="flex items-center justify-between">
+            <div class="flex flex-col min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between gap-1">
               <span class="text-text-muted">Operating System</span>
-              <span class="text-accent-bright font-semibold">Pop!_OS</span>
+              <span class="text-accent-bright font-semibold min-[380px]:text-right">Pop!_OS</span>
             </div>
-            <div class="flex items-center justify-between">
+            <div class="flex flex-col min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between gap-1">
               <span class="text-text-muted">GPU</span>
-              <span class="text-accent-bright font-semibold">RTX 5070 Ti</span>
+              <span class="text-accent-bright font-semibold min-[380px]:text-right">RTX 5070 Ti</span>
             </div>
-            <div class="flex items-center justify-between">
+            <div class="flex flex-col min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between gap-1">
               <span class="text-text-muted">Processor</span>
-              <span class="text-accent-bright font-semibold">Core i9 14900K</span>
+              <span class="text-accent-bright font-semibold min-[380px]:text-right">Core i9 14900K</span>
             </div>
           </div>
         </div>
@@ -103,7 +106,7 @@ const services = [
 
   <!-- Services -->
   <section class="py-20">
-    <div class="max-w-5xl mx-auto px-6">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
       <div class="text-center mb-16">
         <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">What I Do</h2>
         <p class="text-text-muted text-lg max-w-2xl mx-auto">
@@ -115,7 +118,7 @@ const services = [
       </div>
       <div class="grid sm:grid-cols-2 gap-6">
         {services.map((service) => (
-          <div class="p-6 rounded-xl border border-border bg-primary hover:border-accent/30 transition-colors group">
+          <div class="p-5 sm:p-6 rounded-xl border border-border bg-primary hover:border-accent/30 transition-colors group">
             <div class="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
               {service.icon}
             </div>
@@ -131,13 +134,13 @@ const services = [
   <section class="border-y border-border bg-surface/50 py-20">
     <div class="max-w-3xl mx-auto px-6 text-center">
       <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-6">
-        Start with an audit, not an apology.
+        Start with the report. Then decide what needs an audit.
       </h2>
       <p class="text-text-muted text-lg mb-10 leading-relaxed">
-        I help teams find the risks in their AI stack — cloud dependency, privacy leaks, compliance gaps — before a regulator, a breach, or a lawsuit does. If you already know you have a problem, we start there. If you want proof you don't, we find that too.
+        The hyperscaler report is the advance scout: a public map of common telemetry, jurisdiction, and dependency risks. If it matches what you are worried about, I can help turn that concern into evidence and a practical Local Vault path.
       </p>
-      <a href="/contact" class="inline-flex items-center justify-center px-8 py-4 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright transition-colors text-lg">
-        Get in Touch
+      <a href="/hyperscaler-audit" class="inline-flex w-full sm:w-auto items-center justify-center px-6 sm:px-8 py-4 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright transition-colors text-lg">
+        Read the Hyperscaler Report
       </a>
     </div>
   </section>

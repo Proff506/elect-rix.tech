@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 820" width="800" height="820">
+  <defs>
+    <!-- === METALLIC GRADIENTS === -->
+    
+    <!-- Heavy brushed steel outer frame -->
+    <linearGradient id="steelFrame" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9EA3AB"/>
+      <stop offset="15%" stop-color="#6B7078"/>
+      <stop offset="30%" stop-color="#B0B5BD"/>
+      <stop offset="45%" stop-color="#7A7F87"/>
+      <stop offset="60%" stop-color="#A5AAB2"/>
+      <stop offset="75%" stop-color="#6B7078"/>
+      <stop offset="90%" stop-color="#9EA3AB"/>
+      <stop offset="100%" stop-color="#787D85"/>
+    </linearGradient>
+
+    <!-- Inner vault door plate -->
+    <linearGradient id="vaultPlate" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#8A8F97"/>
+      <stop offset="20%" stop-color="#555960"/>
+      <stop offset="40%" stop-color="#9A9FA7"/>
+      <stop offset="60%" stop-color="#65696F"/>
+      <stop offset="80%" stop-color="#8A8F97"/>
+      <stop offset="100%" stop-color="#4A4E55"/>
+    </linearGradient>
+
+    <!-- Spoke wheel gradient -->
+    <linearGradient id="spokeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B8BDC5"/>
+      <stop offset="30%" stop-color="#8A8F97"/>
+      <stop offset="60%" stop-color="#C5CAD2"/>
+      <stop offset="100%" stop-color="#75797F"/>
+    </linearGradient>
+
+    <!-- Spoke wheel handle rim -->
+    <linearGradient id="rimGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#D0D5DD"/>
+      <stop offset="30%" stop-color="#95999F"/>
+      <stop offset="50%" stop-color="#C8CDD5"/>
+      <stop offset="70%" stop-color="#85898F"/>
+      <stop offset="100%" stop-color="#B0B5BD"/>
+    </linearGradient>
+
+    <!-- Rivet gradient -->
+    <radialGradient id="rivetGrad" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#E0E5ED"/>
+      <stop offset="40%" stop-color="#95999F"/>
+      <stop offset="100%" stop-color="#555960"/>
+    </radialGradient>
+
+    <!-- Bolt gradient (larger rivets for locking bolts) -->
+    <radialGradient id="boltGrad" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#D5DAE2"/>
+      <stop offset="30%" stop-color="#8A8F97"/>
+      <stop offset="70%" stop-color="#4A4E55"/>
+      <stop offset="100%" stop-color="#35383E"/>
+    </radialGradient>
+
+    <!-- Locking bolt bar gradient -->
+    <linearGradient id="boltBar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#A5AAB2"/>
+      <stop offset="50%" stop-color="#75797F"/>
+      <stop offset="100%" stop-color="#95999F"/>
+    </linearGradient>
+
+    <!-- Teal accent for electronics elements -->
+    <linearGradient id="tealAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0098B8"/>
+      <stop offset="50%" stop-color="#00C8F0"/>
+      <stop offset="100%" stop-color="#0098B8"/>
+    </linearGradient>
+
+    <!-- Amber accent -->
+    <linearGradient id="amberAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C06000"/>
+      <stop offset="50%" stop-color="#E88020"/>
+      <stop offset="100%" stop-color="#C06000"/>
+    </linearGradient>
+
+    <!-- Central hub gradient -->
+    <radialGradient id="hubGrad" cx="45%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#C8CDD5"/>
+      <stop offset="40%" stop-color="#85898F"/>
+      <stop offset="80%" stop-color="#555960"/>
+      <stop offset="100%" stop-color="#3A3D42"/>
+    </radialGradient>
+
+    <!-- Chip die gradient -->
+    <linearGradient id="chipDie" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A2D3D"/>
+      <stop offset="50%" stop-color="#0D1820"/>
+      <stop offset="100%" stop-color="#1A2D3D"/>
+    </linearGradient>
+
+    <!-- Chip grid pattern -->
+    <pattern id="chipGrid" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+      <rect width="8" height="8" fill="none"/>
+      <line x1="0" y1="0" x2="8" y2="0" stroke="#1E3848" stroke-width="0.4"/>
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#1E3848" stroke-width="0.4"/>
+    </pattern>
+
+    <!-- Background gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#1A1C20"/>
+      <stop offset="100%" stop-color="#08090B"/>
+    </radialGradient>
+
+    <!-- === FILTERS === -->
+    
+    <!-- Heavy drop shadow for outer frame -->
+    <filter id="frameShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="blur"/>
+      <feFlood flood-color="#000000" flood-opacity="0.6" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="shadow"/>
+      <feOffset in="shadow" dx="0" dy="4" result="offsetShadow"/>
+      <feMerge>
+        <feMergeNode in="offsetShadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Inner shadow for vault plate recess -->
+    <filter id="innerRecess" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
+      <feFlood flood-color="#000000" flood-opacity="0.4" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="shadow"/>
+      <feOffset in="shadow" dx="0" dy="2" result="offsetShadow"/>
+      <feMerge>
+        <feMergeNode in="offsetShadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Subtle glow for teal electronics -->
+    <filter id="glowTeal" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feFlood flood-color="#00C8F0" flood-opacity="0.5" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Subtle glow for amber -->
+    <filter id="glowAmber" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.8" result="blur"/>
+      <feFlood flood-color="#E88020" flood-opacity="0.4" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Bevel highlight for metallic surfaces -->
+    <filter id="bevel" x="-2%" y="-2%" width="104%" height="104%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+      <feSpecularLighting in="blur" surfaceScale="3" specularConstant="0.6" specularExponent="20" result="spec">
+        <fePointLight x="200" y="100" z="200"/>
+      </feSpecularLighting>
+      <feComposite in="spec" in2="SourceAlpha" operator="in" result="specOut"/>
+      <feMerge>
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="specOut"/>
+      </feMerge>
+    </filter>
+
+    <!-- Etched groove effect - makes traces look carved into metal -->
+    <filter id="etchGroove" x="-8%" y="-8%" width="116%" height="116%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2.5" result="blur1"/>
+      <feFlood flood-color="#000000" flood-opacity="0.6" result="darkGlow"/>
+      <feComposite in="darkGlow" in2="blur1" operator="in" result="darkShadow"/>
+      <feGaussianBlur in="SourceAlpha" stdDeviation="0.8" result="blur2"/>
+      <feOffset in="blur2" dx="-0.5" dy="-0.5" result="offsetLight"/>
+      <feFlood flood-color="#C0C8D0" flood-opacity="0.25" result="lightFlood"/>
+      <feComposite in="lightFlood" in2="offsetLight" operator="in" result="lightEdge"/>
+      <feMerge>
+        <feMergeNode in="darkShadow"/>
+        <feMergeNode in="lightEdge"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Highlight for polished metal edges -->
+    <linearGradient id="edgeHighlight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="40%" stop-color="#FFFFFF" stop-opacity="0.15"/>
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.3"/>
+      <stop offset="60%" stop-color="#FFFFFF" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="800" fill="url(#bgGrad)"/>
+
+  <!-- ============================================ -->
+  <!-- OUTER FRAME (heavy steel ring)               -->
+  <!-- ============================================ -->
+  
+  <!-- Frame shadow base -->
+  <circle cx="400" cy="400" r="320" fill="#15171A" filter="url(#frameShadow)"/>
+
+  <!-- Outer steel frame -->
+  <circle cx="400" cy="400" r="315" fill="url(#steelFrame)" stroke="#3A3D42" stroke-width="2"/>
+
+  <!-- Frame inner edge -->
+  <circle cx="400" cy="400" r="270" fill="none" stroke="#45484E" stroke-width="2.5"/>
+
+  <!-- Frame outer edge highlight -->
+  <circle cx="400" cy="400" r="314" fill="none" stroke="#C8CDD5" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- Rivets around outer frame (24 rivets) -->
+  <g>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(15,400,400)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(30,400,400)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(45,400,400)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(60,400,400)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(75,400,400)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(90,400,400)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(105,400,400)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(120,400,400)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(135,400,400)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(150,400,400)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(165,400,400)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(180,400,400)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(195,400,400)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(210,400,400)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(225,400,400)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(240,400,400)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(255,400,400)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(270,400,400)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(285,400,400)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(300,400,400)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(315,400,400)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(330,400,400)"/>
+    <circle cx="400" cy="88" r="6" fill="url(#rivetGrad)" transform="rotate(345,400,400)"/>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- LOCKING BOLTS (4 cardinal positions)         -->
+  <!-- ============================================ -->
+  
+  <!-- Top locking bolt -->
+  <g>
+    <rect x="386" y="72" width="28" height="45" rx="3" fill="url(#boltBar)" stroke="#3A3D42" stroke-width="1.2"/>
+    <circle cx="400" cy="78" r="10" fill="url(#boltGrad)"/>
+    <rect x="389" y="72" width="22" height="2" fill="#C8CDD5" opacity="0.4"/>
+  </g>
+  
+  <!-- Bottom locking bolt -->
+  <g>
+    <rect x="386" y="683" width="28" height="45" rx="3" fill="url(#boltBar)" stroke="#3A3D42" stroke-width="1.2"/>
+    <circle cx="400" cy="722" r="10" fill="url(#boltGrad)"/>
+    <rect x="389" y="726" width="22" height="2" fill="#C8CDD5" opacity="0.4"/>
+  </g>
+  
+  <!-- Left locking bolt -->
+  <g>
+    <rect x="72" y="386" width="45" height="28" rx="3" fill="url(#boltBar)" stroke="#3A3D42" stroke-width="1.2"/>
+    <circle cx="78" cy="400" r="10" fill="url(#boltGrad)"/>
+  </g>
+  
+  <!-- Right locking bolt -->
+  <g>
+    <rect x="683" y="386" width="45" height="28" rx="3" fill="url(#boltBar)" stroke="#3A3D42" stroke-width="1.2"/>
+    <circle cx="722" cy="400" r="10" fill="url(#boltGrad)"/>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- VAULT DOOR PLATE (inner disc)                -->
+  <!-- ============================================ -->
+  
+  <circle cx="400" cy="400" r="268" fill="#2A2D32" filter="url(#innerRecess)"/>
+  <circle cx="400" cy="400" r="265" fill="url(#vaultPlate)"/>
+
+  <!-- Subtle concentric machining lines on plate -->
+  <circle cx="400" cy="400" r="255" fill="none" stroke="#70757D" stroke-width="0.3" opacity="0.4"/>
+  <circle cx="400" cy="400" r="245" fill="none" stroke="#70757D" stroke-width="0.3" opacity="0.3"/>
+  <circle cx="400" cy="400" r="235" fill="none" stroke="#70757D" stroke-width="0.3" opacity="0.35"/>
+  <circle cx="400" cy="400" r="225" fill="none" stroke="#70757D" stroke-width="0.3" opacity="0.25"/>
+  <circle cx="400" cy="400" r="215" fill="none" stroke="#70757D" stroke-width="0.3" opacity="0.3"/>
+  <circle cx="400" cy="400" r="205" fill="none" stroke="#70757D" stroke-width="0.3" opacity="0.2"/>
+
+  <!-- Plate highlight sweep -->
+  <circle cx="400" cy="400" r="265" fill="none" stroke="url(#edgeHighlight)" stroke-width="1"/>
+  
+  <!-- Specular highlight arc - simulates light source from upper-left -->
+  <path d="M220,200 A265,265 0 0,1 400,135" fill="none" stroke="#FFFFFF" stroke-width="25" opacity="0.06" stroke-linecap="round"/>
+  <path d="M240,220 A255,255 0 0,1 380,142" fill="none" stroke="#FFFFFF" stroke-width="12" opacity="0.04" stroke-linecap="round"/>
+
+  <!-- ============================================ -->
+  <!-- CIRCUIT TRACES (woven into the vault plate)  -->
+  <!-- ============================================ -->
+
+  <!-- Upper-left quadrant traces (teal) - groove + lit trace -->
+  <g opacity="0.35">
+    <path d="M370,345 L370,310 L340,280 L340,200 L320,180 L320,145" stroke="#0A1520" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M358,345 L358,300 L320,262 L300,262 L280,200 L260,170" stroke="#0A1520" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M346,355 L310,355 L280,325 L240,325 L200,280 L160,280" stroke="#0A1520" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M346,370 L320,370 L300,350 L260,350 L230,320 L180,320" stroke="#0A1520" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g opacity="0.9">
+    <path d="M370,345 L370,310 L340,280 L340,200 L320,180 L320,145" stroke="#00C8F0" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M358,345 L358,300 L320,262 L300,262 L280,200 L260,170" stroke="#00C8F0" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M346,355 L310,355 L280,325 L240,325 L200,280 L160,280" stroke="#00C8F0" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M346,370 L320,370 L300,350 L260,350 L230,320 L180,320" stroke="#00C8F0" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Upper-right quadrant traces (amber) - groove + lit trace -->
+  <g opacity="0.35">
+    <path d="M430,345 L430,310 L460,280 L460,200 L480,180 L480,145" stroke="#0A1520" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M442,345 L442,300 L480,262 L500,262 L520,200 L540,170" stroke="#0A1520" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M454,355 L490,355 L520,325 L560,325 L600,280 L640,280" stroke="#0A1520" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M454,370 L480,370 L500,350 L540,350 L570,320 L620,320" stroke="#0A1520" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g opacity="0.9">
+    <path d="M430,345 L430,310 L460,280 L460,200 L480,180 L480,145" stroke="#E88020" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M442,345 L442,300 L480,262 L500,262 L520,200 L540,170" stroke="#E88020" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M454,355 L490,355 L520,325 L560,325 L600,280 L640,280" stroke="#E88020" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M454,370 L480,370 L500,350 L540,350 L570,320 L620,320" stroke="#E88020" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Lower-left quadrant traces (amber) - groove + lit trace -->
+  <g opacity="0.35">
+    <path d="M370,455 L370,490 L340,520 L340,600 L320,620 L320,655" stroke="#0A1520" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M358,455 L358,500 L320,538 L300,538 L280,600 L260,630" stroke="#0A1520" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M346,445 L310,445 L280,475 L240,475 L200,520 L160,520" stroke="#0A1520" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M346,430 L320,430 L300,450 L260,450 L230,480 L180,480" stroke="#0A1520" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g opacity="0.9">
+    <path d="M370,455 L370,490 L340,520 L340,600 L320,620 L320,655" stroke="#E88020" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M358,455 L358,500 L320,538 L300,538 L280,600 L260,630" stroke="#E88020" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M346,445 L310,445 L280,475 L240,475 L200,520 L160,520" stroke="#E88020" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M346,430 L320,430 L300,450 L260,450 L230,480 L180,480" stroke="#E88020" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Lower-right quadrant traces (teal) - groove + lit trace -->
+  <g opacity="0.35">
+    <path d="M430,455 L430,490 L460,520 L460,600 L480,620 L480,655" stroke="#0A1520" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M442,455 L442,500 L480,538 L500,538 L520,600 L540,630" stroke="#0A1520" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M454,445 L490,445 L520,475 L560,475 L600,520 L640,520" stroke="#0A1520" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M454,430 L480,430 L500,450 L540,450 L570,480 L620,480" stroke="#0A1520" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g opacity="0.9">
+    <path d="M430,455 L430,490 L460,520 L460,600 L480,620 L480,655" stroke="#00C8F0" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M442,455 L442,500 L480,538 L500,538 L520,600 L540,630" stroke="#00C8F0" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M454,445 L490,445 L520,475 L560,475 L600,520 L640,520" stroke="#00C8F0" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M454,430 L480,430 L500,450 L540,450 L570,480 L620,480" stroke="#00C8F0" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Trace endpoint nodes -->
+  <g>
+    <circle cx="320" cy="143" r="3.5" fill="#00C8F0" filter="url(#glowTeal)"/>
+    <circle cx="260" cy="168" r="3" fill="#00C8F0" filter="url(#glowTeal)"/>
+    <circle cx="158" cy="280" r="3" fill="#00C8F0" filter="url(#glowTeal)"/>
+    <circle cx="178" cy="320" r="3" fill="#00C8F0" filter="url(#glowTeal)"/>
+    <circle cx="480" cy="143" r="3.5" fill="#E88020" filter="url(#glowAmber)"/>
+    <circle cx="540" cy="168" r="3" fill="#E88020" filter="url(#glowAmber)"/>
+    <circle cx="642" cy="280" r="3" fill="#E88020" filter="url(#glowAmber)"/>
+    <circle cx="622" cy="320" r="3" fill="#E88020" filter="url(#glowAmber)"/>
+    <circle cx="320" cy="657" r="3.5" fill="#E88020" filter="url(#glowAmber)"/>
+    <circle cx="260" cy="632" r="3" fill="#E88020" filter="url(#glowAmber)"/>
+    <circle cx="158" cy="520" r="3" fill="#E88020" filter="url(#glowAmber)"/>
+    <circle cx="178" cy="480" r="3" fill="#E88020" filter="url(#glowAmber)"/>
+    <circle cx="480" cy="657" r="3.5" fill="#00C8F0" filter="url(#glowTeal)"/>
+    <circle cx="540" cy="632" r="3" fill="#00C8F0" filter="url(#glowTeal)"/>
+    <circle cx="642" cy="520" r="3" fill="#00C8F0" filter="url(#glowTeal)"/>
+    <circle cx="622" cy="480" r="3" fill="#00C8F0" filter="url(#glowTeal)"/>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- SPOKE WHEEL (the vault handle)               -->
+  <!-- ============================================ -->
+
+  <!-- Outer wheel rim -->
+  <circle cx="400" cy="400" r="140" fill="none" stroke="url(#rimGrad)" stroke-width="16" filter="url(#bevel)"/>
+
+  <!-- Inner wheel rim highlight -->
+  <circle cx="400" cy="400" r="148" fill="none" stroke="#C8CDD5" stroke-width="0.5" opacity="0.4"/>
+  <circle cx="400" cy="400" r="132" fill="none" stroke="#3A3D42" stroke-width="0.8" opacity="0.5"/>
+
+  <!-- Wheel spokes (6 spokes) -->
+  <g stroke="url(#spokeGrad)" stroke-width="10" stroke-linecap="round" filter="url(#bevel)">
+    <line x1="400" y1="335" x2="400" y2="264"/>
+    <line x1="456" y1="368" x2="517" y2="332"/>
+    <line x1="456" y1="432" x2="517" y2="468"/>
+    <line x1="400" y1="465" x2="400" y2="536"/>
+    <line x1="344" y1="432" x2="283" y2="468"/>
+    <line x1="344" y1="368" x2="283" y2="332"/>
+  </g>
+
+  <!-- Spoke highlight edges -->
+  <g stroke="#D0D5DD" stroke-width="1" opacity="0.3" stroke-linecap="round">
+    <line x1="395" y1="335" x2="395" y2="264"/>
+    <line x1="453" y1="370" x2="514" y2="334"/>
+    <line x1="453" y1="430" x2="514" y2="466"/>
+    <line x1="395" y1="465" x2="395" y2="536"/>
+    <line x1="347" y1="430" x2="286" y2="466"/>
+    <line x1="347" y1="370" x2="286" y2="334"/>
+  </g>
+
+  <!-- Spoke knobs at rim (6 knobs) -->
+  <g>
+    <circle cx="400" cy="260" r="8" fill="url(#rivetGrad)" stroke="#3A3D42" stroke-width="0.8"/>
+    <circle cx="521" cy="330" r="8" fill="url(#rivetGrad)" stroke="#3A3D42" stroke-width="0.8"/>
+    <circle cx="521" cy="470" r="8" fill="url(#rivetGrad)" stroke="#3A3D42" stroke-width="0.8"/>
+    <circle cx="400" cy="540" r="8" fill="url(#rivetGrad)" stroke="#3A3D42" stroke-width="0.8"/>
+    <circle cx="279" cy="470" r="8" fill="url(#rivetGrad)" stroke="#3A3D42" stroke-width="0.8"/>
+    <circle cx="279" cy="330" r="8" fill="url(#rivetGrad)" stroke="#3A3D42" stroke-width="0.8"/>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- CENTRAL HUB + SILICON CHIP                   -->
+  <!-- ============================================ -->
+
+  <!-- Central hub disc -->
+  <circle cx="400" cy="400" r="70" fill="url(#hubGrad)" stroke="#3A3D42" stroke-width="2" filter="url(#bevel)"/>
+  
+  <!-- Hub inner ring -->
+  <circle cx="400" cy="400" r="62" fill="none" stroke="#555960" stroke-width="1"/>
+  <circle cx="400" cy="400" r="60" fill="none" stroke="#85898F" stroke-width="0.5" opacity="0.5"/>
+
+  <!-- Hub inner rivets (8 small rivets) -->
+  <g>
+    <circle cx="400" cy="338" r="3" fill="url(#rivetGrad)"/>
+    <circle cx="444" cy="356" r="3" fill="url(#rivetGrad)"/>
+    <circle cx="462" cy="400" r="3" fill="url(#rivetGrad)"/>
+    <circle cx="444" cy="444" r="3" fill="url(#rivetGrad)"/>
+    <circle cx="400" cy="462" r="3" fill="url(#rivetGrad)"/>
+    <circle cx="356" cy="444" r="3" fill="url(#rivetGrad)"/>
+    <circle cx="338" cy="400" r="3" fill="url(#rivetGrad)"/>
+    <circle cx="356" cy="356" r="3" fill="url(#rivetGrad)"/>
+  </g>
+
+  <!-- Silicon chip die (embedded in the hub center) -->
+  <rect x="362" y="362" width="76" height="76" rx="2" fill="#101820" stroke="#3A4550" stroke-width="1.5"/>
+  <rect x="367" y="367" width="66" height="66" rx="1" fill="url(#chipDie)"/>
+  <rect x="367" y="367" width="66" height="66" rx="1" fill="url(#chipGrid)" opacity="0.4"/>
+
+  <!-- Chip internal blocks -->
+  <g opacity="0.5">
+    <rect x="373" y="373" width="16" height="16" rx="1" fill="none" stroke="#2A5565" stroke-width="0.6"/>
+    <rect x="393" y="373" width="16" height="12" rx="1" fill="none" stroke="#2A5565" stroke-width="0.6"/>
+    <rect x="413" y="373" width="14" height="16" rx="1" fill="none" stroke="#2A5565" stroke-width="0.6"/>
+    <rect x="373" y="393" width="14" height="22" rx="1" fill="none" stroke="#2A5565" stroke-width="0.6"/>
+    <rect x="391" y="393" width="18" height="18" rx="1" fill="none" stroke="#3A7585" stroke-width="0.8"/>
+    <rect x="413" y="393" width="14" height="22" rx="1" fill="none" stroke="#2A5565" stroke-width="0.6"/>
+    <rect x="373" y="419" width="20" height="12" rx="1" fill="none" stroke="#2A5565" stroke-width="0.6"/>
+    <rect x="397" y="419" width="16" height="12" rx="1" fill="none" stroke="#2A5565" stroke-width="0.6"/>
+    <rect x="417" y="419" width="10" height="12" rx="1" fill="none" stroke="#2A5565" stroke-width="0.6"/>
+  </g>
+
+  <!-- Chip bond pads (connecting to spokes/traces) -->
+  <g fill="#7A8A9A">
+    <!-- Top -->
+    <rect x="378" y="361" width="5" height="6" rx="0.5"/>
+    <rect x="388" y="361" width="5" height="6" rx="0.5"/>
+    <rect x="398" y="361" width="5" height="6" rx="0.5"/>
+    <rect x="408" y="361" width="5" height="6" rx="0.5"/>
+    <rect x="418" y="361" width="5" height="6" rx="0.5"/>
+    <!-- Bottom -->
+    <rect x="378" y="433" width="5" height="6" rx="0.5"/>
+    <rect x="388" y="433" width="5" height="6" rx="0.5"/>
+    <rect x="398" y="433" width="5" height="6" rx="0.5"/>
+    <rect x="408" y="433" width="5" height="6" rx="0.5"/>
+    <rect x="418" y="433" width="5" height="6" rx="0.5"/>
+    <!-- Left -->
+    <rect x="361" y="378" width="6" height="5" rx="0.5"/>
+    <rect x="361" y="390" width="6" height="5" rx="0.5"/>
+    <rect x="361" y="402" width="6" height="5" rx="0.5"/>
+    <rect x="361" y="414" width="6" height="5" rx="0.5"/>
+    <rect x="361" y="426" width="6" height="5" rx="0.5"/>
+    <!-- Right -->
+    <rect x="433" y="378" width="6" height="5" rx="0.5"/>
+    <rect x="433" y="390" width="6" height="5" rx="0.5"/>
+    <rect x="433" y="402" width="6" height="5" rx="0.5"/>
+    <rect x="433" y="414" width="6" height="5" rx="0.5"/>
+    <rect x="433" y="426" width="6" height="5" rx="0.5"/>
+  </g>
+
+  <!-- Pin 1 marker glow -->
+  <circle cx="374" cy="374" r="2" fill="#00C8F0" opacity="0.6"/>
+
+  <!-- Small teal indicator LED on hub -->
+  <circle cx="435" cy="365" r="2.5" fill="#00C8F0" filter="url(#glowTeal)"/>
+
+  <!-- ============================================ -->
+  <!-- INNER PLATE RIVETS (ring of 12)              -->
+  <!-- ============================================ -->
+  <g>
+    <circle cx="400" cy="160" r="5" fill="url(#rivetGrad)"/>
+    <circle cx="400" cy="160" r="5" fill="url(#rivetGrad)" transform="rotate(30,400,400)"/>
+    <circle cx="400" cy="160" r="5" fill="url(#rivetGrad)" transform="rotate(60,400,400)"/>
+    <circle cx="400" cy="160" r="5" fill="url(#rivetGrad)" transform="rotate(90,400,400)"/>
+    <circle cx="400" cy="160" r="5" fill="url(#rivetGrad)" transform="rotate(120,400,400)"/>
+    <circle cx="400" cy="160" r="5" fill="url(#rivetGrad)" transform="rotate(150,400,400)"/>
+    <circle cx="400" cy="160" r="5" fill="url(#rivetGrad)" transform="rotate(180,400,400)"/>
+    <circle cx="400" cy="160" r="5" fill="url(#rivetGrad)" transform="rotate(210,400,400)"/>
+    <circle cx="400" cy="160" r="5" fill="url(#rivetGrad)" transform="rotate(240,400,400)"/>
+    <circle cx="400" cy="160" r="5" fill="url(#rivetGrad)" transform="rotate(270,400,400)"/>
+    <circle cx="400" cy="160" r="5" fill="url(#rivetGrad)" transform="rotate(300,400,400)"/>
+    <circle cx="400" cy="160" r="5" fill="url(#rivetGrad)" transform="rotate(330,400,400)"/>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- TYPOGRAPHY                                   -->
+  <!-- ============================================ -->
+  
+  <text x="400" y="790" text-anchor="middle" font-family="'Rajdhani','Orbitron','Share Tech Mono','Courier New',monospace" font-size="42" font-weight="600" letter-spacing="4" fill="#FFFFFF">
+    elect-rix.tech
+  </text>
+</svg>
