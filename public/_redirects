@@ -1,0 +1,4 @@
+# Cloudflare Pages redirects
+# Report slug locked to /telemetry-audit (2026-06). Old slug preserved.
+/hyperscaler-audit  /telemetry-audit  301
+/hyperscaler-audit/  /telemetry-audit  301

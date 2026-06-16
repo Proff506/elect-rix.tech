@@ -12,6 +12,9 @@ interface Props {
 
 const siteUrl = 'https://elect-rix.tech';
 const { title, description = 'Protect your data. Even when the lights go out. Resilient, private, verifiable — built in, not bolted on.', ogImage = siteUrl + '/og-default.png', lang = 'en' } = Astro.props;
+// Canonical URL: origin + current path, normalized (strip trailing slash except root)
+const canonicalPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const canonicalUrl = siteUrl + canonicalPath;
 
 const t = useTranslations(lang);
 const pathname = Astro.url.pathname;
@@ -26,7 +29,7 @@ if (lang === 'en') {
 
 const navItems = [
   { label: t('nav.home'), href: '/' },
-  { label: t('nav.report'), href: '/hyperscaler-audit' },
+  { label: t('nav.report'), href: '/telemetry-audit' },
   { label: t('nav.about'), href: '/about' },
   { label: t('nav.trust'), href: '/trust' },
   { label: t('nav.safety'), href: '/safety' },
@@ -54,7 +57,7 @@ const resolvedNav = navItems.map(item => {
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={siteUrl} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="elect-rix.tech" />
@@ -72,6 +75,7 @@ const resolvedNav = navItems.map(item => {
     <link rel="alternate" hreflang="x-default" href={siteUrl + (lang === 'en' ? pathname : otherPath)} />
 
     <title>{title}</title>
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/png" sizes="16x16" href="/brand/favicon-16x16.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/brand/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="64x64" href="/brand/favicon-64x64.png" />
@@ -91,7 +95,7 @@ const resolvedNav = navItems.map(item => {
           <LanguageSwitcher lang={lang} pathname={pathname} />
         </div>
         <div class="ml-auto flex lg:hidden items-center gap-2 text-sm font-medium whitespace-nowrap">
-          <a href="/hyperscaler-audit" class="inline-flex px-3 py-1.5 rounded-md border border-accent/40 text-accent-bright hover:bg-accent/10 transition-colors">Report</a>
+          <a href="/telemetry-audit" class="inline-flex px-3 py-1.5 rounded-md border border-accent/40 text-accent-bright hover:bg-accent/10 transition-colors">Report</a>
           <a href="/contact" class="hidden min-[340px]:inline-flex px-2.5 py-1.5 rounded-md text-text-muted hover:text-text transition-colors">{t('nav.contact')}</a>
         </div>
       </div>

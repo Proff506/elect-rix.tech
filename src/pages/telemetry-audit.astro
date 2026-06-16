@@ -63,21 +63,6 @@ import Layout from '../layouts/Layout.astro';
       </ul>
     </nav>
 
-<section id="the-hyperscaler-ai-telemetry-audit" class="mb-16">
-<h1 class="text-4xl font-extrabold tracking-tight mb-4">The Hyperscaler AI Telemetry Audit</h1>
-<section id="what-microsoft-google-and-aws-collect-when-you-use-their-ai" class="mb-16">
-<h2 class="text-2xl font-bold mb-4">What Microsoft, Google, and AWS Collect When You Use Their AI</h2>
-<p class="text-text-muted leading-relaxed mb-4"><strong>A Research Brief by elect-rix Technology Solutions</strong></p>
-<p class="text-text-muted leading-relaxed mb-4">*Operating under RixBot Technologies Inc.*</p>
-<table class="w-full text-sm border-collapse border border-border">
-<thead>
-<tr class="bg-surface">
-</tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-<p class="text-text-muted leading-relaxed mb-4">---</p>
 <section id="executive-summary" class="mb-16">
 <h2 class="text-2xl font-bold mb-4">Executive Summary</h2>
 <p class="text-text-muted leading-relaxed mb-4">Enterprise adoption of cloud-hosted generative AI has outpaced legal and security review. Organizations are feeding proprietary data, customer records, and strategic queries into APIs owned by three vendors — Microsoft, Google, and Amazon Web Services — without a clear inventory of what those vendors log, retain, analyze, or disclose.</p>
@@ -89,7 +74,8 @@ import Layout from '../layouts/Layout.astro';
 </ul>
 <p class="text-text-muted leading-relaxed mb-4"><strong>Key finding:</strong> While all three vendors promise that customer prompts are not used to train foundation models, each platform generates a substantial metadata footprint — API call logs, token counts, latency metrics, IP addresses, identity objects, and abuse-monitoring telemetry — that creates compliance surface area most enterprises have not assessed. The May 2026 joint PIPEDA investigation into OpenAI confirms that Canadian regulators are now actively scrutinizing these practices.</p>
 <p class="text-text-muted leading-relaxed mb-4">For organizations subject to PIPEDA, provincial privacy laws, GDPR, or sector-specific regulations (healthcare, finance, defense), the default configuration of cloud AI APIs presents material risk. This report documents those risks and outlines the audit framework elect-rix applies when assessing client AI infrastructure.</p>
-<p class="text-text-muted leading-relaxed mb-4">---</p>
+</section>
+<hr class="border-border my-12" />
 <section id="1-the-stakes-why-telemetry-matters" class="mb-16">
 <h2 class="text-2xl font-bold mb-4">1. The Stakes: Why Telemetry Matters</h2>
 <p class="text-text-muted leading-relaxed mb-4">When an employee submits a prompt to a cloud AI model, the organization leaks more than just the text of the query. The transaction produces:</p>
@@ -103,32 +89,32 @@ import Layout from '../layouts/Layout.astro';
 </thead>
 <tbody>
 <tr>
-<td class="border border-border p-2">**Prompt content**</td>
+<td class="border border-border p-2"><strong>Prompt content</strong></td>
 <td class="border border-border p-2">Customer record, contract clause, proprietary algorithm</td>
 <td class="border border-border p-2">IP exposure, privacy breach</td>
 </tr>
 <tr>
-<td class="border border-border p-2">**Response content**</td>
+<td class="border border-border p-2"><strong>Response content</strong></td>
 <td class="border border-border p-2">Generated code, strategic recommendation, legal analysis</td>
 <td class="border border-border p-2">Derivative IP claims</td>
 </tr>
 <tr>
-<td class="border border-border p-2">**API metadata**</td>
+<td class="border border-border p-2"><strong>API metadata</strong></td>
 <td class="border border-border p-2">Token count, model version, timestamp, latency</td>
 <td class="border border-border p-2">Competitive intelligence, usage fingerprinting</td>
 </tr>
 <tr>
-<td class="border border-border p-2">**Identity telemetry**</td>
+<td class="border border-border p-2"><strong>Identity telemetry</strong></td>
 <td class="border border-border p-2">Entra ID object ID, IAM principal, API key fingerprint</td>
 <td class="border border-border p-2">Insider threat profiling, access pattern mapping</td>
 </tr>
 <tr>
-<td class="border border-border p-2">**Network telemetry**</td>
+<td class="border border-border p-2"><strong>Network telemetry</strong></td>
 <td class="border border-border p-2">Source IP (full or masked), region, user-agent</td>
 <td class="border border-border p-2">Geolocation, organizational structure inference</td>
 </tr>
 <tr>
-<td class="border border-border p-2">**Abuse flags**</td>
+<td class="border border-border p-2"><strong>Abuse flags</strong></td>
 <td class="border border-border p-2">Content filter triggers, policy violations, flagged completions</td>
 <td class="border border-border p-2">Regulatory scrutiny, employee monitoring</td>
 </tr>
@@ -136,7 +122,8 @@ import Layout from '../layouts/Layout.astro';
 </table>
 <p class="text-text-muted leading-relaxed mb-4"><strong>The misconception:</strong> "We have an enterprise agreement that says our data is not used for training."</p>
 <p class="text-text-muted leading-relaxed mb-4"><strong>The reality:</strong> Training-data commitments address only one vector. They do not eliminate logging, do not prevent subpoena-driven disclosure, and do not exempt the vendor from retaining prompts for abuse monitoring, debugging, or legal compliance.</p>
-<p class="text-text-muted leading-relaxed mb-4">---</p>
+</section>
+<hr class="border-border my-12" />
 <section id="2-methodology" class="mb-16">
 <h2 class="text-2xl font-bold mb-4">2. Methodology</h2>
 <p class="text-text-muted leading-relaxed mb-4">This audit is based on:</p>
@@ -147,7 +134,18 @@ import Layout from '../layouts/Layout.astro';
 <li><strong>Enterprise architecture reviews</strong> conducted by elect-rix in production environments</li>
 </ol>
 <p class="text-text-muted leading-relaxed mb-4">This report does not rely on vendor marketing materials. Where documentation is ambiguous, we note the gap and classify it as an unverified risk.</p>
-<p class="text-text-muted leading-relaxed mb-4">---</p>
+<h3 class="text-xl font-bold mb-2 mt-6">Scope</h3>
+<p class="text-text-muted leading-relaxed mb-4">This audit covers the default and commonly-deployed configurations of three hyperscaler AI platforms as documented and observed through June 2026: Microsoft Azure OpenAI / Foundry, Google Cloud Vertex AI / Gemini, and Amazon Web Services Bedrock / SageMaker. It addresses telemetry, logging, retention, and metadata exposure relevant to Canadian data-sovereignty and PIPEDA obligations.</p>
+<h3 class="text-xl font-bold mb-2 mt-6">Limitations</h3>
+<ul class="list-disc list-inside space-y-2 text-text-muted leading-relaxed mb-4">
+<li>Vendor data-handling practices change frequently; findings reflect documentation and observed behaviour current as of the publication date below and may not reflect subsequent changes.</li>
+<li>Enterprise agreements, regional deployments, and private-networking configurations can materially alter telemetry behaviour. Organization-specific exposure requires a direct assessment.</li>
+<li>Where vendor documentation is silent or ambiguous, items are classified as unverified risks rather than confirmed practices.</li>
+<li>This report is informational and is not legal advice. It does not establish an attorney-client relationship.</li>
+</ul>
+<p class="text-text-muted leading-relaxed mb-4 text-sm"><strong>Published:</strong> June 16, 2026 &nbsp;·&nbsp; <strong>Version:</strong> 1.0 &nbsp;·&nbsp; <strong>Next scheduled review:</strong> December 2026</p>
+</section>
+<hr class="border-border my-12" />
 <section id="3-microsoft-azure-openai-foundry" class="mb-16">
 <h2 class="text-2xl font-bold mb-4">3. Microsoft Azure OpenAI / Foundry</h2>
 <h3 class="text-lg font-semibold text-text mt-6 mb-3">3.1 Official Data Commitments</h3>
@@ -189,23 +187,23 @@ import Layout from '../layouts/Layout.astro';
 </thead>
 <tbody>
 <tr>
-<td class="border border-border p-2">**Audit Logs**</td>
+<td class="border border-border p-2"><strong>Audit Logs</strong></td>
 <td class="border border-border p-2">ListKeys operations only</td>
 <td class="border border-border p-2">User identity, prompt content, model calls</td>
 </tr>
 <tr>
-<td class="border border-border p-2">**Request/Response Logs**</td>
+<td class="border border-border p-2"><strong>Request/Response Logs</strong></td>
 <td class="border border-border p-2">Action type, timestamp, status code, first 3 octets of IP, response time</td>
-<td class="border border-border p-2">**Prompt content, response content, token usage**</td>
+<td class="border border-border p-2"><strong>Prompt content, response content, token usage</strong></td>
 </tr>
 <tr>
-<td class="border border-border p-2">**Trace Logs**</td>
+<td class="border border-border p-2"><strong>Trace Logs</strong></td>
 <td class="border border-border p-2">Undocumented / unknown</td>
 <td class="border border-border p-2">Unknown scope</td>
 </tr>
 </tbody>
 </table>
-<p class="text-text-muted leading-relaxed mb-4"><strong>As of January 2024:</strong> Entra ID object ID was added to RequestResponse logs. Microsoft now logs *who* made the call but not *what* was in it.</p>
+<p class="text-text-muted leading-relaxed mb-4"><strong>As of January 2024:</strong> Entra ID object ID was added to RequestResponse logs. Microsoft now logs who made the call but not what was in it.</p>
 <p class="text-text-muted leading-relaxed mb-4"><strong>Enterprise impact:</strong> Native logs are insufficient for chargeback, input/output auditing, and token-level forensic analysis. Organizations must deploy an API gateway (Azure API Management or equivalent) to capture the telemetry they actually need — which means the gateway layer now becomes a second point of data exposure.</p>
 <h3 class="text-lg font-semibold text-text mt-6 mb-3">3.5 Subpoena and Disclosure Risk</h3>
 <p class="text-text-muted leading-relaxed mb-4">Microsoft operates under U.S. law. The Microsoft Products and Services Data Protection Addendum (DPA) governs data handling, but like all U.S.-based cloud providers, Microsoft is subject to:</p>
@@ -215,7 +213,8 @@ import Layout from '../layouts/Layout.astro';
 <li><strong>National Security Letters</strong> — gag-ordered data requests</li>
 </ul>
 <p class="text-text-muted leading-relaxed mb-4">Microsoft publishes a transparency report but cannot disclose the volume of classified requests.</p>
-<p class="text-text-muted leading-relaxed mb-4">---</p>
+</section>
+<hr class="border-border my-12" />
 <section id="4-google-cloud-vertex-ai-gemini" class="mb-16">
 <h2 class="text-2xl font-bold mb-4">4. Google Cloud — Vertex AI & Gemini</h2>
 <h3 class="text-lg font-semibold text-text mt-6 mb-3">4.1 Data Use Framework</h3>
@@ -229,19 +228,19 @@ import Layout from '../layouts/Layout.astro';
 </thead>
 <tbody>
 <tr>
-<td class="border border-border p-2">**Consumer Gemini (free)**</td>
+<td class="border border-border p-2"><strong>Consumer Gemini (free)</strong></td>
 <td class="border border-border p-2">Data may be used to improve models; human review possible</td>
 </tr>
 <tr>
-<td class="border border-border p-2">**Consumer Gemini (paid/Google One AI)**</td>
-<td class="border border-border p-2">Data not used for training *if* "Gemini Apps Activity" is turned off</td>
+<td class="border border-border p-2"><strong>Consumer Gemini (paid/Google One AI)</strong></td>
+<td class="border border-border p-2">Data not used for training if "Gemini Apps Activity" is turned off</td>
 </tr>
 <tr>
-<td class="border border-border p-2">**Google Workspace Gemini**</td>
+<td class="border border-border p-2"><strong>Google Workspace Gemini</strong></td>
 <td class="border border-border p-2">Data not used for training without permission; governed by Workspace terms</td>
 </tr>
 <tr>
-<td class="border border-border p-2">**Vertex AI (enterprise)**</td>
+<td class="border border-border p-2"><strong>Vertex AI (enterprise)</strong></td>
 <td class="border border-border p-2">Customer data is not used to train models; governed by Cloud Data Processing Addendum</td>
 </tr>
 </tbody>
@@ -271,7 +270,8 @@ import Layout from '../layouts/Layout.astro';
 <p class="text-text-muted leading-relaxed mb-4">Google's Pre-GA terms (Alpha, Beta, Preview, Experimental) contain explicit disclaimers:</p>
 <blockquote class="border-l-4 border-accent-bright pl-4 italic text-text-muted my-4">"PRE-GA OFFERINGS ARE PROVIDED 'AS IS' WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES... [They] are not covered by any SLA or Google indemnity."</blockquote>
 <p class="text-text-muted leading-relaxed mb-4">Enterprise AI teams frequently adopt preview features (e.g., early Gemini model versions, agent frameworks) without legal review of these terms. The result: production workloads running on software with no warranty, no SLA, and no data-location guarantees.</p>
-<p class="text-text-muted leading-relaxed mb-4">---</p>
+</section>
+<hr class="border-border my-12" />
 <section id="5-amazon-web-services-bedrock-sagemaker" class="mb-16">
 <h2 class="text-2xl font-bold mb-4">5. Amazon Web Services — Bedrock & SageMaker</h2>
 <h3 class="text-lg font-semibold text-text mt-6 mb-3">5.1 The Shared Responsibility Model</h3>
@@ -314,7 +314,8 @@ import Layout from '../layouts/Layout.astro';
 <li>AWS does not train on customer data</li>
 </ol>
 <p class="text-text-muted leading-relaxed mb-4"><strong>The unverified risk:</strong> Whether Anthropic's training data included legally problematic sources (copyrighted works, personal data scraped without consent) affects the compliance posture of every output generated by the model. AWS does not warrant the provenance of third-party model training data.</p>
-<p class="text-text-muted leading-relaxed mb-4">---</p>
+</section>
+<hr class="border-border my-12" />
 <section id="6-the-metadata-layer-what-vendors-don-t-talk-about" class="mb-16">
 <h2 class="text-2xl font-bold mb-4">6. The Metadata Layer: What Vendors Don't Talk About</h2>
 <p class="text-text-muted leading-relaxed mb-4">Even when prompt content is protected, the metadata surrounding AI API calls reveals significant organizational intelligence:</p>
@@ -327,38 +328,39 @@ import Layout from '../layouts/Layout.astro';
 </thead>
 <tbody>
 <tr>
-<td class="border border-border p-2">**Token count patterns**</td>
+<td class="border border-border p-2"><strong>Token count patterns</strong></td>
 <td class="border border-border p-2">Document length, complexity of queries, workload type</td>
 </tr>
 <tr>
-<td class="border border-border p-2">**Timestamp distribution**</td>
+<td class="border border-border p-2"><strong>Timestamp distribution</strong></td>
 <td class="border border-border p-2">Operating hours, team locations, project deadlines</td>
 </tr>
 <tr>
-<td class="border border-border p-2">**Model selection**</td>
+<td class="border border-border p-2"><strong>Model selection</strong></td>
 <td class="border border-border p-2">Use case (code generation vs. summarization vs. image generation)</td>
 </tr>
 <tr>
-<td class="border border-border p-2">**Error rate trends**</td>
+<td class="border border-border p-2"><strong>Error rate trends</strong></td>
 <td class="border border-border p-2">Data quality issues, model capability gaps</td>
 </tr>
 <tr>
-<td class="border border-border p-2">**IP address / region**</td>
+<td class="border border-border p-2"><strong>IP address / region</strong></td>
 <td class="border border-border p-2">Office locations, remote worker geography</td>
 </tr>
 <tr>
-<td class="border border-border p-2">**Identity objects**</td>
+<td class="border border-border p-2"><strong>Identity objects</strong></td>
 <td class="border border-border p-2">Who is using AI, how often, for what business function</td>
 </tr>
 <tr>
-<td class="border border-border p-2">**Content filter triggers**</td>
+<td class="border border-border p-2"><strong>Content filter triggers</strong></td>
 <td class="border border-border p-2">Topics the organization researches, policies employees test</td>
 </tr>
 </tbody>
 </table>
 <p class="text-text-muted leading-relaxed mb-4">This metadata is not covered by "your data is not used for training" promises. It is operational telemetry that vendors retain for billing, capacity planning, product improvement, and abuse prevention.</p>
 <p class="text-text-muted leading-relaxed mb-4"><strong>The strategic risk:</strong> A competitor or adversary with access to this metadata (via breach, subpoena, or insider action) could reconstruct organizational priorities without ever seeing a single prompt.</p>
-<p class="text-text-muted leading-relaxed mb-4">---</p>
+</section>
+<hr class="border-border my-12" />
 <section id="7-regulatory-context-the-canadian-crackdown" class="mb-16">
 <h2 class="text-2xl font-bold mb-4">7. Regulatory Context: The Canadian Crackdown</h2>
 <h3 class="text-lg font-semibold text-text mt-6 mb-3">7.1 PIPEDA Findings #2026-002 — OpenAI Investigation</h3>
@@ -391,7 +393,8 @@ import Layout from '../layouts/Layout.astro';
 <li><strong>Meta's €1.2 billion fine</strong> (2023) for unlawful EU-U.S. data transfers set the precedent</li>
 </ul>
 <p class="text-text-muted leading-relaxed mb-4">Organizations using cloud AI for EU data subjects must document why the transfer is lawful — a burden that increases with every new model deployment.</p>
-<p class="text-text-muted leading-relaxed mb-4">---</p>
+</section>
+<hr class="border-border my-12" />
 <section id="8-enterprise-risk-assessment-matrix" class="mb-16">
 <h2 class="text-2xl font-bold mb-4">8. Enterprise Risk Assessment Matrix</h2>
 <table class="w-full text-sm border-collapse border border-border">
@@ -463,7 +466,8 @@ import Layout from '../layouts/Layout.astro';
 </tr>
 </tbody>
 </table>
-<p class="text-text-muted leading-relaxed mb-4">---</p>
+</section>
+<hr class="border-border my-12" />
 <section id="9-the-alternative-air-gapped-local-deployment" class="mb-16">
 <h2 class="text-2xl font-bold mb-4">9. The Alternative: Air-Gapped & Local Deployment</h2>
 <p class="text-text-muted leading-relaxed mb-4">The only configuration that eliminates the risks documented in this audit is <strong>local AI inference on hardware the organization owns and controls.</strong></p>
@@ -514,7 +518,8 @@ import Layout from '../layouts/Layout.astro';
 </tbody>
 </table>
 <p class="text-text-muted leading-relaxed mb-4"><strong>Trade-offs:</strong> Local deployment requires capital expenditure (hardware), technical expertise (deployment, maintenance), and capacity planning (GPU resources, model selection). For organizations where data sovereignty is non-negotiable — healthcare, defense, finance, critical infrastructure — these trade-offs are features, not bugs.</p>
-<p class="text-text-muted leading-relaxed mb-4">---</p>
+</section>
+<hr class="border-border my-12" />
 <section id="10-recommendations" class="mb-16">
 <h2 class="text-2xl font-bold mb-4">10. Recommendations</h2>
 <h3 class="text-lg font-semibold text-text mt-6 mb-3">For Organizations Currently Using Cloud AI</h3>
@@ -532,21 +537,15 @@ import Layout from '../layouts/Layout.astro';
 <li><strong>Pilot with local deployment.</strong> Test model capabilities, integration patterns, and user workflows on local hardware before committing to cloud API contracts. Migration from local to cloud is trivial. Migration from cloud to local is a data-retention nightmare.</li>
 <li><strong>Negotiate contracts with telemetry carve-outs.</strong> Enterprise agreements should explicitly define what metadata vendors may retain, for how long, and for what purposes. Most standard agreements are silent on metadata.</li>
 </ol>
-<p class="text-text-muted leading-relaxed mb-4">---</p>
+</section>
+<hr class="border-border my-12" />
 <section id="11-about-this-report" class="mb-16">
 <h2 class="text-2xl font-bold mb-4">11. About This Report</h2>
 <p class="text-text-muted leading-relaxed mb-4">This audit was prepared by <strong>elect-rix Technology Solutions</strong>, operating under <strong>RixBot Technologies Inc.</strong>, a New Brunswick corporation. We design, deploy, and audit local AI infrastructure for organizations that cannot accept the data-sovereignty risks of cloud-hosted models.</p>
 <p class="text-text-muted leading-relaxed mb-4">Our methodology combines vendor documentation review, regulatory tracking, and hands-on infrastructure assessment. We do not sell cloud AI subscriptions. We sell control.</p>
-<p class="text-text-muted leading-relaxed mb-4"><strong>For a confidential assessment of your organization's AI telemetry exposure:</strong></p>
-<table class="w-full text-sm border-collapse border border-border">
-<thead>
-<tr class="bg-surface">
-</tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-<p class="text-text-muted leading-relaxed mb-4">---</p>
+<p class="text-text-muted leading-relaxed mb-4"><strong>For a confidential assessment of your organization's AI telemetry exposure</strong>, contact elect-rix Technology Solutions via the <a href="/contact" class="text-accent-bright hover:underline">contact page</a>. All engagements begin with a scoped, fixed-fee assessment and a signed confidentiality agreement.</p>
+</section>
+<hr class="border-border my-12" />
 <section id="sources-and-references" class="mb-16">
 <h2 class="text-2xl font-bold mb-4">Sources and References</h2>
 <ol class="list-decimal list-inside space-y-2 text-text-muted leading-relaxed">
@@ -560,9 +559,10 @@ import Layout from '../layouts/Layout.astro';
 <li>Office of the Privacy Commissioner of Canada. "PIPEDA Findings #2026-002: Joint Investigation of OpenAI OpCo, LLC." May 6, 2026. https://www.priv.gc.ca/en/opc-actions-and-decisions/investigations/investigations-into-businesses/2026/pipeda-2026-002/</li>
 <li>Concentric AI. "Google Gemini Security Risks and Privacy Concerns Explained." https://concentric.ai/google-gemini-security-risks/</li>
 </ol>
-<p class="text-text-muted leading-relaxed mb-4">---</p>
-<p class="text-text-muted leading-relaxed mb-4">*This report is provided for informational purposes and does not constitute legal advice. Organizations should consult qualified legal counsel for guidance on specific compliance obligations.*</p>
-<p class="text-text-muted leading-relaxed mb-4">*© 2026 elect-rix Technology Solutions / RixBot Technologies Inc. All rights reserved.*</p>
+</section>
+<hr class="border-border my-12" />
+<p class="text-text-muted leading-relaxed mb-4">This report is provided for informational purposes and does not constitute legal advice. Organizations should consult qualified legal counsel for guidance on specific compliance obligations.</p>
+<p class="text-text-muted leading-relaxed mb-4">© 2026 elect-rix Technology Solutions / RixBot Technologies Inc. All rights reserved.</p>
 
     <!-- CTA -->
     <div class="p-6 rounded-xl border border-accent-bright/20 bg-accent-bright/5 text-center mt-16">
