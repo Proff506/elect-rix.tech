@@ -102,9 +102,17 @@ const resolvedNav = navItems.map(item => {
     </main>
 
     <footer class="border-t border-border py-8 mt-20">
-      <div class="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-text-muted">
-        <span>{t('footer.rights').replace('{year}', String(new Date().getFullYear()))}</span>
-        <span>{t('footer.tagline')}</span>
+      <div class="max-w-4xl mx-auto px-6 flex flex-col gap-4 text-sm text-text-muted">
+        <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+          <a href="/privacy" class="hover:text-text transition-colors">Privacy</a>
+          <a href="/terms" class="hover:text-text transition-colors">Terms</a>
+          <a href="/trust" class="hover:text-text transition-colors">Trust &amp; IP</a>
+          <a href="/contact" class="hover:text-text transition-colors">Contact</a>
+        </div>
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-2">
+          <span>{t('footer.rights').replace('{year}', String(new Date().getFullYear()))}</span>
+          <span>{t('footer.tagline')}</span>
+        </div>
       </div>
     </footer>
   </body>
