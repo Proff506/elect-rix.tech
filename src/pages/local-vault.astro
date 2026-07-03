@@ -1,0 +1,174 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const included = [
+  {
+    title: 'Owned Hardware',
+    description: 'A dedicated workstation or small server installed in your office. You own it. You control physical access. No shared tenancy.',
+    icon: '📦',
+  },
+  {
+    title: 'RixBot Interface',
+    description: 'The included local AI agent. Staff chat, summarize documents, and draft content through a web interface that never leaves your network.',
+    icon: '🤖',
+  },
+  {
+    title: 'Local LLMs',
+    description: 'Multiple open-weight models running on dedicated GPUs. No per-token billing, no API quotas, no third-party content filters.',
+    icon: '🧠',
+  },
+  {
+    title: 'Document & Data Storage',
+    description: 'Self-hosted storage and search for internal documents. Keep client files, research, and records off public cloud services.',
+    icon: '📁',
+  },
+  {
+    title: 'Telemetry Audit Trail',
+    description: 'Logs that prove what left and what stayed. Useful for compliance reviews, insurance questionnaires, and regulator questions.',
+    icon: '📋',
+  },
+  {
+    title: 'Ongoing Support',
+    description: 'Updates, model swaps, backup verification, and troubleshooting. Optional response-time tiers as your dependence grows.',
+    icon: '🔧',
+  },
+];
+
+const verticals = [
+  {
+    title: 'Law Firms',
+    description: 'Protect solicitor-client privilege. Avoid accidental disclosure through cloud AI telemetry. Align with Law Society technology and confidentiality guidance.',
+  },
+  {
+    title: 'Healthcare',
+    description: 'Keep personal health information and patient records off US cloud AI services. Build toward PHIPA, CIHI, and RED Toolkit expectations.',
+  },
+  {
+    title: 'Government & Public Sector',
+    description: 'Meet FOIPOP, ITSG-33/37, and CCCS cloud guidance for Protected A/B workloads and data residency requirements.',
+  },
+  {
+    title: 'Professional Services',
+    description: 'Accountants, engineers, consultants — any practice where client files and proprietary work must stay under your roof.',
+  },
+];
+
+const process = [
+  { step: '1', title: 'Free Phone Audit', description: '20 minutes. We review your current AI tools, data flows, and compliance concerns. You get a clear yes/no on whether Local Vault makes sense.' },
+  { step: '2', title: 'Paid Deep-Dive Audit', description: '$2,000–$15,000 depending on scope. We map every endpoint, assess exposure, and define the exact Local Vault configuration you need.' },
+  { step: '3', title: 'Quote & Build', description: 'Fixed-price quote for hardware, software, installation, and training. 50% deposit to commence the build.' },
+  { step: '4', title: 'Deploy & Support', description: 'Installed in your office, integrated with your workflow, and supported so it stays current and secure.' },
+];
+---
+
+<Layout
+  title="Local Vault — elect-rix.tech"
+  description="A private, on-premise AI and data system for New Brunswick offices. RixBot included. Own your hardware, keep your data, and stay working when the cloud doesn't."
+>
+  <section class="relative overflow-hidden">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-16 sm:pb-20 text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent-bright text-sm font-medium mb-8 border border-accent/20">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Product
+      </div>
+      <h1 class="text-[2rem] min-[360px]:text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08] mb-6">
+        Local Vault:<br class="hidden sm:block" />
+        <span class="text-accent-bright">Your office. Your data. Your AI.</span>
+      </h1>
+      <p class="text-lg sm:text-xl text-text-muted max-w-2xl mx-auto leading-relaxed mb-10">
+        A self-contained AI and data system that keeps client files, patient records, and privileged conversations inside your building — not in a hyperscaler's data centre.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+        <a href="/contact" class="inline-flex w-full sm:w-auto items-center justify-center px-5 sm:px-6 py-3 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright transition-colors">
+          Book a Free Phone Audit
+        </a>
+        <a href="/telemetry-audit" class="inline-flex w-full sm:w-auto items-center justify-center px-5 sm:px-6 py-3 rounded-lg border border-border text-text font-semibold hover:border-accent/60 hover:text-accent-bright transition-colors">
+          Read the Hyperscaler Report
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is included -->
+  <section class="border-y border-border bg-surface/50 py-16 sm:py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">What Is Included</h2>
+        <p class="text-text-muted text-lg max-w-2xl mx-auto">
+          Local Vault is a complete package: hardware, software, AI models, and support. RixBot is the interface your staff uses every day.
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {included.map((item) => (
+          <div class="p-5 sm:p-6 rounded-xl border border-border bg-primary hover:border-accent/30 transition-colors group">
+            <div class="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+              {item.icon}
+            </div>
+            <h3 class="text-xl font-semibold mb-3">{item.title}</h3>
+            <p class="text-text-muted leading-relaxed">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Who it is for -->
+  <section class="py-16 sm:py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Who It Is For</h2>
+        <p class="text-text-muted text-lg max-w-2xl mx-auto">
+          Any New Brunswick office that treats client data, privilege, or regulated information as a core asset.
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-6">
+        {verticals.map((v) => (
+          <div class="p-5 sm:p-6 rounded-xl border border-border bg-primary">
+            <h3 class="text-xl font-semibold mb-3">{v.title}</h3>
+            <p class="text-text-muted leading-relaxed">{v.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="border-y border-border bg-surface/50 py-16 sm:py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">How It Works</h2>
+        <p class="text-text-muted text-lg max-w-2xl mx-auto">
+          A low-friction path from conversation to deployment.
+        </p>
+      </div>
+      <div class="space-y-6">
+        {process.map((p) => (
+          <div class="flex gap-4 sm:gap-6 p-5 sm:p-6 rounded-xl border border-border bg-primary">
+            <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent-bright font-bold text-lg shrink-0">
+              {p.step}
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold mb-2">{p.title}</h3>
+              <p class="text-text-muted leading-relaxed">{p.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="py-16 sm:py-20">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-6">
+        Investment
+      </h2>
+      <p class="text-text-muted text-lg mb-10 leading-relaxed">
+        Paid audits range from $2,000 to $15,000 depending on scope. Local Vault hardware and deployment are quoted after the audit, with a 50% deposit to begin the build. Support is available as a monthly plan or on demand.
+      </p>
+      <a href="/contact" class="inline-flex w-full sm:w-auto items-center justify-center px-6 sm:px-8 py-4 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright transition-colors text-lg">
+        Start With a Free Phone Audit
+      </a>
+    </div>
+  </section>
+</Layout>

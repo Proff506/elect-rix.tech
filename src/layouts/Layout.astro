@@ -29,6 +29,7 @@ if (lang === 'en') {
 
 const navItems = [
   { label: t('nav.home'), href: '/' },
+  { label: t('nav.vault'), href: '/local-vault' },
   { label: t('nav.report'), href: '/telemetry-audit' },
   { label: t('nav.about'), href: '/about' },
   { label: t('nav.trust'), href: '/trust' },
@@ -95,7 +96,7 @@ const resolvedNav = navItems.map(item => {
           <LanguageSwitcher lang={lang} pathname={pathname} />
         </div>
         <div class="ml-auto flex lg:hidden items-center gap-2 text-sm font-medium whitespace-nowrap">
-          <a href="/telemetry-audit" class="inline-flex px-3 py-1.5 rounded-md border border-accent/40 text-accent-bright hover:bg-accent/10 transition-colors">Report</a>
+          <a href="/local-vault" class="inline-flex px-3 py-1.5 rounded-md border border-accent/40 text-accent-bright hover:bg-accent/10 transition-colors">Local Vault</a>
           <a href="/contact" class="hidden min-[340px]:inline-flex px-2.5 py-1.5 rounded-md text-text-muted hover:text-text transition-colors">{t('nav.contact')}</a>
         </div>
       </div>
