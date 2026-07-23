@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>elect-rix Audit — Self-Assessment Tool</title>
+<style>
+:root {
+  --bg: #0a0a0b;
+  --surface: #131316;
+  --surface2: #1a1a1f;
+  --border: #2a2a30;
+  --text: #f5f5f5;
+  --text-dim: #a0a0a8;
+  --text-muted: #6b6b73;
+  --accent: #818cf8;
+  --accent-dim: #4a4a6a;
+  --green: #4ade80;
+  --yellow: #facc15;
+  --orange: #fb923c;
+  --red: #f87171;
+  --radius: 8px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 15px; line-height: 1.6; min-height: 100vh;
+}
+.container { max-width: 800px; margin: 0 auto; padding: 24px 20px 80px; }
+.header { text-align: center; margin-bottom: 32px; }
+.header .logo { font-size: 24px; font-weight: 700; letter-spacing: 2px; margin-bottom: 4px; }
+.header .logo span { color: var(--accent); }
+.header .tagline { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); }
+.header .subtitle { font-size: 14px; color: var(--text-dim); margin-top: 12px; }
+
+/* Progress bar */
+.progress-wrap { margin: 24px 0; }
+.progress-bar { height: 4px; background: var(--surface2); border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--accent); transition: width 0.3s ease; }
+.progress-labels { display: flex; justify-content: space-between; margin-top: 8px; font-size: 12px; color: var(--text-muted); }
+
+/* Cards / sections */
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px; margin-bottom: 20px;
+}
+.card-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+.card-desc { color: var(--text-dim); font-size: 14px; margin-bottom: 16px; }
+.layer-badge {
+  display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--accent); background: rgba(129,140,248,0.1);
+  padding: 4px 10px; border-radius: 20px; margin-bottom: 12px;
+}
+.pitch { font-style: italic; color: var(--text-dim); padding: 12px 16px; background: var(--surface2); border-radius: var(--radius); margin-bottom: 16px; border-left: 3px solid var(--accent); }
+
+/* Form elements */
+.question { margin-bottom: 28px; }
+.question-text { font-weight: 500; margin-bottom: 12px; font-size: 15px; }
+.question-required { color: var(--accent); margin-left: 4px; }
+.checkbox-group { display: flex; flex-direction: column; gap: 8px; }
+.checkbox-item {
+  display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px;
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+  cursor: pointer; transition: border-color 0.15s, background 0.15s;
+}
+.checkbox-item:hover { border-color: var(--accent-dim); }
+.checkbox-item.checked { border-color: var(--accent); background: rgba(129,140,248,0.05); }
+.checkbox-item input { margin-top: 3px; accent-color: var(--accent); }
+.checkbox-item label { cursor: pointer; flex: 1; }
+.checkbox-item .text-input { margin-top: 8px; width: 100%; }
+.checkbox-item .risk-flag { font-size: 11px; color: var(--orange); margin-left: 6px; }
+
+select, input[type="text"], textarea {
+  width: 100%; padding: 10px 14px; background: var(--surface2);
+  border: 1px solid var(--border); border-radius: 6px; color: var(--text);
+  font-size: 14px; font-family: inherit;
+}
+select:focus, input:focus, textarea:focus { outline: none; border-color: var(--accent); }
+textarea { resize: vertical; min-height: 60px; }
+
+/* Matrix table */
+.matrix-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.matrix-table th { text-align: left; padding: 8px 10px; color: var(--text-dim); font-weight: 500; border-bottom: 1px solid var(--border); }
+.matrix-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); }
+.matrix-table .row-label { color: var(--text); font-weight: 500; }
+.matrix-table input[type="checkbox"] { accent-color: var(--accent); }
+.matrix-table select { padding: 4px 8px; font-size: 12px; width: auto; min-width: 80px; }
+.matrix-table .text-cell input { padding: 4px 8px; font-size: 12px; }
+
+/* Buttons */
+.btn-row { display: flex; gap: 12px; justify-content: space-between; margin-top: 24px; }
+.btn {
+  padding: 12px 28px; border: 1px solid var(--border); border-radius: 6px;
+  background: var(--surface2); color: var(--text); font-size: 14px;
+  font-weight: 500; cursor: pointer; transition: all 0.15s; font-family: inherit;
+}
+.btn:hover { border-color: var(--accent); }
+.btn-primary { background: var(--accent); color: #0a0a0b; border-color: var(--accent); font-weight: 600; }
+.btn-primary:hover { background: #6d7be8; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-back { background: transparent; }
+
+/* Industry selection */
+.profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 16px; }
+.profile-card {
+  padding: 16px; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--radius); cursor: pointer; text-align: center; transition: all 0.15s;
+}
+.profile-card:hover { border-color: var(--accent-dim); }
+.profile-card.selected { border-color: var(--accent); background: rgba(129,140,248,0.05); }
+.profile-card .icon { font-size: 28px; margin-bottom: 8px; }
+.profile-card .name { font-weight: 600; font-size: 13px; }
+.profile-card .desc { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+/* Org info form */
+.form-row { margin-bottom: 16px; }
+.form-row label { display: block; font-size: 13px; color: var(--text-dim); margin-bottom: 6px; }
+
+/* Results */
+.result-hero { text-align: center; padding: 32px; }
+.result-score { font-size: 48px; font-weight: 700; margin: 8px 0; }
+.result-label { font-size: 14px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); }
+.result-desc { font-size: 14px; color: var(--text-dim); margin-top: 12px; max-width: 500px; margin-left: auto; margin-right: auto; }
+.risk-low { color: var(--green); }
+.risk-moderate { color: var(--yellow); }
+.risk-elevated { color: var(--orange); }
+.risk-high { color: var(--red); }
+
+.gap-list { list-style: none; }
+.gap-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.gap-item:last-child { border-bottom: none; }
+.gap-icon { width: 8px; height: 8px; border-radius: 50%; margin-top: 7px; flex-shrink: 0; }
+.gap-icon.high { background: var(--red); }
+.gap-icon.medium { background: var(--orange); }
+.gap-icon.low { background: var(--yellow); }
+.gap-text { flex: 1; }
+.gap-layer { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+.report-section { margin-bottom: 24px; }
+.report-section h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--accent); }
+.report-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 12px; }
+.report-table th { text-align: left; padding: 8px 10px; color: var(--text-dim); border-bottom: 1px solid var(--border); font-weight: 500; }
+.report-table td { padding: 8px 10px; border-bottom: 1px solid var(--surface2); }
+.report-table tr:last-child td { border-bottom: none; }
+
+.rec-list { list-style: none; counter-reset: rec; }
+.rec-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.rec-item:last-child { border-bottom: none; }
+.rec-num { font-weight: 700; color: var(--accent); flex-shrink: 0; min-width: 24px; }
+.rec-priority { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 2px 8px; border-radius: 10px; display: inline-block; margin-left: 8px; }
+.rec-priority.high { background: rgba(248,113,113,0.15); color: var(--red); }
+.rec-priority.medium { background: rgba(251,146,60,0.15); color: var(--orange); }
+.rec-priority.low { background: rgba(250,204,21,0.15); color: var(--yellow); }
+
+/* Upsell */
+.upsell-box {
+  background: var(--surface2); border: 1px solid var(--accent-dim);
+  border-radius: var(--radius); padding: 20px; margin-top: 24px; text-align: center;
+}
+.upsell-box h4 { color: var(--accent); margin-bottom: 8px; }
+.upsell-box p { color: var(--text-dim); font-size: 14px; margin-bottom: 12px; }
+.upsell-box a { color: var(--accent); text-decoration: none; font-weight: 500; }
+.upsell-box a:hover { text-decoration: underline; }
+
+/* Print */
+@media print {
+  body { background: white; color: black; font-size: 12px; }
+  .container { max-width: 100%; padding: 0; }
+  .no-print { display: none !important; }
+  .card { border: 1px solid #ccc; page-break-inside: avoid; }
+  .report-table th { color: #555; border-bottom: 1px solid #ccc; }
+  .report-table td { border-bottom: 1px solid #eee; }
+  .risk-low { color: #16a34a; }
+  .risk-moderate { color: #ca8a04; }
+  .risk-elevated { color: #ea580c; }
+  .risk-high { color: #dc2626; }
+  .gap-icon.high { background: #dc2626; }
+  .gap-icon.medium { background: #ea580c; }
+  .gap-icon.low { background: #ca8a04; }
+  .rec-priority.high { background: #fee2e2; color: #dc2626; }
+  .rec-priority.medium { background: #ffedd5; color: #ea580c; }
+  .rec-priority.low { background: #fef9c3; color: #ca8a04; }
+}
+
+.hidden { display: none; }
+.disclaimer { font-size: 11px; color: var(--text-muted); margin-top: 16px; padding: 12px; background: var(--surface2); border-radius: 6px; }
+.nav-dots { display: flex; gap: 6px; justify-content: center; margin-top: 16px; }
+.nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: background 0.15s; }
+.nav-dot.active { background: var(--accent); }
+.nav-dot.completed { background: var(--accent-dim); }
+</style>
+</head>
+<body>
+<div class="container" id="app">
+  <!-- Header -->
+  <div class="header no-print">
+    <div class="logo">elect<span>-rix</span></div>
+    <div class="tagline">Make it work.</div>
+  </div>
+
+  <!-- INTRO SCREEN -->
+  <div id="screen-intro" class="screen">
+    <div class="card">
+      <div class="card-title">Data Sovereignty Self-Assessment</div>
+      <div class="card-desc">Map where your business data lives, what's cloud-dependent, what compliance paperwork is missing, and what to fix first. Based on the elect-rix 5-layer audit methodology.</div>
+      <div class="pitch">"You're already responsible for personal and client data under Canadian rules. Most small firms can't answer, on one page, where that data lives, who can open it, or what dies if Microsoft/Google is down. This tool builds that page."</div>
+      <div class="disclaimer">This self-assessment produces a clarity map, not a compliance certification. Not legal advice. Not a penetration test. Based on your responses — honest blanks and "unknown" are valid answers.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Organization Information</div>
+      <div class="form-row">
+        <label>Organization name</label>
+        <input type="text" id="org-name" placeholder="e.g., Smith & Associates Law">
+      </div>
+      <div class="form-row">
+        <label>Your name (auditor)</label>
+        <input type="text" id="auditor-name" placeholder="e.g., John Smith">
+      </div>
+      <div class="form-row">
+        <label>Role / title</label>
+        <input type="text" id="auditor-role" placeholder="e.g., Managing Partner">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Select Your Industry Profile</div>
+      <div class="card-desc">This determines which compliance frameworks and questions apply to your assessment.</div>
+      <div class="profile-grid" id="profile-grid"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Select Audit Tier</div>
+      <div class="card-desc">Quick Scan covers all 5 layers at a summary level. Standard adds staff workflow detail. Full adds remediation roadmap.</div>
+      <div class="profile-grid" id="tier-grid"></div>
+    </div>
+
+    <div class="btn-row no-print">
+      <div></div>
+      <button class="btn btn-primary" id="btn-start" onclick="startAudit()" disabled>Start Assessment →</button>
+    </div>
+  </div>
+
+  <!-- QUESTION SCREEN -->
+  <div id="screen-questions" class="screen hidden">
+    <div class="progress-wrap no-print">
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width: 0%"></div></div>
+      <div class="progress-labels">
+        <span id="progress-layer">Layer 1 of 5</span>
+        <span id="progress-percent">0%</span>
+      </div>
+      <div class="nav-dots" id="nav-dots"></div>
+    </div>
+    <div id="question-container"></div>
+    <div class="btn-row no-print">
+      <button class="btn btn-back" id="btn-prev" onclick="prevLayer()">← Back</button>
+      <button class="btn btn-primary" id="btn-next" onclick="nextLayer()">Next →</button>
+    </div>
+  </div>
+
+  <!-- RESULTS SCREEN -->
+  <div id="screen-results" class="screen hidden">
+    <div id="report-content"></div>
+    <div class="btn-row no-print" style="margin-top: 24px;">
+      <button class="btn btn-back" onclick="resetAudit()">← Start Over</button>
+      <div style="display:flex; gap:12px;">
+        <button class="btn" onclick="window.print()">Print / Save PDF</button>
+        <button class="btn btn-primary" onclick="downloadReport()">Download Report</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== QUESTION BANK =====
+const PROFILES = {
+  general_smb: { name: 'General SMB', icon: '🏢', desc: 'Standard commercial business', frameworks: ['PIPEDA'] },
+  healthcare: { name: 'Healthcare', icon: '⚕️', desc: 'Clinic / patient data', frameworks: ['PIPEDA', 'PHIPA'] },
+  legal: { name: 'Legal', icon: '⚖️', desc: 'Law firm / privilege', frameworks: ['PIPEDA', 'Solicitor-Client'] },
+  government: { name: 'Government', icon: '🏛️', desc: 'Public sector / contractor', frameworks: ['PIPEDA', 'ITSG-33/37', 'FOIPOP'] },
+  quebec: { name: 'Quebec', icon: '🇫🇷', desc: 'Quebec residents\' data', frameworks: ['PIPEDA', 'Law 25'] }
+};
+
+const TIERS = {
+  quick: { name: 'Quick Scan', icon: '⚡', desc: 'All 5 layers, summary level', maxPages: 10 },
+  standard: { name: 'Standard', icon: '📋', desc: 'Adds staff workflow detail', maxPages: 25 },
+  full: { name: 'Full', icon: '📊', desc: 'Adds remediation roadmap', maxPages: 40 }
+};
+
+const LAYERS = [
+  {
+    num: 1, name: 'Data', icon: '💾',
+    desc: 'What sensitive stuff exists, and where does it live?',
+    pitch: 'If the building burned but internet still worked — what would you still have, and where?',
+    questions: [
+      {
+        id: 'L1-Q1', text: 'What types of sensitive data does your organization handle?', type: 'checkbox', required: true,
+        options: [
+          { id: 'client_files', label: 'Client / customer files' },
+          { id: 'email_messages', label: 'Email / messages' },
+          { id: 'financial_records', label: 'Financial / accounting / invoices' },
+          { id: 'employee_records', label: 'Employee HR / payroll' },
+          { id: 'contracts_legal', label: 'Contracts / legal documents' },
+          { id: 'health_records', label: 'Health / clinical records', profiles: ['healthcare'] },
+          { id: 'photos_scans', label: 'Photos / scans / media' },
+          { id: 'project_files', label: 'Project / job files' },
+          { id: 'marketing_lists', label: 'Marketing lists / CRM' },
+          { id: 'other', label: 'Other (specify)', allowText: true }
+        ]
+      },
+      {
+        id: 'L1-Q2', text: 'Where does each data type primarily live? Mark all that apply.', type: 'matrix', required: true,
+        rowsFrom: 'L1-Q1',
+        columns: [
+          { id: 'local_pc', label: 'Local PC' },
+          { id: 'shared_drive', label: 'Shared drive / NAS' },
+          { id: 'email_only', label: 'Email only' },
+          { id: 'cloud_folder', label: 'Cloud folder' },
+          { id: 'industry_saas', label: 'Industry SaaS' },
+          { id: 'paper', label: 'Paper' },
+          { id: 'unknown', label: 'Unknown' }
+        ],
+        notes: true
+      },
+      {
+        id: 'L1-Q3', text: 'Who outside your company can open these files today?', type: 'checkbox', required: true,
+        options: [
+          { id: 'nobody', label: 'Nobody that we know of', risk: 0 },
+          { id: 'cloud_vendor_staff', label: 'Cloud vendor staff / sub-processors (assumed)', risk: 2 },
+          { id: 'msp_vendor', label: 'MSP / IT vendor', risk: 1 },
+          { id: 'accountant_remote', label: 'Accountant / bookkeeper (remote access)', risk: 1 },
+          { id: 'former_staff', label: 'Former staff accounts still active', risk: 3 },
+          { id: 'unknown_external', label: 'Unknown — flag for report', risk: 3 }
+        ]
+      }
+    ]
+  },
+  {
+    num: 2, name: 'Cloud & Services', icon: '☁️',
+    desc: 'Which cloud apps keep the business alive? What dies offline?',
+    pitch: 'What do you log into every morning? What\'s always on the phone home screen for work?',
+    questions: [
+      {
+        id: 'L2-Q1', text: 'Which email and office suite do you use?', type: 'checkbox', required: true,
+        options: [
+          { id: 'microsoft365', label: 'Microsoft 365 / Outlook / Teams', risk: 2 },
+          { id: 'google_workspace', label: 'Google Workspace / Gmail / Drive', risk: 2 },
+          { id: 'proton_mail', label: 'Proton Mail / Proton Drive', risk: 0 },
+          { id: 'apple_icloud', label: 'Apple iCloud Mail', risk: 1 },
+          { id: 'other_email', label: 'Other email host (specify)', allowText: true },
+          { id: 'unknown_mixed', label: 'Unknown / mixed personal + work', risk: 3 }
+        ]
+      },
+      {
+        id: 'L2-Q2', text: 'Which file storage and collaboration tools do you use?', type: 'checkbox', required: true,
+        options: [
+          { id: 'onedrive_sharepoint', label: 'OneDrive / SharePoint', risk: 2 },
+          { id: 'google_drive', label: 'Google Drive / Shared drives', risk: 2 },
+          { id: 'dropbox', label: 'Dropbox', risk: 2 },
+          { id: 'box', label: 'Box', risk: 2 },
+          { id: 'icloud_drive', label: 'iCloud Drive', risk: 1 },
+          { id: 'local_only', label: 'Local only (no cloud file sync)', risk: 0 },
+          { id: 'other_files', label: 'Other (specify)', allowText: true }
+        ]
+      },
+      {
+        id: 'L2-Q3', text: 'Which accounting or financial software do you use?', type: 'checkbox', required: true,
+        options: [
+          { id: 'quickbooks_online', label: 'QuickBooks Online', risk: 2 },
+          { id: 'quickbooks_desktop', label: 'QuickBooks Desktop', risk: 0 },
+          { id: 'xero', label: 'Xero', risk: 2 },
+          { id: 'wave', label: 'Wave', risk: 1 },
+          { id: 'sage', label: 'Sage', risk: 1 },
+          { id: 'bank_only', label: 'Bank online only', risk: 1 },
+          { id: 'other_accounting', label: 'Other (specify)', allowText: true },
+          { id: 'unknown_accounting', label: 'Unknown', risk: 3 }
+        ]
+      },
+      {
+        id: 'L2-Q4', text: 'Which CRM, sales, or booking tools do you use?', type: 'checkbox', required: false,
+        options: [
+          { id: 'hubspot', label: 'HubSpot', risk: 2 },
+          { id: 'salesforce', label: 'Salesforce', risk: 2 },
+          { id: 'jobber', label: 'Jobber / ServiceTitan / field-service app', risk: 2 },
+          { id: 'square_shopify', label: 'Square / Shopify', risk: 2 },
+          { id: 'calendly', label: 'Calendly / booking tool', risk: 1 },
+          { id: 'spreadsheet_only', label: 'Spreadsheet only', risk: 0 },
+          { id: 'none_crm', label: 'None' },
+          { id: 'other_crm', label: 'Other (specify)', allowText: true }
+        ]
+      },
+      {
+        id: 'L2-Q5', text: 'Which industry-specific or vertical software do you use?', type: 'checkbox', required: false,
+        profiles: ['healthcare', 'legal', 'government'],
+        options: [
+          { id: 'ehr_emr', label: 'Practice management / EHR / EMR (specify)', allowText: true, profiles: ['healthcare'], risk: 2 },
+          { id: 'legal_practice', label: 'Legal practice / trust accounting (specify)', allowText: true, profiles: ['legal'], risk: 2 },
+          { id: 'dental_clinic', label: 'Dental / clinic software (specify)', allowText: true, profiles: ['healthcare'], risk: 2 },
+          { id: 'construction', label: 'Construction / estimating (specify)', allowText: true },
+          { id: 'other_vertical', label: 'Other vertical (specify)', allowText: true },
+          { id: 'none_vertical', label: 'None / not applicable' }
+        ]
+      },
+      {
+        id: 'L2-Q6', text: 'Which communication and meeting tools do you use?', type: 'checkbox', required: true,
+        options: [
+          { id: 'zoom', label: 'Zoom', risk: 1 },
+          { id: 'teams', label: 'Microsoft Teams', risk: 2 },
+          { id: 'google_meet', label: 'Google Meet', risk: 1 },
+          { id: 'slack_discord', label: 'Slack / Discord', risk: 2 },
+          { id: 'whatsapp_imessage', label: 'WhatsApp / iMessage for business', risk: 2 },
+          { id: 'phone_voip', label: 'Phone / VoIP (specify provider)', allowText: true },
+          { id: 'other_comms', label: 'Other (specify)', allowText: true }
+        ]
+      },
+      {
+        id: 'L2-Q7', text: 'What backup and security tools do you have in place?', type: 'checkbox', required: true,
+        options: [
+          { id: 'vendor_backup', label: 'Vendor backup only (OneDrive/Google built-in)', risk: 2 },
+          { id: 'backblaze', label: 'Backblaze / Carbonite / similar cloud backup', risk: 1 },
+          { id: 'local_backup', label: 'Local external drive / NAS backup', risk: 0 },
+          { id: 'no_backup', label: 'No formal backup known', risk: 3 },
+          { id: 'password_manager', label: 'Password manager (specify)', allowText: true },
+          { id: 'antivirus_edr', label: 'Antivirus / EDR (specify)', allowText: true },
+          { id: 'vpn_remote', label: 'VPN for remote work' },
+          { id: 'unknown_backup', label: 'Unknown', risk: 3 }
+        ]
+      },
+      {
+        id: 'L2-Q8', text: 'What AI tools are in use today?', type: 'checkbox', required: true,
+        options: [
+          { id: 'chatgpt', label: 'ChatGPT / OpenAI', risk: 2 },
+          { id: 'copilot', label: 'Microsoft Copilot', risk: 2 },
+          { id: 'gemini', label: 'Google Gemini', risk: 2 },
+          { id: 'claude_cloud', label: 'Claude / other cloud AI', risk: 2 },
+          { id: 'local_ai', label: 'Local AI only', risk: 0 },
+          { id: 'none_ai', label: 'None known' },
+          { id: 'staff_personal_ai', label: 'Staff use personal AI on work data (RISK)', risk: 3 }
+        ]
+      },
+      {
+        id: 'L2-Q9', text: 'If your cloud services go down for a day, what stops completely?', type: 'checkbox', required: true,
+        options: [
+          { id: 'email_stops', label: 'Email' },
+          { id: 'file_access_stops', label: 'File access' },
+          { id: 'billing_stops', label: 'Billing / invoicing' },
+          { id: 'scheduling_stops', label: 'Scheduling / bookings' },
+          { id: 'industry_app_stops', label: 'Industry app (clinical/legal/etc.)' },
+          { id: 'phones_stop', label: 'Phones / VoIP' },
+          { id: 'nothing_stops', label: 'Almost nothing — local-first already', risk: 0 },
+          { id: 'unknown_impact', label: 'Unknown', risk: 3 }
+        ]
+      },
+      {
+        id: 'L2-Q10', text: 'If a cloud outage occurs, does a workaround exist?', type: 'select', required: true,
+        options: [
+          { id: 'workaround_yes', label: 'Yes', risk: 0, allowText: true, textLabel: 'Describe the workaround' },
+          { id: 'workaround_partial', label: 'Partial', risk: 1 },
+          { id: 'workaround_no', label: 'No', risk: 3 },
+          { id: 'workaround_unknown', label: 'Unknown', risk: 3 }
+        ]
+      }
+    ]
+  },
+  {
+    num: 3, name: 'Gear & Network', icon: '🔌',
+    desc: 'What boxes and Wi-Fi exist on site?',
+    pitch: 'Where does the internet come in? Any box people call "the server"?',
+    questions: [
+      {
+        id: 'L3-Q1', text: 'What is your internet setup?', type: 'checkbox', required: true,
+        options: [
+          { id: 'single_isp', label: 'Single ISP', risk: 1 },
+          { id: 'dual_isp', label: 'Dual / backup link', risk: 0 },
+          { id: 'cellular_hotspot', label: 'Cellular hotspot fallback', risk: 0 },
+          { id: 'unknown_isp', label: 'Unknown ISP', allowText: true, risk: 3 }
+        ]
+      },
+      {
+        id: 'L3-Q2', text: 'What on-site equipment do you have?', type: 'checkbox', required: true,
+        options: [
+          { id: 'workstations_only', label: 'Workstations / laptops only' },
+          { id: 'desktop_server', label: 'Desktop "server" under desk', risk: 1 },
+          { id: 'nas', label: 'NAS / Synology / TrueNAS / similar', risk: 0 },
+          { id: 'rack_gear', label: 'Rack / closet gear' },
+          { id: 'managed_router', label: 'Managed router / firewall (specify brand)', allowText: true },
+          { id: 'consumer_router', label: 'Consumer router only', risk: 2 },
+          { id: 'printers_scan', label: 'Printers with scan-to-email / cloud', risk: 1 },
+          { id: 'security_cameras', label: 'Security cameras / NVR' },
+          { id: 'unknown_gear', label: 'Unknown — needs site walk', risk: 3 }
+        ]
+      },
+      {
+        id: 'L3-Q3', text: 'How is your Wi-Fi configured?', type: 'select', required: true,
+        options: [
+          { id: 'wifi_separated', label: 'Staff + guest separated', risk: 0 },
+          { id: 'wifi_one_network', label: 'One network for everything', risk: 2 },
+          { id: 'wifi_unknown', label: 'Unknown', risk: 3 }
+        ]
+      },
+      {
+        id: 'L3-Q4', text: 'How do staff access the office network remotely?', type: 'checkbox', required: false,
+        options: [
+          { id: 'vpn', label: 'VPN', risk: 0 },
+          { id: 'rdp', label: 'RDP / screen share tools', risk: 2 },
+          { id: 'cloud_only_remote', label: 'Cloud-only (no remote to office machines)', risk: 1 },
+          { id: 'unknown_remote', label: 'Unknown', risk: 3 }
+        ]
+      }
+    ]
+  },
+  {
+    num: 4, name: 'Compliance Paperwork', icon: '📋',
+    desc: 'What rules apply, what paper exists? Yes/no/unknown — not legal opinion.',
+    pitch: 'Do you have a privacy policy? Retention rules? Who gets told if there\'s a breach?',
+    disclaimer: 'I\'m not your lawyer. I only check whether basic paperwork exists.',
+    questions: [
+      {
+        id: 'L4-Q1', text: 'Which compliance frameworks may apply to your organization?', type: 'checkbox', required: true,
+        options: [
+          { id: 'pipeda', label: 'PIPEDA (general Canadian commercial personal info)' },
+          { id: 'provincial_health', label: 'Provincial health privacy (e.g. PHIPA) — if health sector', profiles: ['healthcare'] },
+          { id: 'solicitor_client', label: 'Solicitor-client / professional duty — if law', profiles: ['legal'] },
+          { id: 'government_itsg', label: 'Government customer / ITSG / security questionnaire', profiles: ['government'] },
+          { id: 'foipop', label: 'FOIPOP / public-sector angle', profiles: ['government'] },
+          { id: 'quebec_law25', label: 'Quebec Law 25 — if handling Quebec residents\' data', profiles: ['quebec'] },
+          { id: 'none_known', label: 'None they know of' },
+          { id: 'unknown_frameworks', label: 'Unknown — note in report', risk: 3 }
+        ]
+      },
+      {
+        id: 'L4-Q2', text: 'Which compliance documents exist in your organization?', type: 'matrix_docs', required: true,
+        columns: ['Yes', 'No', 'Unknown'],
+        rows: [
+          { id: 'privacy_policy', label: 'Privacy policy', gap: 2 },
+          { id: 'data_inventory', label: 'Written data inventory', gap: 2 },
+          { id: 'access_control', label: 'Access / who-can-open-what documentation', gap: 2 },
+          { id: 'breach_response', label: 'Breach response plan / who to tell', gap: 3 },
+          { id: 'retention_schedule', label: 'Data retention schedule', gap: 2 },
+          { id: 'vendor_list', label: 'Vendor list (where client data goes)', gap: 2 },
+          { id: 'staff_acceptable_use', label: 'Staff acceptable-use / device policy', gap: 1 },
+          { id: 'dpas', label: 'Client data processing / processor agreements', gap: 2 }
+        ]
+      },
+      {
+        id: 'L4-Q3', text: 'What control hygiene practices are in place?', type: 'checkbox', required: true,
+        options: [
+          { id: 'mfa_email', label: 'MFA on email / main suite', risk: 0 },
+          { id: 'shared_passwords', label: 'Shared passwords in use (RISK)', risk: 3 },
+          { id: 'former_staff_cleaned', label: 'Former staff accounts cleaned up', risk: 0 },
+          { id: 'unknown_controls', label: 'Unknown', risk: 3 }
+        ]
+      }
+    ]
+  },
+  {
+    num: 5, name: 'Staff & Tools', icon: '👥',
+    desc: 'Who does what on which tools? Where do people put files "just for a second"?',
+    pitch: 'Walk me through yesterday, tool by tool.',
+    questions: [
+      {
+        id: 'L5-Q1', text: 'Which roles are present in your organization? (Check and provide count for each)', type: 'checkbox_count', required: true,
+        options: [
+          { id: 'owner_partner', label: 'Owner / partner' },
+          { id: 'admin_manager', label: 'Admin / office manager' },
+          { id: 'reception', label: 'Reception / front desk' },
+          { id: 'bookkeeper', label: 'Bookkeeper / finance' },
+          { id: 'professional', label: 'Professional (lawyer, clinician, technician)' },
+          { id: 'field_mobile', label: 'Field / mobile workers' },
+          { id: 'it_msp', label: 'IT / MSP external' },
+          { id: 'other_role', label: 'Other (specify)', allowText: true }
+        ]
+      },
+      {
+        id: 'L5-Q2', text: 'For each role, what are the main tools and cloud dependencies?', type: 'dynamic_table', required: true,
+        rowsFrom: 'L5-Q1',
+        columns: [
+          { id: 'main_tools', label: 'Main tools', type: 'text' },
+          { id: 'cloud_dependent', label: 'Cloud-dependent?', type: 'select', options: ['Y', 'N', 'Partial'] },
+          { id: 'if_internet_dies', label: 'If internet dies...', type: 'text' }
+        ]
+      },
+      {
+        id: 'L5-Q3', text: 'Are any of these shadow IT habits present?', type: 'checkbox', required: true,
+        options: [
+          { id: 'personal_dropbox', label: 'Personal Dropbox / Google for work files', risk: 3 },
+          { id: 'personal_ai_work', label: 'Personal AI with client data', risk: 3 },
+          { id: 'usb_sticks', label: 'USB sticks for "quick transfer"', risk: 2 },
+          { id: 'home_computer', label: 'Home computer for work files', risk: 2 },
+          { id: 'no_shadow_known', label: 'None known', risk: 0 },
+          { id: 'unknown_shadow', label: 'Unknown / not asked yet', risk: 3 }
+        ]
+      }
+    ]
+  }
+];
+
+// ===== STATE =====
+let state = {
+  profile: null,
+  tier: null,
+  orgName: '',
+  auditorName: '',
+  auditorRole: '',
+  currentLayer: 0,
+  responses: {}
+};
+
+// ===== INIT =====
+function init() {
+  renderProfiles();
+  renderTiers();
+  updateStartButton();
+  document.getElementById('org-name').addEventListener('input', updateStartButton);
+  document.getElementById('auditor-name').addEventListener('input', updateStartButton);
+}
+
+function renderProfiles() {
+  const grid = document.getElementById('profile-grid');
+  grid.innerHTML = '';
+  Object.entries(PROFILES).forEach(([id, p]) => {
+    const card = document.createElement('div');
+    card.className = 'profile-card';
+    card.onclick = () => selectProfile(id);
+    card.innerHTML = `<div class="icon">${p.icon}</div><div class="name">${p.name}</div><div class="desc">${p.desc}</div>`;
+    grid.appendChild(card);
+  });
+}
+
+function renderTiers() {
+  const grid = document.getElementById('tier-grid');
+  grid.innerHTML = '';
+  Object.entries(TIERS).forEach(([id, t]) => {
+    const card = document.createElement('div');
+    card.className = 'profile-card';
+    card.onclick = () => selectTier(id);
+    card.innerHTML = `<div class="icon">${t.icon}</div><div class="name">${t.name}</div><div class="desc">${t.desc}</div>`;
+    grid.appendChild(card);
+  });
+}
+
+function selectProfile(id) {
+  state.profile = id;
+  document.querySelectorAll('#profile-grid .profile-card').forEach((c, i) => {
+    c.classList.toggle('selected', Object.keys(PROFILES)[i] === id);
+  });
+  updateStartButton();
+}
+
+function selectTier(id) {
+  state.tier = id;
+  document.querySelectorAll('#tier-grid .profile-card').forEach((c, i) => {
+    c.classList.toggle('selected', Object.keys(TIERS)[i] === id);
+  });
+  updateStartButton();
+}
+
+function updateStartButton() {
+  const btn = document.getElementById('btn-start');
+  const orgOk = document.getElementById('org-name').value.trim().length > 0;
+  const auditorOk = document.getElementById('auditor-name').value.trim().length > 0;
+  btn.disabled = !(state.profile && state.tier && orgOk && auditorOk);
+  state.orgName = document.getElementById('org-name').value.trim();
+  state.auditorName = document.getElementById('auditor-name').value.trim();
+  state.auditorRole = document.getElementById('auditor-role').value.trim();
+}
+
+// ===== START AUDIT =====
+function startAudit() {
+  state.currentLayer = 0;
+  state.responses = {};
+  showScreen('questions');
+  renderNavDots();
+  renderLayer();
+}
+
+function showScreen(name) {
+  ['intro', 'questions', 'results'].forEach(s => {
+    document.getElementById('screen-' + s).classList.toggle('hidden', s !== name);
+  });
+}
+
+function renderNavDots() {
+  const dots = document.getElementById('nav-dots');
+  dots.innerHTML = '';
+  LAYERS.forEach((l, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'nav-dot' + (i === state.currentLayer ? ' active' : (i < state.currentLayer ? ' completed' : ''));
+    dots.appendChild(dot);
+  });
+}
+
+// ===== RENDER LAYER =====
+function renderLayer() {
+  const layer = LAYERS[state.currentLayer];
+  const total = LAYERS.length;
+  const pct = Math.round((state.currentLayer / total) * 100);
+
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-percent').textContent = pct + '%';
+  document.getElementById('progress-layer').textContent = `Layer ${layer.num} of ${total} — ${layer.name}`;
+  renderNavDots();
+
+  const container = document.getElementById('question-container');
+  let html = `<div class="card">
+    <div class="layer-badge">Layer ${layer.num} / ${total} · ${layer.icon} ${layer.name}</div>
+    <div class="card-title">${layer.name}</div>
+    <div class="card-desc">${layer.desc}</div>
+    <div class="pitch">${layer.pitch}</div>`;
+  if (layer.disclaimer) {
+    html += `<div class="disclaimer">${layer.disclaimer}</div>`;
+  }
+  html += `</div>`;
+
+  layer.questions.forEach(q => {
+    if (q.profiles && !q.profiles.includes(state.profile)) return;
+    html += `<div class="card"><div class="question"><div class="question-text">${q.text}${q.required ? '<span class="question-required">*</span>' : ''}</div>`;
+    html += renderQuestion(q, layer);
+    html += `</div></div>`;
+  });
+
+  container.innerHTML = html;
+
+  // Button states
+  document.getElementById('btn-prev').disabled = state.currentLayer === 0;
+  document.getElementById('btn-next').textContent = state.currentLayer === total - 1 ? 'Generate Report →' : 'Next →';
+
+  // Attach event listeners
+  attachListeners();
+}
+
+function renderQuestion(q, layer) {
+  let html = '';
+  const profile = state.profile;
+
+  switch (q.type) {
+    case 'checkbox':
+      html += '<div class="checkbox-group" data-qid="' + q.id + '">';
+      q.options.forEach(opt => {
+        if (opt.profiles && !opt.profiles.includes(profile)) return;
+        const checked = (state.responses[q.id] || []).includes(opt.id) ? 'checked' : '';
+        const checkedClass = checked ? ' checked' : '';
+        html += `<div class="checkbox-item${checkedClass}" data-opt="${opt.id}">
+          <input type="checkbox" id="${q.id}_${opt.id}" ${checked} onchange="onCheckboxChange('${q.id}','${opt.id}', this.checked)">
+          <label for="${q.id}_${opt.id}">${opt.label}${opt.risk >= 2 ? '<span class="risk-flag">⚠</span>' : ''}</label>`;
+        if (opt.allowText) {
+          const textVal = (state.responses[q.id + '_text'] || {})[opt.id] || '';
+          html += `<input type="text" class="text-input hidden" id="${q.id}_${opt.id}_text" placeholder="Specify..." value="${escapeHtml(textVal)}" oninput="onOptTextChange('${q.id}','${opt.id}', this.value)">`;
+        }
+        html += `</div>`;
+      });
+      html += '</div>';
+      break;
+
+    case 'select':
+      html += `<select data-qid="${q.id}" onchange="onSelectChange('${q.id}', this.value)">`;
+      html += `<option value="">-- Select --</option>`;
+      q.options.forEach(opt => {
+        const selected = state.responses[q.id] === opt.id ? 'selected' : '';
+        html += `<option value="${opt.id}" ${selected}>${opt.label}</option>`;
+      });
+      html += '</select>';
+      // Text sub-field for select with allowText
+      q.options.forEach(opt => {
+        if (opt.allowText && state.responses[q.id] === opt.id) {
+          const textVal = state.responses[q.id + '_text'] || '';
+          html += `<input type="text" class="text-input" style="margin-top:8px" placeholder="${opt.textLabel || 'Specify...'}" value="${escapeHtml(textVal)}" oninput="state.responses['${q.id}_text'] = this.value">`;
+        }
+      });
+      break;
+
+    case 'matrix':
+      const rows = getMatrixRows(q, layer);
+      if (rows.length === 0) {
+        html += '<p style="color:var(--text-muted);font-size:13px">Select data types in the previous question to populate this table.</p>';
+      } else {
+        html += '<div style="overflow-x:auto"><table class="matrix-table" data-qid="' + q.id + '"><thead><tr><th>Data type</th>';
+        q.columns.forEach(c => { html += `<th style="text-align:center">${c.label}</th>`; });
+        html += '</tr></thead><tbody>';
+        rows.forEach(r => {
+          const checkedSet = state.responses[q.id + '_' + r.id] || [];
+          html += `<tr><td class="row-label">${r.label}</td>`;
+          q.columns.forEach(c => {
+            const checked = checkedSet.includes(c.id) ? 'checked' : '';
+            html += `<td style="text-align:center"><input type="checkbox" data-q="${q.id}" data-row="${r.id}" data-col="${c.id}" ${checked} onchange="onMatrixChange('${q.id}','${r.id}','${c.id}', this.checked)"></td>`;
+          });
+          html += '</tr>';
+        });
+        html += '</tbody></table></div>';
+        if (q.notes) {
+          const notesVal = state.responses[q.id + '_notes'] || '';
+          html += `<input type="text" class="text-input" style="margin-top:8px" placeholder="Notes / rough volume estimates" value="${escapeHtml(notesVal)}" oninput="state.responses['${q.id}_notes'] = this.value">`;
+        }
+      }
+      break;
+
+    case 'matrix_docs':
+      html += '<div style="overflow-x:auto"><table class="matrix-table" data-qid="' + q.id + '"><thead><tr><th>Document</th><th>Yes</th><th>No</th><th>Unknown</th><th>Current? (Y/N/U)</th></tr></thead><tbody>';
+      q.rows.forEach(r => {
+        const current = state.responses[q.id + '_current_' + r.id] || '';
+        const selected = state.responses[q.id + '_' + r.id] || '';
+        html += `<tr><td class="row-label">${r.label}</td>
+          <td style="text-align:center"><input type="radio" name="${q.id}_${r.id}" value="yes" ${selected === 'yes' ? 'checked' : ''} onchange="onDocRadioChange('${q.id}','${r.id}','yes')"></td>
+          <td style="text-align:center"><input type="radio" name="${q.id}_${r.id}" value="no" ${selected === 'no' ? 'checked' : ''} onchange="onDocRadioChange('${q.id}','${r.id}','no')"></td>
+          <td style="text-align:center"><input type="radio" name="${q.id}_${r.id}" value="unknown" ${selected === 'unknown' ? 'checked' : ''} onchange="onDocRadioChange('${q.id}','${r.id}','unknown')"></td>
+          <td style="text-align:center"><select onchange="state.responses['${q.id}_current_${r.id}'] = this.value"><option value="">--</option><option value="yes" ${current === 'yes' ? 'selected' : ''}>Yes</option><option value="no" ${current === 'no' ? 'selected' : ''}>No</option><option value="unknown" ${current === 'unknown' ? 'selected' : ''}>Unknown</option></select></td>
+        </tr>`;
+      });
+      html += '</tbody></table></div>';
+      break;
+
+    case 'checkbox_count':
+      html += '<div class="checkbox-group" data-qid="' + q.id + '">';
+      q.options.forEach(opt => {
+        if (opt.profiles && !opt.profiles.includes(profile)) return;
+        const checked = (state.responses[q.id] || []).includes(opt.id);
+        const count = (state.responses[q.id + '_count'] || {})[opt.id] || '';
+        const checkedClass = checked ? ' checked' : '';
+        html += `<div class="checkbox-item${checkedClass}" data-opt="${opt.id}">
+          <input type="checkbox" id="${q.id}_${opt.id}" ${checked ? 'checked' : ''} onchange="onCheckboxCountChange('${q.id}','${opt.id}', this.checked)">
+          <label for="${q.id}_${opt.id}">${opt.label}</label>
+          <input type="number" class="text-input" style="max-width:70px;margin-left:auto" placeholder="Count" value="${count}" min="0" oninput="onCountChange('${q.id}','${opt.id}', this.value)">`;
+        if (opt.allowText) {
+          const textVal = (state.responses[q.id + '_text'] || {})[opt.id] || '';
+          html += `<input type="text" class="text-input hidden" placeholder="Specify..." value="${escapeHtml(textVal)}" oninput="onOptTextChange('${q.id}','${opt.id}', this.value)">`;
+        }
+        html += `</div>`;
+      });
+      html += '</div>';
+      break;
+
+    case 'dynamic_table':
+      const dtRows = getDynamicTableRows(q, layer);
+      if (dtRows.length === 0) {
+        html += '<p style="color:var(--text-muted);font-size:13px">Select roles in the previous question to populate this table.</p>';
+      } else {
+        html += '<div style="overflow-x:auto"><table class="matrix-table" data-qid="' + q.id + '"><thead><tr>';
+        html += '<th>Role</th>';
+        q.columns.forEach(c => { html += `<th>${c.label}</th>`; });
+        html += '</tr></thead><tbody>';
+        dtRows.forEach(r => {
+          html += `<tr><td class="row-label">${r.label}</td>`;
+          q.columns.forEach(c => {
+            const key = `${q.id}_${r.id}_${c.id}`;
+            const val = state.responses[key] || '';
+            if (c.type === 'select') {
+              html += `<td><select onchange="state.responses['${key}'] = this.value"><option value="">--</option>`;
+              c.options.forEach(o => { html += `<option value="${o}" ${val === o ? 'selected' : ''}>${o}</option>`; });
+              html += '</select></td>';
+            } else {
+              html += `<td class="text-cell"><input type="text" value="${escapeHtml(val)}" oninput="state.responses['${key}'] = this.value"></td>`;
+            }
+          });
+          html += '</tr>';
+        });
+        html += '</tbody></table></div>';
+      }
+      break;
+  }
+  return html;
+}
+
+function getMatrixRows(q, layer) {
+  const sourceQ = layer.questions.find(sq => sq.id === q.rowsFrom);
+  if (!sourceQ) return [];
+  const selected = state.responses[q.rowsFrom] || [];
+  return sourceQ.options.filter(o => selected.includes(o.id) && (!o.profiles || o.profiles.includes(state.profile)));
+}
+
+function getDynamicTableRows(q, layer) {
+  return getMatrixRows(q, layer);
+}
+
+// ===== EVENT HANDLERS =====
+function onCheckboxChange(qid, optId, checked) {
+  if (!state.responses[qid]) state.responses[qid] = [];
+  if (checked && !state.responses[qid].includes(optId)) state.responses[qid].push(optId);
+  if (!checked) state.responses[qid] = state.responses[qid].filter(x => x !== optId);
+  // Show/hide text input
+  const item = document.querySelector(`[data-opt="${optId}"]`);
+  if (item) {
+    item.classList.toggle('checked', checked);
+    const textInput = document.getElementById(qid + '_' + optId + '_text');
+    if (textInput) textInput.classList.toggle('hidden', !checked);
+  }
+  // Re-render dependent matrix if this is a source question
+  const layer = LAYERS[state.currentLayer];
+  const dependentQ = layer.questions.find(q => q.rowsFrom === qid);
+  if (dependentQ) {
+    setTimeout(() => renderLayer(), 50);
+  }
+}
+
+function onCheckboxCountChange(qid, optId, checked) {
+  onCheckboxChange(qid, optId, checked);
+}
+
+function onCountChange(qid, optId, val) {
+  if (!state.responses[qid + '_count']) state.responses[qid + '_count'] = {};
+  state.responses[qid + '_count'][optId] = val;
+}
+
+function onOptTextChange(qid, optId, val) {
+  if (!state.responses[qid + '_text']) state.responses[qid + '_text'] = {};
+  state.responses[qid + '_text'][optId] = val;
+}
+
+function onSelectChange(qid, val) {
+  state.responses[qid] = val;
+  // Re-render to show/hide sub-text
+  setTimeout(() => renderLayer(), 50);
+}
+
+function onMatrixChange(qid, rowId, colId, checked) {
+  const key = qid + '_' + rowId;
+  if (!state.responses[key]) state.responses[key] = [];
+  if (checked) state.responses[key].push(colId);
+  else state.responses[key] = state.responses[key].filter(x => x !== colId);
+}
+
+function onDocRadioChange(qid, rowId, val) {
+  state.responses[qid + '_' + rowId] = val;
+}
+
+function attachListeners() {
+  // Listeners are inline in the rendered HTML
+}
+
+// ===== NAVIGATION =====
+function nextLayer() {
+  if (!validateCurrentLayer()) return;
+  if (state.currentLayer < LAYERS.length - 1) {
+    state.currentLayer++;
+    renderLayer();
+    window.scrollTo(0, 0);
+  } else {
+    generateReport();
+  }
+}
+
+function prevLayer() {
+  if (state.currentLayer > 0) {
+    state.currentLayer--;
+    renderLayer();
+    window.scrollTo(0, 0);
+  }
+}
+
+function validateCurrentLayer() {
+  const layer = LAYERS[state.currentLayer];
+  let valid = true;
+  let firstMissing = null;
+
+  layer.questions.forEach(q => {
+    if (q.profiles && !q.profiles.includes(state.profile)) return;
+    if (!q.required) return;
+
+    const resp = state.responses[q.id];
+    if (q.type === 'checkbox' || q.type === 'checkbox_count') {
+      if (!resp || resp.length === 0) {
+        valid = false;
+        if (!firstMissing) firstMissing = q.id;
+      }
+    } else if (q.type === 'select') {
+      if (!resp) {
+        valid = false;
+        if (!firstMissing) firstMissing = q.id;
+      }
+    } else if (q.type === 'matrix' || q.type === 'matrix_docs') {
+      // Check if at least one row answered for matrix_docs
+      if (q.type === 'matrix_docs') {
+        const answered = q.rows.some(r => state.responses[q.id + '_' + r.id]);
+        if (!answered) { valid = false; if (!firstMissing) firstMissing = q.id; }
+      }
+      // For matrix with rowsFrom, skip if no source selections
+      if (q.type === 'matrix' && q.rowsFrom) {
+        const source = state.responses[q.rowsFrom] || [];
+        if (source.length > 0) {
+          const answered = source.some(s => state.responses[q.id + '_' + s]);
+          if (!answered) { valid = false; if (!firstMissing) firstMissing = q.id; }
+        }
+      }
+    }
+  });
+
+  if (!valid) {
+    alert('Please answer all required questions before proceeding.');
+    if (firstMissing) {
+      const el = document.querySelector(`[data-qid="${firstMissing}"]`);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+  return valid;
+}
+
+// ===== SCORING =====
+function calculateScore() {
+  let totalRisk = 0;
+  let gaps = [];
+  let cloudServices = [];
+  let dataTypes = [];
+  let frameworks = [];
+  let complianceGaps = [];
+
+  // Layer 1
+  const l1q1 = state.responses['L1-Q1'] || [];
+  dataTypes = l1q1.map(id => {
+    const opt = LAYERS[0].questions[0].options.find(o => o.id === id);
+    return opt ? opt.label : id;
+  });
+
+  // Layer 1 Q3 - external access
+  (state.responses['L1-Q3'] || []).forEach(id => {
+    const opt = LAYERS[0].questions[2].options.find(o => o.id === id);
+    if (opt && opt.risk) {
+      totalRisk += opt.risk;
+      if (opt.risk >= 3) gaps.push({ layer: 'Data', text: `External access: ${opt.label}`, severity: 'high' });
+      else if (opt.risk >= 2) gaps.push({ layer: 'Data', text: `External access: ${opt.label}`, severity: 'medium' });
+    }
+  });
+
+  // Layer 2 - cloud services and risk
+  LAYERS[1].questions.forEach(q => {
+    if (q.type !== 'checkbox' && q.type !== 'select') return;
+    const resp = state.responses[q.id];
+    if (!resp) return;
+    const items = Array.isArray(resp) ? resp : [resp];
+    items.forEach(id => {
+      const opt = q.options.find(o => o.id === id);
+      if (opt && opt.risk) {
+        totalRisk += opt.risk;
+        if (q.id === 'L2-Q1' || q.id === 'L2-Q2' || q.id === 'L2-Q3' || q.id === 'L2-Q4' || q.id === 'L2-Q5' || q.id === 'L2-Q6') {
+          cloudServices.push(opt.label);
+        }
+        if (opt.risk >= 3) gaps.push({ layer: 'Cloud & Services', text: opt.label, severity: 'high' });
+        else if (opt.risk >= 2) gaps.push({ layer: 'Cloud & Services', text: opt.label, severity: 'medium' });
+      }
+    });
+  });
+
+  // Layer 2 Q10 - workaround
+  const l2q10 = state.responses['L2-Q10'];
+  if (l2q10) {
+    const opt = LAYERS[1].questions[9].options.find(o => o.id === l2q10);
+    if (opt && opt.risk) {
+      totalRisk += opt.risk;
+      if (opt.risk >= 3) gaps.push({ layer: 'Cloud & Services', text: `No workaround for cloud outage`, severity: 'high' });
+    }
+  }
+
+  // Layer 3
+  LAYERS[2].questions.forEach(q => {
+    if (q.type !== 'checkbox' && q.type !== 'select') return;
+    const resp = state.responses[q.id];
+    if (!resp) return;
+    const items = Array.isArray(resp) ? resp : [resp];
+    items.forEach(id => {
+      const opt = q.options.find(o => o.id === id);
+      if (opt && opt.risk) {
+        totalRisk += opt.risk;
+        if (opt.risk >= 3) gaps.push({ layer: 'Gear & Network', text: opt.label, severity: 'high' });
+        else if (opt.risk >= 2) gaps.push({ layer: 'Gear & Network', text: opt.label, severity: 'medium' });
+      }
+    });
+  });
+
+  // Layer 4 - compliance gaps
+  const docQ = LAYERS[3].questions[1];
+  docQ.rows.forEach(r => {
+    const val = state.responses['L4-Q2_' + r.id];
+    if (val === 'no' || val === 'unknown') {
+      totalRisk += r.gap;
+      complianceGaps.push({ doc: r.label, gap: r.gap, status: val });
+      if (r.gap >= 3) gaps.push({ layer: 'Compliance', text: `Missing: ${r.label}`, severity: 'high' });
+      else gaps.push({ layer: 'Compliance', text: `Missing: ${r.label}`, severity: 'medium' });
+    }
+  });
+
+  // Layer 4 Q1 - frameworks
+  (state.responses['L4-Q1'] || []).forEach(id => {
+    const opt = LAYERS[3].questions[0].options.find(o => o.id === id);
+    if (opt) frameworks.push(opt.label);
+  });
+
+  // Layer 4 Q3 - controls
+  (state.responses['L4-Q3'] || []).forEach(id => {
+    const opt = LAYERS[3].questions[2].options.find(o => o.id === id);
+    if (opt && opt.risk) {
+      totalRisk += opt.risk;
+      if (opt.risk >= 3) gaps.push({ layer: 'Compliance', text: opt.label, severity: 'high' });
+    }
+  });
+
+  // Layer 5 - shadow IT
+  (state.responses['L5-Q3'] || []).forEach(id => {
+    const opt = LAYERS[4].questions[2].options.find(o => o.id === id);
+    if (opt && opt.risk) {
+      totalRisk += opt.risk;
+      if (opt.risk >= 3) gaps.push({ layer: 'Staff & Tools', text: opt.label, severity: 'high' });
+      else if (opt.risk >= 2) gaps.push({ layer: 'Staff & Tools', text: opt.label, severity: 'medium' });
+    }
+  });
+
+  // Determine risk level
+  let riskLevel, riskClass, riskDesc;
+  if (totalRisk <= 10) { riskLevel = 'Low'; riskClass = 'risk-low'; riskDesc = 'Most controls in place. Minor gaps to address.'; }
+  else if (totalRisk <= 25) { riskLevel = 'Moderate'; riskClass = 'risk-moderate'; riskDesc = 'Several gaps identified. Remediation plan recommended.'; }
+  else if (totalRisk <= 40) { riskLevel = 'Elevated'; riskClass = 'risk-elevated'; riskDesc = 'Significant gaps across multiple layers. Priority remediation needed.'; }
+  else { riskLevel = 'High'; riskClass = 'risk-high'; riskDesc = 'Critical gaps identified. Immediate action required.'; }
+
+  return { totalRisk, riskLevel, riskClass, riskDesc, gaps, cloudServices, dataTypes, frameworks, complianceGaps };
+}
+
+// ===== REPORT GENERATION =====
+function generateReport() {
+  const score = calculateScore();
+  const profile = PROFILES[state.profile];
+  const tier = TIERS[state.tier];
+  const date = new Date().toLocaleDateString('en-CA');
+
+  // Deduplicate gaps by severity
+  const highGaps = score.gaps.filter(g => g.severity === 'high');
+  const mediumGaps = score.gaps.filter(g => g.severity === 'medium');
+  const lowGaps = score.gaps.filter(g => g.severity === 'low');
+
+  // Generate recommendations
+  let recommendations = generateRecommendations(score);
+
+  let html = `
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start">
+      <div>
+        <div style="font-size:18px;font-weight:700;letter-spacing:1px">elect<span style="color:var(--accent)">-rix</span></div>
+        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-top:2px">Make it work.</div>
+      </div>
+      <div style="text-align:right;font-size:12px;color:var(--text-dim)">
+        <div>Document classification: Confidential</div>
+        <div>Prepared for: ${escapeHtml(state.orgName)}</div>
+        <div>Date: ${date}</div>
+        <div>Tier: ${tier.name}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Executive Summary</div>
+    <div class="card-desc" style="margin-bottom:20px">
+      <strong>Audited organization:</strong> ${escapeHtml(state.orgName)}<br>
+      <strong>Auditor:</strong> ${escapeHtml(state.auditorName)}${state.auditorRole ? ', ' + escapeHtml(state.auditorRole) : ''}<br>
+      <strong>Industry profile:</strong> ${profile.name}<br>
+      <strong>Applicable frameworks:</strong> ${score.frameworks.length > 0 ? score.frameworks.join(', ') : 'None identified'}
+    </div>
+
+    <div class="result-hero" style="padding:20px 0">
+      <div class="result-label">Overall Risk Level</div>
+      <div class="result-score ${score.riskClass}">${score.riskLevel}</div>
+      <div class="result-desc">${score.riskDesc}</div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:8px">Total risk score: ${score.totalRisk} points</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px">
+      <div style="text-align:center;padding:16px;background:var(--surface2);border-radius:8px">
+        <div class="risk-high" style="font-size:24px;font-weight:700">${highGaps.length}</div>
+        <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px">High Risk</div>
+      </div>
+      <div style="text-align:center;padding:16px;background:var(--surface2);border-radius:8px">
+        <div class="risk-elevated" style="font-size:24px;font-weight:700">${mediumGaps.length}</div>
+        <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px">Medium Risk</div>
+      </div>
+      <div style="text-align:center;padding:16px;background:var(--surface2);border-radius:8px">
+        <div class="risk-moderate" style="font-size:24px;font-weight:700">${lowGaps.length}</div>
+        <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px">Low Risk</div>
+      </div>
+    </div>
+  </div>
+  `;
+
+  // Section 1: Data Inventory
+  if (score.dataTypes.length > 0) {
+    html += `<div class="card report-section"><h3>1. Data Inventory</h3>`;
+    html += `<div style="margin-bottom:12px"><strong>Data types identified:</strong> ${score.dataTypes.join(', ')}</div>`;
+    // Data location matrix
+    const l1q2 = state.responses;
+    const dataTypes_selected = state.responses['L1-Q1'] || [];
+    if (dataTypes_selected.length > 0) {
+      const cols = LAYERS[0].questions[1].columns;
+      html += '<table class="report-table"><thead><tr><th>Data type</th>';
+      cols.forEach(c => html += `<th>${c.label}</th>`);
+      html += '</tr></thead><tbody>';
+      dataTypes_selected.forEach(id => {
+        const opt = LAYERS[0].questions[0].options.find(o => o.id === id);
+        if (!opt) return;
+        const locations = state.responses['L1-Q2_' + id] || [];
+        html += `<tr><td>${opt.label}</td>`;
+        cols.forEach(c => {
+          html += `<td>${locations.includes(c.id) ? '✓' : ''}</td>`;
+        });
+        html += '</tr>';
+      });
+      html += '</tbody></table>';
+    }
+    const notes = state.responses['L1-Q2_notes'];
+    if (notes) html += `<div style="margin-top:8px;font-size:13px;color:var(--text-dim)"><em>Notes: ${escapeHtml(notes)}</em></div>`;
+    html += '</div>';
+  }
+
+  // Section 2: Cloud Dependency
+  if (score.cloudServices.length > 0) {
+    html += `<div class="card report-section"><h3>2. Cloud Dependency Map</h3>`;
+    html += `<div style="margin-bottom:12px"><strong>Active cloud services:</strong> ${score.cloudServices.join(', ')}</div>`;
+    const offline = (state.responses['L2-Q9'] || []).map(id => {
+      const opt = LAYERS[1].questions[8].options.find(o => o.id === id);
+      return opt ? opt.label : id;
+    });
+    if (offline.length > 0) {
+      html += `<div style="margin-bottom:12px"><strong>What stops if cloud goes down:</strong> ${offline.join(', ')}</div>`;
+    }
+    const workaround = state.responses['L2-Q10'];
+    if (workaround) {
+      const opt = LAYERS[1].questions[9].options.find(o => o.id === workaround);
+      html += `<div><strong>Workaround exists:</strong> ${opt ? opt.label : workaround}`;
+      if (state.responses['L2-Q10_text']) html += ` — ${escapeHtml(state.responses['L2-Q10_text'])}`;
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+
+  // Section 3: Gear & Network
+  html += `<div class="card report-section"><h3>3. Equipment & Network</h3>`;
+  ['L3-Q1', 'L3-Q2', 'L3-Q3', 'L3-Q4'].forEach(qid => {
+    const q = LAYERS[2].questions.find(q => q.id === qid);
+    const resp = state.responses[qid];
+    if (!resp || (Array.isArray(resp) && resp.length === 0)) return;
+    const items = Array.isArray(resp) ? resp : [resp];
+    const labels = items.map(id => {
+      const opt = q.options.find(o => o.id === id);
+      return opt ? opt.label : id;
+    });
+    html += `<div style="margin-bottom:8px"><strong>${q.text}</strong><br>${labels.join(', ')}</div>`;
+  });
+  html += '</div>';
+
+  // Section 4: Compliance Gap Analysis
+  html += `<div class="card report-section"><h3>4. Compliance Gap Analysis</h3>`;
+  if (score.frameworks.length > 0) {
+    html += `<div style="margin-bottom:12px"><strong>Applicable frameworks:</strong> ${score.frameworks.join(', ')}</div>`;
+  }
+  if (score.complianceGaps.length > 0) {
+    html += '<table class="report-table"><thead><tr><th>Document</th><th>Status</th><th>Gap severity</th></tr></thead><tbody>';
+    score.complianceGaps.forEach(g => {
+      const sevClass = g.gap >= 3 ? 'risk-high' : 'risk-elevated';
+      const sevLabel = g.gap >= 3 ? 'Critical' : 'Notable';
+      html += `<tr><td>${g.doc}</td><td>${g.status === 'unknown' ? 'Unknown' : 'Missing'}</td><td class="${sevClass}" style="font-weight:600">${sevLabel}</td></tr>`;
+    });
+    html += '</tbody></table>';
+  } else {
+    html += '<div style="color:var(--text-dim)">All compliance documents are in place.</div>';
+  }
+  // Controls
+  const controls = (state.responses['L4-Q3'] || []).map(id => {
+    const opt = LAYERS[3].questions[2].options.find(o => o.id === id);
+    return opt ? opt.label : id;
+  });
+  if (controls.length > 0) {
+    html += `<div style="margin-top:12px"><strong>Control hygiene:</strong> ${controls.join(', ')}</div>`;
+  }
+  html += '</div>';
+
+  // Section 5: Staff & Tools
+  html += `<div class="card report-section"><h3>5. Staff Workflow Assessment</h3>`;
+  const roles = (state.responses['L5-Q1'] || []).map(id => {
+    const opt = LAYERS[4].questions[0].options.find(o => o.id === id);
+    const count = (state.responses['L5-Q1_count'] || {})[id];
+    return opt ? `${opt.label}${count ? ' (' + count + ')' : ''}` : id;
+  });
+  if (roles.length > 0) {
+    html += `<div style="margin-bottom:12px"><strong>Roles:</strong> ${roles.join(', ')}</div>`;
+  }
+  // Shadow IT
+  const shadow = (state.responses['L5-Q3'] || []).map(id => {
+    const opt = LAYERS[4].questions[2].options.find(o => o.id === id);
+    return opt ? opt.label : id;
+  });
+  if (shadow.length > 0) {
+    html += `<div><strong>Shadow IT / risk habits:</strong> ${shadow.join(', ')}</div>`;
+  }
+  html += '</div>';
+
+  // Section 6: Risk Assessment
+  html += `<div class="card report-section"><h3>6. Risk Assessment</h3>`;
+  if (score.gaps.length > 0) {
+    html += '<ul class="gap-list">';
+    score.gaps.forEach(g => {
+      html += `<li class="gap-item"><div class="gap-icon ${g.severity}"></div><div class="gap-text"><div>${escapeHtml(g.text)}</div><div class="gap-layer">${g.layer}</div></div></li>`;
+    });
+    html += '</ul>';
+  } else {
+    html += '<div style="color:var(--text-dim)">No significant risks identified.</div>';
+  }
+  html += '</div>';
+
+  // Section 7: Recommendations
+  if (recommendations.length > 0) {
+    html += `<div class="card report-section"><h3>7. Prioritized Recommendations</h3>`;
+    html += '<ul class="rec-list">';
+    recommendations.forEach((r, i) => {
+      html += `<li class="rec-item"><div class="rec-num">${i + 1}</div><div><div>${r.text} <span class="rec-priority ${r.priority}">${r.priority}</span></div><div style="font-size:13px;color:var(--text-dim);margin-top:4px">${r.detail}</div></div></li>`;
+    });
+    html += '</ul></div>';
+  }
+
+  // Upsell
+  html += `<div class="card"><div class="upsell-box">
+    <h4>Want a Professional Review?</h4>
+    <p>This self-assessment gives you a clarity map. For a full-service audit with on-site review, deployment planning, and Local Vault specification, elect-rix offers professional audits starting at $2,000.</p>
+    <a href="https://elect-rix.tech">elect-rix.tech</a> · contact@elect-rix.tech · (506) 801-2722
+  </div></div>`;
+
+  // Footer
+  html += `<div class="card" style="font-size:11px;color:var(--text-muted)">
+    <strong>Disclaimer:</strong> This self-assessment produces a clarity map, not a compliance certification. Not legal advice. Not a penetration test. Based on information provided by the respondent. For regulatory confirmation, consult a qualified lawyer or privacy officer.<br><br>
+    Generated by elect-rix Audit Self-Assessment Tool · ${date}<br>
+    elect-rix Technology Solutions · RixBot Technologies Inc.
+  </div>`;
+
+  document.getElementById('report-content').innerHTML = html;
+  showScreen('results');
+  window.scrollTo(0, 0);
+}
+
+function generateRecommendations(score) {
+  let recs = [];
+
+  // High-risk gaps → high priority
+  score.gaps.filter(g => g.severity === 'high').forEach(g => {
+    let detail = '';
+    if (g.text.includes('Former staff')) detail = 'Audit and deactivate all former staff accounts immediately. Review access logs for unusual activity.';
+    else if (g.text.includes('Personal AI')) detail = 'Establish an AI usage policy. Prohibit personal AI accounts for work data. Consider a Local Vault with RixBot for controlled AI.';
+    else if (g.text.includes('Personal Dropbox')) detail = 'Migrate work files from personal cloud accounts to organization-controlled storage.';
+    else if (g.text.includes('No formal backup')) detail = 'Implement a 3-2-1 backup strategy immediately: 3 copies, 2 media, 1 offsite.';
+    else if (g.text.includes('No workaround')) detail = 'Document a business continuity plan for cloud outages. Consider local-first alternatives for critical functions.';
+    else if (g.text.includes('Shared passwords')) detail = 'Deploy a password manager and enforce individual accounts. Eliminate shared credentials.';
+    else if (g.text.includes('breach')) detail = 'Draft a breach response plan immediately. Identify who must be notified, in what order, and within what timeframe.';
+    else if (g.text.includes('Unknown')) detail = 'Investigate and document. Unknown risks are unmanaged risks — you cannot protect what you haven\'t mapped.';
+    else detail = 'Address this gap as a priority. See elect-rix for a professional audit and remediation plan.';
+    recs.push({ text: `Address: ${g.text}`, priority: 'high', detail });
+  });
+
+  // Medium-risk gaps
+  score.gaps.filter(g => g.severity === 'medium').forEach(g => {
+    let detail = '';
+    if (g.text.includes('Microsoft 365') || g.text.includes('Google Workspace')) {
+      detail = 'Review telemetry settings, disable unnecessary data collection, and evaluate whether a sovereign alternative (Local Vault) is appropriate.';
+    } else if (g.text.includes('QuickBooks Online') || g.text.includes('Xero')) {
+      detail = 'Evaluate whether desktop accounting or a Local Vault deployment would reduce data exposure.';
+    } else if (g.text.includes('Missing:')) {
+      detail = `Draft or update: ${g.text.replace('Missing: ', '')}. Use a template or engage elect-rix for documentation support.`;
+    } else {
+      detail = 'Review and address. Schedule remediation within 30-60 days.';
+    }
+    recs.push({ text: `Review: ${g.text}`, priority: 'medium', detail });
+  });
+
+  // General recommendations
+  if (score.cloudServices.length > 3) {
+    recs.push({ text: 'Reduce cloud dependency', priority: 'medium', detail: 'Multiple cloud services create compound risk. Consider consolidating or deploying a Local Vault for critical operations.' });
+  }
+  if (score.complianceGaps.length >= 3) {
+    recs.push({ text: 'Compliance documentation sprint', priority: 'high', detail: 'Multiple compliance documents missing. Recommend a focused documentation session or engaging elect-rix for a full audit.' });
+  }
+
+  return recs;
+}
+
+// ===== UTILITIES =====
+function escapeHtml(text) {
+  if (!text) return '';
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function resetAudit() {
+  state = { profile: null, tier: null, orgName: '', auditorName: '', auditorRole: '', currentLayer: 0, responses: {} };
+  document.getElementById('org-name').value = '';
+  document.getElementById('auditor-name').value = '';
+  document.getElementById('auditor-role').value = '';
+  document.querySelectorAll('.profile-card').forEach(c => c.classList.remove('selected'));
+  showScreen('intro');
+  window.scrollTo(0, 0);
+}
+
+function downloadReport() {
+  // Generate a downloadable HTML report
+  const reportHtml = document.getElementById('report-content').innerHTML;
+  const date = new Date().toLocaleDateString('en-CA');
+  const fullHtml = `<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>elect-rix Audit Report — ${escapeHtml(state.orgName)} — ${date}</title>
+<style>
+body { font-family: 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px 20px; background: #0a0a0b; color: #f5f5f5; }
+.card { background: #131316; border: 1px solid #2a2a30; border-radius: 8px; padding: 24px; margin-bottom: 20px; }
+h3 { color: #818cf8; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 12px; }
+th { text-align: left; padding: 8px 10px; color: #a0a0a8; border-bottom: 1px solid #2a2a30; }
+td { padding: 8px 10px; border-bottom: 1px solid #1a1a1f; }
+.risk-low { color: #4ade80; } .risk-moderate { color: #facc15; } .risk-elevated { color: #fb923c; } .risk-high { color: #f87171; }
+.gap-icon { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 8px; }
+.gap-icon.high { background: #f87171; } .gap-icon.medium { background: #fb923c; } .gap-icon.low { background: #facc15; }
+.rec-priority { font-size: 11px; font-weight: 600; text-transform: uppercase; padding: 2px 8px; border-radius: 10px; }
+.rec-priority.high { background: rgba(248,113,113,0.15); color: #f87171; }
+.rec-priority.medium { background: rgba(251,146,60,0.15); color: #fb923c; }
+</style></head><body>${reportHtml}</body></html>`;
+  const blob = new Blob([fullHtml], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `elect-rix-audit-${date}-${state.orgName.replace(/\s+/g, '-').toLowerCase()}.html`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ===== START =====
+init();
+</script>
+</body>
+</html>
