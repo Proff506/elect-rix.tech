@@ -1,0 +1,418 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="AI Exposure Self-Check — elect-rix.tech"
+  description="Free 2-minute AI exposure assessment. No install, no signup. Your data never leaves your browser. Get your risk score instantly."
+>
+  <section class="max-w-2xl mx-auto px-6 pt-32 pb-20">
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent-bright text-sm font-medium mb-6 border border-accent/20">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Free — runs in your browser
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.1] mb-6">
+        AI Exposure Self-Check
+      </h1>
+      <p class="text-lg text-text-muted max-w-xl mx-auto leading-relaxed">
+        Answer 8 questions about how your office uses AI. Get an instant risk score.
+        No install. No signup. No data leaves your browser.
+      </p>
+    </div>
+
+    <!-- Privacy banner -->
+    <div class="mb-8 p-4 rounded-lg border border-border bg-surface flex items-start gap-3">
+      <span class="text-accent-bright text-lg mt-0.5">🔒</span>
+      <p class="text-sm text-text-muted leading-relaxed">
+        <strong class="text-text">Private by design.</strong> This assessment runs entirely
+        in your browser. Your answers are never sent to any server, stored in any database,
+        or seen by anyone but you. Close the page and everything is gone.
+      </p>
+    </div>
+
+    <!-- Questionnaire -->
+    <div id="quiz" class="space-y-8">
+      <!-- Q1: Staff count -->
+      <div class="quiz-question" data-question="staff">
+        <label class="block text-sm font-semibold text-text mb-3">
+          1. How many people work at your office?
+        </label>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <button type="button" data-value="1-5" class="quiz-option px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">1–5</button>
+          <button type="button" data-value="6-25" class="quiz-option px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">6–25</button>
+          <button type="button" data-value="26-100" class="quiz-option px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">26–100</button>
+          <button type="button" data-value="100+" class="quiz-option px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">100+</button>
+        </div>
+      </div>
+
+      <!-- Q2: AI tool usage -->
+      <div class="quiz-question" data-question="ai_tools">
+        <label class="block text-sm font-semibold text-text mb-3">
+          2. Do your staff use AI tools like ChatGPT, Claude, Copilot, or Gemini for work?
+        </label>
+        <div class="space-y-3">
+          <button type="button" data-value="yes_daily" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Yes, daily</button>
+          <button type="button" data-value="yes_weekly" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Yes, occasionally (weekly)</button>
+          <button type="button" data-value="maybe" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">I think so, but I'm not sure</button>
+          <button type="button" data-value="no" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">No, we don't use AI tools</button>
+        </div>
+      </div>
+
+      <!-- Q3: Client data in AI -->
+      <div class="quiz-question" data-question="client_data">
+        <label class="block text-sm font-semibold text-text mb-3">
+          3. Do staff ever paste client names, financial data, or patient information into AI tools?
+        </label>
+        <div class="space-y-3">
+          <button type="button" data-value="yes_often" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Yes, this happens regularly</button>
+          <button type="button" data-value="yes_sometimes" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Yes, occasionally — even if we tell them not to</button>
+          <button type="button" data-value="no_policy" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">No, we have a policy against it</button>
+          <button type="button" data-value="dont_know" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">I don't know what staff paste into AI tools</button>
+        </div>
+      </div>
+
+      <!-- Q4: Industry -->
+      <div class="quiz-question" data-question="industry">
+        <label class="block text-sm font-semibold text-text mb-3">
+          4. What type of business are you?
+        </label>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <button type="button" data-value="accounting" class="quiz-option px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Accounting / Finance</button>
+          <button type="button" data-value="legal" class="quiz-option px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Law firm / Legal services</button>
+          <button type="button" data-value="healthcare" class="quiz-option px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Healthcare / Dental / Medical</button>
+          <button type="button" data-value="insurance" class="quiz-option px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Insurance / Financial planning</button>
+          <button type="button" data-value="government" class="quiz-option px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Municipal / Government</button>
+          <button type="button" data-value="other" class="quiz-option px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Other professional services</button>
+        </div>
+      </div>
+
+      <!-- Q5: Data storage -->
+      <div class="quiz-question" data-question="data_storage">
+        <label class="block text-sm font-semibold text-text mb-3">
+          5. Where is your client data stored?
+        </label>
+        <div class="space-y-3">
+          <button type="button" data-value="cloud_us" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Cloud services (Google, Microsoft, etc.) — US-based</button>
+          <button type="button" data-value="cloud_canada" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Cloud services — Canadian data center</button>
+          <button type="button" data-value="local_server" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Local server in our office</button>
+          <button type="button" data-value="dont_know" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">I'm not sure where our data lives</button>
+        </div>
+      </div>
+
+      <!-- Q6: AI policy -->
+      <div class="quiz-question" data-question="ai_policy">
+        <label class="block text-sm font-semibold text-text mb-3">
+          6. Do you have a written policy on which AI tools staff are allowed to use?
+        </label>
+        <div class="space-y-3">
+          <button type="button" data-value="yes_enforced" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Yes, and we enforce it</button>
+          <button type="button" data-value="yes_not_enforced" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Yes, but staff don't always follow it</button>
+          <button type="button" data-value="no" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">No written policy</button>
+          <button type="button" data-value="banned" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">We banned AI tools entirely</button>
+        </div>
+      </div>
+
+      <!-- Q7: Browser extensions -->
+      <div class="quiz-question" data-question="extensions">
+        <label class="block text-sm font-semibold text-text mb-3">
+          7. Do staff have AI-powered browser extensions installed (Grammarly, writing assistants, etc.)?
+        </label>
+        <div class="space-y-3">
+          <button type="button" data-value="yes_many" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Yes, several staff have them</button>
+          <button type="button" data-value="yes_some" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">A few staff might have them</button>
+          <button type="button" data-value="no" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">No, we don't allow browser extensions</button>
+          <button type="button" data-value="dont_know" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">I don't know what extensions staff install</button>
+        </div>
+      </div>
+
+      <!-- Q8: Mobile -->
+      <div class="quiz-question" data-question="mobile">
+        <label class="block text-sm font-semibold text-text mb-3">
+          8. Do staff use AI apps on their personal phones for work tasks?
+        </label>
+        <div class="space-y-3">
+          <button type="button" data-value="yes" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Yes, staff use personal phones for work with AI apps</button>
+          <button type="button" data-value="maybe" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Possibly — we have a BYOD policy</button>
+          <button type="button" data-value="no" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">No, staff use only company devices</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit button -->
+    <div class="mt-10 text-center">
+      <button id="submit-btn" type="button" disabled
+        class="px-8 py-4 rounded-lg bg-accent-bright text-white font-semibold text-lg disabled:opacity-30 disabled:cursor-not-allowed enabled:hover:bg-accent enabled:cursor-pointer transition-all">
+        Get My Risk Score
+      </button>
+      <p id="progress-text" class="mt-3 text-sm text-text-muted">Answer all 8 questions to continue</p>
+    </div>
+
+    <!-- Results (hidden until submitted) -->
+    <div id="results" class="hidden mt-12 space-y-6">
+      <!-- Risk score card -->
+      <div id="risk-card" class="p-8 rounded-xl border-2 text-center">
+        <div class="text-sm font-semibold uppercase tracking-wider text-text-muted mb-2">Your AI Exposure</div>
+        <div id="risk-level" class="text-6xl font-extrabold mb-2">—</div>
+        <div id="risk-score" class="text-lg text-text-muted mb-4">Score: —/100</div>
+        <div id="risk-summary" class="text-base text-text-muted max-w-md mx-auto leading-relaxed">—</div>
+      </div>
+
+      <!-- Key findings -->
+      <div class="p-6 rounded-xl border border-border bg-surface">
+        <h3 class="text-lg font-bold text-text mb-4">Key Findings</h3>
+        <ul id="findings-list" class="space-y-3 text-sm text-text-muted"></ul>
+      </div>
+
+      <!-- Recommendations -->
+      <div class="p-6 rounded-xl border border-border bg-surface">
+        <h3 class="text-lg font-bold text-text mb-4">What This Means</h3>
+        <div id="recommendations" class="space-y-3 text-sm text-text-muted leading-relaxed"></div>
+      </div>
+
+      <!-- CTA -->
+      <div class="p-8 rounded-xl border-2 border-accent-bright/40 bg-accent/5 text-center">
+        <h3 class="text-xl font-bold text-text mb-3">Want the Full Picture?</h3>
+        <p class="text-text-muted mb-6 max-w-md mx-auto leading-relaxed">
+          This self-check is based on what you told us. A full Shadow AI Discovery shows
+          what's <em>actually</em> happening on your workstations — sometimes it's worse
+          than people think. Staff often use tools they don't mention in a survey.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/contact"
+            class="px-6 py-3 rounded-lg bg-accent-bright text-white font-semibold hover:bg-accent transition-colors">
+            Book a Free 15-Min Phone Audit
+          </a>
+          <a href="tel:+15068012722"
+            class="px-6 py-3 rounded-lg border border-border bg-surface text-text font-semibold hover:border-accent transition-colors">
+            Call (506) 801-2722
+          </a>
+        </div>
+        <p class="mt-4 text-xs text-text-muted">
+          The full audit runs from a USB stick — no software install on your machines.
+          Takes 15 minutes on-site. Report delivered within 48 hours.
+        </p>
+      </div>
+
+      <!-- Print button -->
+      <div class="text-center">
+        <button id="print-btn" type="button"
+          class="px-6 py-2 rounded-lg border border-border bg-surface text-text text-sm hover:border-accent transition-colors">
+          Print This Report
+        </button>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script is:inline>
+  // --- State ---
+  const answers = {};
+  const totalQuestions = 8;
+
+  // --- Scoring weights ---
+  const scores = {
+    staff: {
+      '1-5': 5, '6-25': 15, '26-100': 25, '100+': 35
+    },
+    ai_tools: {
+      'yes_daily': 25, 'yes_weekly': 15, 'maybe': 20, 'no': 0
+    },
+    client_data: {
+      'yes_often': 30, 'yes_sometimes': 25, 'no_policy': 5, 'dont_know': 20
+    },
+    industry: {
+      'accounting': 10, 'legal': 15, 'healthcare': 15, 'insurance': 10, 'government': 15, 'other': 5
+    },
+    data_storage: {
+      'cloud_us': 15, 'cloud_canada': 5, 'local_server': 0, 'dont_know': 10
+    },
+    ai_policy: {
+      'yes_enforced': 0, 'yes_not_enforced': 15, 'no': 20, 'banned': 10
+    },
+    extensions: {
+      'yes_many': 15, 'yes_some': 10, 'no': 0, 'dont_know': 10
+    },
+    mobile: {
+      'yes': 15, 'maybe': 10, 'no': 0
+    }
+  };
+
+  // --- Answer selection ---
+  document.querySelectorAll('.quiz-question').forEach(q => {
+    const questionKey = q.dataset.question;
+    q.querySelectorAll('.quiz-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        // Deselect siblings
+        q.querySelectorAll('.quiz-option').forEach(o => {
+          o.classList.remove('border-accent', 'bg-accent', 'text-white');
+          o.classList.add('border-border', 'bg-surface-light', 'text-text');
+        });
+        // Select this
+        opt.classList.remove('border-border', 'bg-surface-light', 'text-text');
+        opt.classList.add('border-accent', 'bg-accent', 'text-white');
+
+        // Store answer
+        answers[questionKey] = opt.dataset.value;
+
+        // Update progress
+        updateProgress();
+      });
+    });
+  });
+
+  function updateProgress() {
+    const answered = Object.keys(answers).length;
+    const btn = document.getElementById('submit-btn');
+    const text = document.getElementById('progress-text');
+
+    if (answered === totalQuestions) {
+      btn.disabled = false;
+      text.textContent = 'Ready! Click to see your risk score.';
+    } else {
+      btn.disabled = true;
+      text.textContent = `Answered ${answered} of ${totalQuestions} questions`;
+    }
+  }
+
+  // --- Calculate score ---
+  function calculateScore() {
+    let total = 0;
+    for (const [key, value] of Object.entries(answers)) {
+      if (scores[key] && scores[key][value] !== undefined) {
+        total += scores[key][value];
+      }
+    }
+    return Math.min(total, 100);
+  }
+
+  // --- Get risk level ---
+  function getRiskLevel(score) {
+    if (score >= 70) return { level: 'CRITICAL', color: '#dc2626', bg: 'border-red-500', text: 'text-red-500' };
+    if (score >= 45) return { level: 'HIGH', color: '#ea580c', bg: 'border-orange-500', text: 'text-orange-500' };
+    if (score >= 25) return { level: 'MODERATE', color: '#ca8a04', bg: 'border-yellow-500', text: 'text-yellow-500' };
+    return { level: 'LOW', color: '#16a34a', bg: 'border-green-500', text: 'text-green-500' };
+  }
+
+  // --- Generate findings ---
+  function generateFindings() {
+    const findings = [];
+
+    if (answers.client_data === 'yes_often' || answers.client_data === 'yes_sometimes') {
+      findings.push('Client data is being pasted into consumer AI tools. This is a PIPEDA violation risk.');
+    }
+    if (answers.client_data === 'dont_know') {
+      findings.push('You cannot confirm whether staff are sharing client data with AI tools. This blind spot is itself a compliance risk.');
+    }
+    if (answers.ai_tools === 'yes_daily' || answers.ai_tools === 'yes_weekly') {
+      findings.push('Staff are regularly using consumer AI tools. Every session sends data to external servers.');
+    }
+    if (answers.ai_tools === 'maybe') {
+      findings.push('Uncertainty about AI tool usage means staff are likely using tools without oversight.');
+    }
+    if (answers.ai_policy === 'no') {
+      findings.push('No written AI usage policy. Staff have no guidelines on what is or isn't allowed.');
+    }
+    if (answers.ai_policy === 'yes_not_enforced') {
+      findings.push('AI policy exists but isn't enforced. Staff may be ignoring it.');
+    }
+    if (answers.ai_policy === 'banned') {
+      findings.push('Banning AI drives usage underground. Staff likely use personal accounts on work devices.');
+    }
+    if (answers.data_storage === 'cloud_us') {
+      findings.push('Client data stored on US-based cloud servers. Subject to CLOUD Act and FISA 702.');
+    }
+    if (answers.data_storage === 'dont_know') {
+      findings.push('Unknown data residency. You cannot guarantee compliance with Canadian privacy requirements.');
+    }
+    if (answers.extensions === 'yes_many' || answers.extensions === 'yes_some') {
+      findings.push('AI browser extensions process all text typed by staff, including client communications.');
+    }
+    if (answers.mobile === 'yes' || answers.mobile === 'maybe') {
+      findings.push('Personal phone usage with AI apps means client data may leave the building via mobile devices.');
+    }
+    if (answers.industry === 'healthcare') {
+      findings.push('Healthcare data (PHI) in consumer AI tools is a PHIPA violation. Fines up to $500K per incident.');
+    }
+    if (answers.industry === 'legal') {
+      findings.push('Legal data in consumer AI tools may breach solicitor-client privilege.');
+    }
+    if (answers.industry === 'government') {
+      findings.push('Government data in consumer AI tools may violate FOIPOP and ITSG-33 requirements.');
+    }
+
+    return findings;
+  }
+
+  // --- Generate recommendations ---
+  function generateRecommendations(risk) {
+    const recs = [];
+
+    if (risk.level === 'CRITICAL' || risk.level === 'HIGH') {
+      recs.push('<strong>Immediate:</strong> Stop staff from pasting client data into consumer AI tools today. Document which personal accounts are being used.');
+      recs.push('<strong>This week:</strong> Book a Shadow AI Discovery audit. A 15-minute on-site scan shows exactly which tools are installed and what data is at risk.');
+      recs.push('<strong>Short-term:</strong> Implement an approved AI tools list and staff training. Consider a Local Vault deployment for on-premises AI that keeps data in your building.');
+    } else if (risk.level === 'MODERATE') {
+      recs.push('<strong>Short-term:</strong> Create a written AI usage policy. Review which tools staff are actually using.');
+      recs.push('<strong>Consider:</strong> A Shadow AI Discovery audit to verify your assessment is accurate. Staff often use more tools than they report.');
+    } else {
+      recs.push('<strong>Good baseline.</strong> Your exposure is low, but stay vigilant. New AI tools appear monthly and staff adoption happens fast.');
+      recs.push('<strong>Recommend:</strong> An annual AI usage review to catch new tools before they become a problem.');
+    }
+
+    return recs;
+  }
+
+  // --- Submit ---
+  document.getElementById('submit-btn').addEventListener('click', () => {
+    const score = calculateScore();
+    const risk = getRiskLevel(score);
+    const findings = generateFindings();
+    const recs = generateRecommendations(risk);
+
+    // Hide quiz, show results
+    document.getElementById('quiz').classList.add('hidden');
+    document.querySelector('.mt-10').classList.add('hidden');
+
+    const results = document.getElementById('results');
+    results.classList.remove('hidden');
+
+    // Risk card
+    const riskCard = document.getElementById('risk-card');
+    riskCard.className = `p-8 rounded-xl border-2 text-center ${risk.bg}`;
+    riskCard.style.borderColor = risk.color;
+
+    const riskLevel = document.getElementById('risk-level');
+    riskLevel.textContent = risk.level;
+    riskLevel.style.color = risk.color;
+
+    document.getElementById('risk-score').textContent = `Score: ${score}/100`;
+
+    const summaries = {
+      CRITICAL: 'Your office has significant AI exposure. Client data is likely leaving the building through AI tools, browser extensions, or personal devices. Immediate action is required.',
+      HIGH: 'Your AI exposure is elevated. Multiple risk factors indicate that client data may be reaching external servers without your knowledge or consent.',
+      MODERATE: 'Your AI exposure is moderate. Some risk factors exist but can be managed with policy and oversight.',
+      LOW: 'Your AI exposure is low. Your current practices provide a reasonable baseline, but stay vigilant.'
+    };
+    document.getElementById('risk-summary').textContent = summaries[risk.level];
+
+    // Findings list
+    const findingsList = document.getElementById('findings-list');
+    if (findings.length > 0) {
+      findingsList.innerHTML = findings.map(f => `<li class="flex items-start gap-2"><span style="color:${risk.color}">▸</span> <span>${f}</span></li>`).join('');
+    } else {
+      findingsList.innerHTML = '<li>No significant risk factors identified from your answers.</li>';
+    }
+
+    // Recommendations
+    document.getElementById('recommendations').innerHTML = recs.map(r => `<p>${r}</p>`).join('');
+
+    // Scroll to results
+    results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // --- Print ---
+  document.getElementById('print-btn').addEventListener('click', () => {
+    window.print();
+  });
+</script>
