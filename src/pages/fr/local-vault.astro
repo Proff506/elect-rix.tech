@@ -1,0 +1,171 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const included = [
+  {
+    title: 'Matériel possédé',
+    description: 'Un poste ou petit serveur dédié installé dans votre bureau. Vous le possédez. Vous contrôlez l\'accès physique. Pas de locataires partagés.',
+    icon: '📦',
+  },
+  {
+    title: 'Interface RixBot',
+    description: 'L\'agent d\'IA local inclus. Le personnel discute, résume des documents et rédige du contenu via une interface web qui ne quitte jamais votre réseau.',
+    icon: '🤖',
+  },
+  {
+    title: 'LLM locaux',
+    description: 'Plusieurs modèles à poids ouverts sur GPU dédiés. Pas de facturation au jeton, pas de quotas d\'API, pas de filtres de contenu tiers.',
+    icon: '🧠',
+  },
+  {
+    title: 'Stockage documents et données',
+    description: 'Stockage et recherche auto-hébergés pour les documents internes. Gardez les dossiers clients, la recherche et les archives hors des services nuage publics.',
+    icon: '📁',
+  },
+  {
+    title: 'Piste d\'audit de télémétrie',
+    description: 'Des journaux qui prouvent ce qui est sorti et ce qui est resté. Utile pour les revues de conformité, les questionnaires d\'assurance et les questions de régulateurs.',
+    icon: '📋',
+  },
+  {
+    title: 'Soutien continu',
+    description: 'Mises à jour, changements de modèles, vérification des sauvegardes et dépannage. Palier de délai de réponse optionnel à mesure que votre dépendance grandit.',
+    icon: '🔧',
+  },
+];
+
+const verticals = [
+  {
+    title: 'Cabinets d\'avocats',
+    description: 'Protéger le secret professionnel. Éviter la divulgation accidentelle via la télémétrie d\'IA nuage. S\'aligner sur les orientations technologiques et de confidentialité du Barreau.',
+  },
+  {
+    title: 'Santé',
+    description: 'Garder les renseignements personnels sur la santé et les dossiers patients hors des services d\'IA nuage américains. Se rapprocher des attentes PHIPA, ICIS et boîte à outils RED.',
+  },
+  {
+    title: 'Gouvernement et secteur public',
+    description: 'Respecter la LOIPVP, ITSG-33/37 et les orientations nuage du CCCS pour les charges protégées A/B et la résidence des données.',
+  },
+  {
+    title: 'Services professionnels',
+    description: 'Comptables, ingénieurs, consultants — toute pratique où les dossiers clients et le travail propriétaire doivent rester sous votre toit.',
+  },
+];
+
+const process = [
+  { step: '1', title: 'Audit téléphonique gratuit', description: '20 minutes. Nous passons en revue vos outils d\'IA, vos flux de données et vos enjeux de conformité. Vous obtenez un oui/non clair sur la pertinence du Coffre-fort local.' },
+  { step: '2', title: 'Audit approfondi payant', description: '2 000 $–15 000 $ selon la portée. Nous cartographions chaque point de terminaison, évaluons l\'exposition et définissons la configuration exacte du Coffre-fort local dont vous avez besoin.' },
+  { step: '3', title: 'Soumission et construction', description: 'Prix fixe pour le matériel, les logiciels, l\'installation et la formation. Dépôt de 50 % pour commencer la construction.' },
+  { step: '4', title: 'Déploiement et soutien', description: 'Installé dans votre bureau, intégré à votre flux de travail, et soutenu pour qu\'il reste à jour et sûr.' },
+];
+---
+
+<Layout
+  lang="fr"
+  title="Coffre-fort local — elect-rix.tech"
+  description="Un système d'IA et de données privé, sur place, pour les bureaux du Nouveau-Brunswick. RixBot inclus. Possédez votre matériel, gardez vos données, et continuez de travailler quand le nuage ne le fait pas."
+>
+  <section class="relative overflow-hidden">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-16 sm:pb-20 text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent-bright text-sm font-medium mb-8 border border-accent/20">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Produit
+      </div>
+      <h1 class="text-[2rem] min-[360px]:text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08] mb-6">
+        Coffre-fort local :<br class="hidden sm:block" />
+        <span class="text-accent-bright">Votre bureau. Vos données. Votre IA.</span>
+      </h1>
+      <p class="text-lg sm:text-xl text-text-muted max-w-2xl mx-auto leading-relaxed mb-10">
+        Un système d'IA et de données autonome qui garde les dossiers clients, les dossiers patients et les conversations privilégiées dans votre immeuble — pas dans le centre de données d'un hyperscaler.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+        <a href="/fr/contact" class="inline-flex w-full sm:w-auto items-center justify-center px-5 sm:px-6 py-3 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright transition-colors">
+          Réserver un audit téléphonique gratuit
+        </a>
+        <a href="/telemetry-audit" class="inline-flex w-full sm:w-auto items-center justify-center px-5 sm:px-6 py-3 rounded-lg border border-border text-text font-semibold hover:border-accent/60 hover:text-accent-bright transition-colors">
+          Lire le rapport hyperscalers
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-border bg-surface/50 py-16 sm:py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Ce qui est inclus</h2>
+        <p class="text-text-muted text-lg max-w-2xl mx-auto">
+          Le Coffre-fort local est un forfait complet : matériel, logiciels, modèles d'IA et soutien. RixBot est l'interface que votre personnel utilise chaque jour.
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {included.map((item) => (
+          <div class="p-5 sm:p-6 rounded-xl border border-border bg-primary hover:border-accent/30 transition-colors group">
+            <div class="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+              {item.icon}
+            </div>
+            <h3 class="text-xl font-semibold mb-3">{item.title}</h3>
+            <p class="text-text-muted leading-relaxed">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Pour qui</h2>
+        <p class="text-text-muted text-lg max-w-2xl mx-auto">
+          Tout bureau du Nouveau-Brunswick qui traite les données clients, le secret professionnel ou l'information réglementée comme un actif central.
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-6">
+        {verticals.map((v) => (
+          <div class="p-5 sm:p-6 rounded-xl border border-border bg-primary">
+            <h3 class="text-xl font-semibold mb-3">{v.title}</h3>
+            <p class="text-text-muted leading-relaxed">{v.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-border bg-surface/50 py-16 sm:py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Comment ça fonctionne</h2>
+        <p class="text-text-muted text-lg max-w-2xl mx-auto">
+          Un chemin à faible friction, de la conversation au déploiement.
+        </p>
+      </div>
+      <div class="space-y-6">
+        {process.map((p) => (
+          <div class="flex gap-4 sm:gap-6 p-5 sm:p-6 rounded-xl border border-border bg-primary">
+            <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent-bright font-bold text-lg shrink-0">
+              {p.step}
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold mb-2">{p.title}</h3>
+              <p class="text-text-muted leading-relaxed">{p.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-20">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-6">
+        Investissement
+      </h2>
+      <p class="text-text-muted text-lg mb-10 leading-relaxed">
+        Les audits payants vont de 2 000 $ à 15 000 $ selon la portée. Le matériel et le déploiement du Coffre-fort local sont soumissionnés après l'audit, avec un dépôt de 50 % pour commencer la construction. Le soutien est disponible en forfait mensuel ou à la demande.
+      </p>
+      <a href="/fr/self-check" class="inline-flex w-full sm:w-auto items-center justify-center px-6 sm:px-8 py-4 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright transition-colors text-lg">
+        Commencer par un autotest d'IA gratuit
+      </a>
+    </div>
+  </section>
+</Layout>

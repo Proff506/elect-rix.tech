@@ -39,7 +39,7 @@ const navItems = [
 ];
 
 // For French pages, prepend /fr to priority pages that have translations
-const frenchPages = new Set(['/', '/trust', '/safety']);
+const frenchPages = new Set(['/', '/trust', '/safety', '/about', '/local-vault', '/contact', '/audit']);
 const resolvedNav = navItems.map(item => {
   if (lang === 'fr' && frenchPages.has(item.href)) {
     return { ...item, href: '/fr' + item.href };
@@ -96,8 +96,8 @@ const resolvedNav = navItems.map(item => {
           <LanguageSwitcher lang={lang} pathname={pathname} />
         </div>
         <div class="ml-auto flex lg:hidden items-center gap-2 text-sm font-medium whitespace-nowrap">
-          <a href="/local-vault" class="inline-flex px-3 py-1.5 rounded-md border border-accent/40 text-accent-bright hover:bg-accent/10 transition-colors">Local Vault</a>
-          <a href="/contact" class="hidden min-[340px]:inline-flex px-2.5 py-1.5 rounded-md text-text-muted hover:text-text transition-colors">{t('nav.contact')}</a>
+          <a href={lang === 'fr' ? '/fr/local-vault' : '/local-vault'} class="inline-flex px-3 py-1.5 rounded-md border border-accent/40 text-accent-bright hover:bg-accent/10 transition-colors">{t('nav.vault')}</a>
+          <a href={lang === 'fr' ? '/fr/contact' : '/contact'} class="hidden min-[340px]:inline-flex px-2.5 py-1.5 rounded-md text-text-muted hover:text-text transition-colors">{t('nav.contact')}</a>
         </div>
       </div>
     </nav>
@@ -111,8 +111,8 @@ const resolvedNav = navItems.map(item => {
         <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
           <a href="/privacy" class="hover:text-text transition-colors">Privacy</a>
           <a href="/terms" class="hover:text-text transition-colors">Terms</a>
-          <a href="/trust" class="hover:text-text transition-colors">Trust &amp; IP</a>
-          <a href="/contact" class="hover:text-text transition-colors">Contact</a>
+          <a href={lang === 'fr' ? '/fr/trust' : '/trust'} class="hover:text-text transition-colors">Trust &amp; IP</a>
+          <a href={lang === 'fr' ? '/fr/contact' : '/contact'} class="hover:text-text transition-colors">Contact</a>
         </div>
         <div class="flex flex-col sm:flex-row items-center justify-between gap-2">
           <span>{t('footer.rights').replace('{year}', String(new Date().getFullYear()))}</span>

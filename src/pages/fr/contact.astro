@@ -1,0 +1,108 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout lang="fr" title="Réserver un audit téléphonique gratuit — elect-rix.tech" description="Réservez un audit téléphonique gratuit de 20 minutes. Nous passons en revue vos outils d'IA, vos flux de données, et si le Coffre-fort local convient à votre bureau du Nouveau-Brunswick.">
+  <section class="relative overflow-hidden">
+    <div class="max-w-3xl mx-auto px-6 pt-32 pb-20">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent-bright text-sm font-medium mb-6 border border-accent/20">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Disponible pour projets
+        </div>
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.1] mb-6">
+          Réserver un audit téléphonique gratuit
+        </h1>
+        <p class="text-lg text-text-muted max-w-xl mx-auto leading-relaxed">
+          Dites-moi ce que vous protégez et comment vous utilisez l'IA aujourd'hui. Je réponds en un jour ouvrable pour fixer un appel de 20 minutes.
+        </p>
+      </div>
+
+      <form
+        action="https://formspree.io/f/mbdbaavo"
+        method="POST"
+        class="rounded-xl border border-border bg-primary p-6 sm:p-8 space-y-6"
+      >
+        <div>
+          <label for="name" class="block text-sm font-medium text-text mb-2">Nom</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            placeholder="Votre nom complet"
+            class="w-full px-4 py-3 rounded-lg bg-surface-light border border-border text-text placeholder-text-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors"
+          />
+        </div>
+
+        <div>
+          <label for="email" class="block text-sm font-medium text-text mb-2">Courriel</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="vous@entreprise.com"
+            class="w-full px-4 py-3 rounded-lg bg-surface-light border border-border text-text placeholder-text-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors"
+          />
+        </div>
+
+        <div>
+          <label for="company" class="block text-sm font-medium text-text mb-2">Entreprise</label>
+          <input
+            type="text"
+            id="company"
+            name="company"
+            placeholder="Nom de l'organisation (facultatif)"
+            class="w-full px-4 py-3 rounded-lg bg-surface-light border border-border text-text placeholder-text-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors"
+          />
+        </div>
+
+        <div>
+          <label for="message" class="block text-sm font-medium text-text mb-2">Que protégez-vous ?</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="5"
+            required
+            placeholder="Décrivez votre bureau, vos outils d'IA actuels (assistant conversationnel, Copilot, Google Workspace, etc.) et ce qui vous a poussé à chercher une option locale. Suggérez un bon moment pour un appel de 20 minutes."
+            class="w-full px-4 py-3 rounded-lg bg-surface-light border border-border text-text placeholder-text-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors resize-y"
+          ></textarea>
+        </div>
+
+        <div>
+          <label for="budget" class="block text-sm font-medium text-text mb-2">Fourchette budgétaire estimée</label>
+          <select
+            id="budget"
+            name="budget"
+            class="w-full px-4 py-3 rounded-lg bg-surface-light border border-border text-text focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors appearance-none cursor-pointer"
+          >
+            <option value="" class="bg-surface-light">-- Choisir --</option>
+            <option value="under-5k" class="bg-surface-light">Moins de 5 000 $</option>
+            <option value="5k-15k" class="bg-surface-light">5 000 $ – 15 000 $</option>
+            <option value="15k-50k" class="bg-surface-light">15 000 $ – 50 000 $</option>
+            <option value="over-50k" class="bg-surface-light">Plus de 50 000 $</option>
+            <option value="not-sure" class="bg-surface-light">Pas encore sûr</option>
+          </select>
+        </div>
+
+        <input type="text" name="_gotcha" style="display:none" />
+        <input type="hidden" name="_next" value="https://elect-rix.tech/fr/thanks" />
+
+        <button
+          type="submit"
+          class="w-full inline-flex items-center justify-center px-6 py-4 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright transition-colors text-lg"
+        >
+          Demander un audit téléphonique gratuit
+        </button>
+      </form>
+
+      <div class="mt-10 text-center text-sm text-text-muted">
+        Vous préférez le courriel ?&nbsp;
+        <a href="mailto:contact@elect-rix.tech" class="text-accent-bright hover:underline font-medium">
+          contact@elect-rix.tech
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

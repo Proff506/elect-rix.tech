@@ -1,0 +1,62 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout lang="fr" title="À propos — elect-rix.tech" description="Protégez vos données. Même quand les lumières s'éteignent. Résilience, confidentialité et confiance vérifiable — intégrées, pas ajoutées.">
+  <section class="max-w-3xl mx-auto px-6 pt-24 pb-16">
+    <header class="mb-10">
+      <h1 class="text-4xl font-extrabold tracking-tight mb-4">À propos</h1>
+      <p class="text-lg text-text-muted leading-relaxed">Pourquoi ça existe, ce que je construis, et comment le Coffre-fort local change l'équation de risque.</p>
+    </header>
+
+    <div class="space-y-8">
+      <section>
+        <h2 class="text-2xl font-bold mb-3">Le problème</h2>
+        <div class="space-y-3 text-text-muted leading-relaxed">
+          <p>La plupart des infrastructures d'IA présument une connectivité permanente. Quand cette hypothèse casse — lien coupé, fenêtre de maintenance, incident de sécurité — les systèmes s'arrêtent. Les données qu'ils ont fuitées entre-temps ne sont pas une erreur de configuration. C'est une décision d'architecture. L'audit arrive, et personne ne peut prouver ce que leurs systèmes ont envoyé — ou n'ont pas envoyé.</p>
+          <p>L'industrie a construit pour le toujours-en-ligne. Le monde réel ne l'est pas. Les systèmes qui dépendent du nuage pour penser, vérifier, fonctionner — ceux-là tombent au pire moment. Et les données qu'ils fuient entre-temps ne sont pas un réglage. C'est un problème d'architecture.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-3">La position</h2>
+        <div class="space-y-3 text-text-muted leading-relaxed">
+          <p><strong class="text-text">Intégrité</strong> — le système fait exactement ce qu'il affirme. Pas de comportement caché, pas de télémétrie secrète, pas de « faites-nous confiance ». Prouvable. Auditable. Les journaux montrent ce qui s'est passé, et rien ne s'est passé qui n'est pas dans les journaux.</p>
+          <p><strong class="text-text">Loyauté</strong> — le système continue de travailler pour <em>vous</em>. Pas pour son fournisseur. Pas pour le nuage. Quand la connexion tombe, il continue. Quand l'API change, il continue. Quand le fournisseur pivote, il continue. Hors ligne par conception, nuage optionnel par choix.</p>
+          <p><strong class="text-text">Honnêteté</strong> — vous pouvez tout vérifier. Transparence de la télémétrie : voir le trafic, vérifier la frontière, et prouver ce qui est sorti ou non. Transparence du comportement : inspecter ce que l'agent fait, pas seulement ce qu'il dit. Une confiance mesurée en preuves, pas en foi.</p>
+          <p>Ce ne sont pas des valeurs d'affiche. Ce sont des propriétés testables d'un système. Un système envoie des données « à la maison » ou il ne le fait pas. Un système tourne hors ligne ou il ne le fait pas. Un journal montre ce qui s'est passé ou il ne le fait pas. On ne peut pas truquer ça avec un interrupteur de configuration. Il faut que ce soit intégré.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-3">Le parcours</h2>
+        <div class="space-y-3 text-text-muted leading-relaxed">
+          <p><strong class="text-text">Recherche</strong> — Publier les preuves d'abord. Le rapport de télémétrie des hyperscalers est l'éclaireur : une carte publique de la dépendance au nuage, des journaux, de la juridiction et des lacunes de vérification.</p>
+          <p><strong class="text-text">Conseil</strong> — Transformer l'inquiétude en preuves. Auditer un déploiement d'IA, identifier les fuites de télémétrie et les trous de résilience, et définir ce qui doit rester local, ce qui peut rester connecté au nuage, et ce qui a besoin de contrôles plus stricts.</p>
+          <p><strong class="text-text">Produit</strong> — Le Coffre-fort local est le forfait de base : matériel possédé plus services d'IA d'abord locaux pour les organisations qui ont besoin de continuité, de confidentialité et d'auditabilité. RixBot est l'interface incluse dans ce coffre, pas une ligne de produit séparée.</p>
+          <p><strong class="text-text">Plateforme</strong> — Le chemin plus long est une norme reproductible pour des déploiements d'IA résilients, privés et vérifiables : auditables là où ça compte, interopérables là où ça aide, et honnêtes sur chaque frontière.</p>
+          <p>Chaque voie alimente la suivante. La recherche attire l'attention. L'audit trouve les vrais besoins. Le Coffre-fort local transforme ces besoins en infrastructure qui fonctionne. Construire. Améliorer. Recommencer.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-3">Le bâtisseur</h2>
+        <div class="space-y-3 text-text-muted leading-relaxed">
+          <p>elect-rix est une opération solo qui fait tourner un laboratoire d'IA à deux postes. Primaire : Pop!_OS avec une RTX 5070 Ti pour l'inférence LLM locale. Secondaire : Linux Mint avec deux GPU pour les compilations distribuées et le calcul. Le labo existe pour tester ce qui peut être possédé, auto-hébergé et vérifié avant de demander à un client de s'y fier.</p>
+          <div class="rounded-xl border border-border overflow-hidden max-w-2xl mx-auto my-6">
+            <img src="/duo-connected-workstations.png" alt="Deux nœuds de postes connectés — configuration du laboratoire d'IA primaire et secondaire" class="w-full h-auto" />
+          </div>
+          <p>J'utilise l'IA comme collaborateur, pas comme remplacement. Les modèles s'occupent du boilerplate, de la recherche, des tâches répétitives. Je m'occupe de l'architecture, des cas limites et des jugements. C'est la seule façon de construire des systèmes qui fonctionnent vraiment — et qui continuent de fonctionner quand les conditions changent.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold mb-3">Entrer en contact</h2>
+        <p class="text-text-muted leading-relaxed mb-4">Vous construisez quelque chose qui doit fonctionner quand le nuage ne fonctionne pas ? Vous voulez savoir si le rapport hyperscalers s'applique à votre propre déploiement d'IA ? Parlons-en.</p>
+        <a href="/fr/contact" class="inline-flex items-center px-5 py-2.5 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright transition-colors">
+          Commencer une conversation
+        </a>
+      </section>
+    </div>
+  </section>
+</Layout>
