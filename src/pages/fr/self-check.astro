@@ -1,0 +1,420 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Autotest d'exposition à l'IA — elect-rix.tech"
+  description="Évaluation gratuite de 2 minutes sur l'exposition à l'IA. Aucune installation, aucune inscription. Vos données ne quittent jamais votre navigateur. Obtenez votre score de risque instantanément."
+  lang="fr"
+>
+  <section class="max-w-2xl mx-auto px-6 pt-32 pb-20">
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent-bright text-sm font-medium mb-6 border border-accent/20">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Gratuit — fonctionne dans votre navigateur
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.1] mb-6">
+        Autotest d'exposition à l'IA
+      </h1>
+      <p class="text-lg text-text-muted max-w-xl mx-auto leading-relaxed">
+        Répondez à 8 questions sur l'utilisation de l'IA dans votre bureau. Obtenez un score de risque instantané.
+        Aucune installation. Aucune inscription. Aucune donnée ne quitte votre navigateur.
+      </p>
+    </div>
+
+    <!-- Privacy banner -->
+    <div class="mb-8 p-4 rounded-lg border border-border bg-surface flex items-start gap-3">
+      <span class="text-accent-bright text-lg mt-0.5">🔒</span>
+      <p class="text-sm text-text-muted leading-relaxed">
+        <strong class="text-text">Privé par conception.</strong> Cette évaluation s'exécute entièrement
+        dans votre navigateur. Vos réponses ne sont jamais envoyées à un serveur, ni stockées dans une
+        base de données, ni vues par quiconque sauf vous. Fermez la page et tout disparaît.
+      </p>
+    </div>
+
+    <!-- Questionnaire -->
+    <div id="quiz" class="space-y-8">
+      <!-- Q1: Staff count -->
+      <div class="quiz-question" data-question="staff">
+        <label class="block text-sm font-semibold text-text mb-3">
+          1. Combien de personnes travaillent dans votre bureau?
+        </label>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <button type="button" data-value="1-5" class="quiz-option px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">1–5</button>
+          <button type="button" data-value="6-25" class="quiz-option px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">6–25</button>
+          <button type="button" data-value="26-100" class="quiz-option px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">26–100</button>
+          <button type="button" data-value="100+" class="quiz-option px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">100+</button>
+        </div>
+      </div>
+
+      <!-- Q2: AI tool usage -->
+      <div class="quiz-question" data-question="ai_tools">
+        <label class="block text-sm font-semibold text-text mb-3">
+          2. Vos employés utilisent-ils des outils d'IA comme ChatGPT, Claude, Copilot ou Gemini au travail?
+        </label>
+        <div class="space-y-3">
+          <button type="button" data-value="yes_daily" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Oui, tous les jours</button>
+          <button type="button" data-value="yes_weekly" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Oui, à l'occasion (chaque semaine)</button>
+          <button type="button" data-value="maybe" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Je crois que oui, mais je n'en suis pas certain</button>
+          <button type="button" data-value="no" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Non, nous n'utilisons pas d'outils d'IA</button>
+        </div>
+      </div>
+
+      <!-- Q3: Client data in AI -->
+      <div class="quiz-question" data-question="client_data">
+        <label class="block text-sm font-semibold text-text mb-3">
+          3. Les employés collent-ils parfois des noms de clients, des données financières ou des renseignements sur des patients dans des outils d'IA?
+        </label>
+        <div class="space-y-3">
+          <button type="button" data-value="yes_often" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Oui, cela arrive régulièrement</button>
+          <button type="button" data-value="yes_sometimes" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Oui, à l'occasion — même si on le leur déconseille</button>
+          <button type="button" data-value="no_policy" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Non, nous avons une politique qui l'interdit</button>
+          <button type="button" data-value="dont_know" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Je ne sais pas ce que les employés collent dans les outils d'IA</button>
+        </div>
+      </div>
+
+      <!-- Q4: Industry -->
+      <div class="quiz-question" data-question="industry">
+        <label class="block text-sm font-semibold text-text mb-3">
+          4. Quel type d'entreprise dirigez-vous?
+        </label>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <button type="button" data-value="accounting" class="quiz-option px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Comptabilité / Finance</button>
+          <button type="button" data-value="legal" class="quiz-option px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Cabinet d'avocats / Services juridiques</button>
+          <button type="button" data-value="healthcare" class="quiz-option px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Santé / Dentaire / Médical</button>
+          <button type="button" data-value="insurance" class="quiz-option px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Assurance / Planification financière</button>
+          <button type="button" data-value="government" class="quiz-option px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Municipal / Gouvernement</button>
+          <button type="button" data-value="other" class="quiz-option px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Autres services professionnels</button>
+        </div>
+      </div>
+
+      <!-- Q5: Data storage -->
+      <div class="quiz-question" data-question="data_storage">
+        <label class="block text-sm font-semibold text-text mb-3">
+          5. Où sont stockées les données de vos clients?
+        </label>
+        <div class="space-y-3">
+          <button type="button" data-value="cloud_us" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Services infonuagiques (Google, Microsoft, etc.) — aux États-Unis</button>
+          <button type="button" data-value="cloud_canada" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Services infonuagiques — centre de données canadien</button>
+          <button type="button" data-value="local_server" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Serveur local dans notre bureau</button>
+          <button type="button" data-value="dont_know" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Je ne sais pas où se trouvent nos données</button>
+        </div>
+      </div>
+
+      <!-- Q6: AI policy -->
+      <div class="quiz-question" data-question="ai_policy">
+        <label class="block text-sm font-semibold text-text mb-3">
+          6. Avez-vous une politique écrite sur les outils d'IA que les employés sont autorisés à utiliser?
+        </label>
+        <div class="space-y-3">
+          <button type="button" data-value="yes_enforced" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Oui, et nous l'appliquons</button>
+          <button type="button" data-value="yes_not_enforced" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Oui, mais les employés ne la respectent pas toujours</button>
+          <button type="button" data-value="no" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Aucune politique écrite</button>
+          <button type="button" data-value="banned" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Nous avons interdit les outils d'IA complètement</button>
+        </div>
+      </div>
+
+      <!-- Q7: Browser extensions -->
+      <div class="quiz-question" data-question="extensions">
+        <label class="block text-sm font-semibold text-text mb-3">
+          7. Les employés ont-ils installé des extensions de navigateur alimentées par l'IA (Grammarly, assistants de rédaction, etc.)?
+        </label>
+        <div class="space-y-3">
+          <button type="button" data-value="yes_many" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Oui, plusieurs employés en ont</button>
+          <button type="button" data-value="yes_some" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Quelques employés en ont peut-être</button>
+          <button type="button" data-value="no" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Non, nous n'autorisons pas les extensions de navigateur</button>
+          <button type="button" data-value="dont_know" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Je ne sais pas quelles extensions les employés installent</button>
+        </div>
+      </div>
+
+      <!-- Q8: Mobile -->
+      <div class="quiz-question" data-question="mobile">
+        <label class="block text-sm font-semibold text-text mb-3">
+          8. Les employés utilisent-ils des applications d'IA sur leur téléphone personnel pour le travail?
+        </label>
+        <div class="space-y-3">
+          <button type="button" data-value="yes" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Oui, les employés utilisent leur téléphone personnel avec des applications d'IA pour le travail</button>
+          <button type="button" data-value="maybe" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Possiblement — nous avons une politique d'appareils personnels (BYOD)</button>
+          <button type="button" data-value="no" class="quiz-option w-full text-left px-4 py-3 rounded-lg border border-border bg-surface-light text-text text-sm hover:border-accent transition-colors">Non, les employés n'utilisent que des appareils de l'entreprise</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit button -->
+    <div class="mt-10 text-center">
+      <button id="submit-btn" type="button" disabled
+        class="px-8 py-4 rounded-lg bg-accent-bright text-white font-semibold text-lg disabled:opacity-30 disabled:cursor-not-allowed enabled:hover:bg-accent enabled:cursor-pointer transition-all">
+        Obtenir mon score de risque
+      </button>
+      <p id="progress-text" class="mt-3 text-sm text-text-muted">Répondez aux 8 questions pour continuer</p>
+    </div>
+
+    <!-- Results (hidden until submitted) -->
+    <div id="results" class="hidden mt-12 space-y-6">
+      <!-- Risk score card -->
+      <div id="risk-card" class="p-8 rounded-xl border-2 text-center">
+        <div class="text-sm font-semibold uppercase tracking-wider text-text-muted mb-2">Votre exposition à l'IA</div>
+        <div id="risk-level" class="text-6xl font-extrabold mb-2">—</div>
+        <div id="risk-score" class="text-lg text-text-muted mb-4">Score : —/100</div>
+        <div id="risk-summary" class="text-base text-text-muted max-w-md mx-auto leading-relaxed">—</div>
+      </div>
+
+      <!-- Key findings -->
+      <div class="p-6 rounded-xl border border-border bg-surface">
+        <h3 class="text-lg font-bold text-text mb-4">Constatations clés</h3>
+        <ul id="findings-list" class="space-y-3 text-sm text-text-muted"></ul>
+      </div>
+
+      <!-- Recommendations -->
+      <div class="p-6 rounded-xl border border-border bg-surface">
+        <h3 class="text-lg font-bold text-text mb-4">Ce que cela signifie</h3>
+        <div id="recommendations" class="space-y-3 text-sm text-text-muted leading-relaxed"></div>
+      </div>
+
+      <!-- CTA -->
+      <div class="p-8 rounded-xl border-2 border-accent-bright/40 bg-accent/5 text-center">
+        <h3 class="text-xl font-bold text-text mb-3">Vous voulez le portrait complet?</h3>
+        <p class="text-text-muted mb-6 max-w-md mx-auto leading-relaxed">
+          Cet autotest repose sur ce que vous nous avez dit. Une vérification complète de l'IA fantôme
+          (Shadow AI) montre ce qui se passe <em>réellement</em> sur vos postes de travail — et c'est
+          parfois pire qu'on le pense. Les employés utilisent souvent des outils qu'ils ne mentionnent
+          pas dans un sondage.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/contact"
+            class="px-6 py-3 rounded-lg bg-accent-bright text-white font-semibold hover:bg-accent transition-colors">
+            Réserver un audit téléphonique gratuit de 15 min
+          </a>
+          <a href="tel:+15068012722"
+            class="px-6 py-3 rounded-lg border border-border bg-surface text-text font-semibold hover:border-accent transition-colors">
+            Appeler le (506) 801-2722
+          </a>
+        </div>
+        <p class="mt-4 text-xs text-text-muted">
+          L'audit complet s'exécute à partir d'une clé USB — aucune installation de logiciel sur vos machines.
+          15 minutes sur place. Rapport livré en 48 heures.
+        </p>
+      </div>
+
+      <!-- Print button -->
+      <div class="text-center">
+        <button id="print-btn" type="button"
+          class="px-6 py-2 rounded-lg border border-border bg-surface text-text text-sm hover:border-accent transition-colors">
+          Imprimer ce rapport
+        </button>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script is:inline>
+  // --- State ---
+  const answers = {};
+  const totalQuestions = 8;
+
+  // --- Scoring weights ---
+  const scores = {
+    staff: {
+      '1-5': 5, '6-25': 15, '26-100': 25, '100+': 35
+    },
+    ai_tools: {
+      'yes_daily': 25, 'yes_weekly': 15, 'maybe': 20, 'no': 0
+    },
+    client_data: {
+      'yes_often': 30, 'yes_sometimes': 25, 'no_policy': 5, 'dont_know': 20
+    },
+    industry: {
+      'accounting': 10, 'legal': 15, 'healthcare': 15, 'insurance': 10, 'government': 15, 'other': 5
+    },
+    data_storage: {
+      'cloud_us': 15, 'cloud_canada': 5, 'local_server': 0, 'dont_know': 10
+    },
+    ai_policy: {
+      'yes_enforced': 0, 'yes_not_enforced': 15, 'no': 20, 'banned': 10
+    },
+    extensions: {
+      'yes_many': 15, 'yes_some': 10, 'no': 0, 'dont_know': 10
+    },
+    mobile: {
+      'yes': 15, 'maybe': 10, 'no': 0
+    }
+  };
+
+  // --- Answer selection ---
+  document.querySelectorAll('.quiz-question').forEach(q => {
+    const questionKey = q.dataset.question;
+    q.querySelectorAll('.quiz-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        // Deselect siblings
+        q.querySelectorAll('.quiz-option').forEach(o => {
+          o.classList.remove('border-accent', 'bg-accent', 'text-white');
+          o.classList.add('border-border', 'bg-surface-light', 'text-text');
+        });
+        // Select this
+        opt.classList.remove('border-border', 'bg-surface-light', 'text-text');
+        opt.classList.add('border-accent', 'bg-accent', 'text-white');
+
+        // Store answer
+        answers[questionKey] = opt.dataset.value;
+
+        // Update progress
+        updateProgress();
+      });
+    });
+  });
+
+  function updateProgress() {
+    const answered = Object.keys(answers).length;
+    const btn = document.getElementById('submit-btn');
+    const text = document.getElementById('progress-text');
+
+    if (answered === totalQuestions) {
+      btn.disabled = false;
+      text.textContent = 'Prêt! Cliquez pour voir votre score de risque.';
+    } else {
+      btn.disabled = true;
+      text.textContent = `${answered} questions sur ${totalQuestions} répondues`;
+    }
+  }
+
+  // --- Calculate score ---
+  function calculateScore() {
+    let total = 0;
+    for (const [key, value] of Object.entries(answers)) {
+      if (scores[key] && scores[key][value] !== undefined) {
+        total += scores[key][value];
+      }
+    }
+    return Math.min(total, 100);
+  }
+
+  // --- Get risk level ---
+  function getRiskLevel(score) {
+    if (score >= 70) return { level: 'CRITIQUE', color: '#dc2626', bg: 'border-red-500', text: 'text-red-500' };
+    if (score >= 45) return { level: 'ÉLEVÉ', color: '#ea580c', bg: 'border-orange-500', text: 'text-orange-500' };
+    if (score >= 25) return { level: 'MODÉRÉ', color: '#ca8a04', bg: 'border-yellow-500', text: 'text-yellow-500' };
+    return { level: 'FAIBLE', color: '#16a34a', bg: 'border-green-500', text: 'text-green-500' };
+  }
+
+  // --- Generate findings ---
+  function generateFindings() {
+    const findings = [];
+
+    if (answers.client_data === 'yes_often' || answers.client_data === 'yes_sometimes') {
+      findings.push('Des données de clients sont collées dans des outils d\'IA grand public. Cela présente un risque de violation de la LPRPDE.');
+    }
+    if (answers.client_data === 'dont_know') {
+      findings.push('Vous ne pouvez pas confirmer si les employés partagent des données de clients avec des outils d\'IA. Cet angle mort est en soi un risque de conformité.');
+    }
+    if (answers.ai_tools === 'yes_daily' || answers.ai_tools === 'yes_weekly') {
+      findings.push('Les employés utilisent régulièrement des outils d\'IA grand public. Chaque session envoie des données vers des serveurs externes.');
+    }
+    if (answers.ai_tools === 'maybe') {
+      findings.push('L\'incertitude quant à l\'utilisation des outils d\'IA signifie que les employés utilisent probablement des outils sans supervision.');
+    }
+    if (answers.ai_policy === 'no') {
+      findings.push('Aucune politique écrite sur l\'utilisation de l\'IA. Les employés n\'ont aucune directive sur ce qui est permis ou non.');
+    }
+    if (answers.ai_policy === 'yes_not_enforced') {
+      findings.push('Une politique d\'IA existe mais n\'est pas appliquée. Les employés l\'ignorent peut-être.');
+    }
+    if (answers.ai_policy === 'banned') {
+      findings.push('Interdire l\'IA pousse son usage dans la clandestinité. Les employés utilisent probablement des comptes personnels sur des appareils de travail.');
+    }
+    if (answers.data_storage === 'cloud_us') {
+      findings.push('Données de clients stockées sur des serveurs infonuagiques aux États-Unis. Assujetties au CLOUD Act et à la FISA 702.');
+    }
+    if (answers.data_storage === 'dont_know') {
+      findings.push('Résidence des données inconnue. Vous ne pouvez pas garantir la conformité aux exigences canadiennes en matière de protection de la vie privée.');
+    }
+    if (answers.extensions === 'yes_many' || answers.extensions === 'yes_some') {
+      findings.push('Les extensions de navigateur IA traitent tout le texte tapé par les employés, y compris les communications avec les clients.');
+    }
+    if (answers.mobile === 'yes' || answers.mobile === 'maybe') {
+      findings.push('L\'utilisation de téléphones personnels avec des applications d\'IA signifie que des données de clients peuvent quitter le bureau par des appareils mobiles.');
+    }
+    if (answers.industry === 'healthcare') {
+      findings.push('Des données de santé (RPS) dans des outils d\'IA grand public constituent une violation de la LPRPSA. Amendes pouvant atteindre 500 000 $ par incident.');
+    }
+    if (answers.industry === 'legal') {
+      findings.push('Des données juridiques dans des outils d\'IA grand public peuvent compromettre le secret professionnel de l\'avocat.');
+    }
+    if (answers.industry === 'government') {
+      findings.push('Des données gouvernementales dans des outils d\'IA grand public peuvent contrevenir à la LPRIP et aux exigences ITSG-33.');
+    }
+
+    return findings;
+  }
+
+  // --- Generate recommendations ---
+  function generateRecommendations(risk) {
+    const recs = [];
+
+    if (risk.level === 'CRITIQUE' || risk.level === 'ÉLEVÉ') {
+      recs.push('<strong>Immédiat :</strong> Empêchez dès aujourd\'hui les employés de coller des données de clients dans des outils d\'IA grand public. Documentez quels comptes personnels sont utilisés.');
+      recs.push('<strong>Cette semaine :</strong> Réservez un audit de détection d\'IA fantôme (Shadow AI). Un balayage sur place de 15 minutes montre exactement quels outils sont installés et quelles données sont à risque.');
+      recs.push('<strong>À court terme :</strong> Mettez en place une liste d\'outils d\'IA approuvés et une formation du personnel. Envisagez un déploiement Local Vault pour une IA sur place qui garde les données dans vos murs.');
+    } else if (risk.level === 'MODÉRÉ') {
+      recs.push('<strong>À court terme :</strong> Rédigez une politique écrite d\'utilisation de l\'IA. Passez en revue les outils que les employés utilisent réellement.');
+      recs.push('<strong>À considérer :</strong> Un audit de détection d\'IA fantôme pour vérifier que votre évaluation est exacte. Les employés utilisent souvent plus d\'outils qu\'ils ne le déclarent.');
+    } else {
+      recs.push('<strong>Bonne base.</strong> Votre exposition est faible, mais restez vigilant. De nouveaux outils d\'IA apparaissent chaque mois et l\'adoption par les employés est rapide.');
+      recs.push('<strong>Recommandation :</strong> Un examen annuel de l\'utilisation de l\'IA pour repérer les nouveaux outils avant qu\'ils ne deviennent un problème.');
+    }
+
+    return recs;
+  }
+
+  // --- Submit ---
+  document.getElementById('submit-btn').addEventListener('click', () => {
+    const score = calculateScore();
+    const risk = getRiskLevel(score);
+    const findings = generateFindings();
+    const recs = generateRecommendations(risk);
+
+    // Hide quiz, show results
+    document.getElementById('quiz').classList.add('hidden');
+    document.querySelector('.mt-10').classList.add('hidden');
+
+    const results = document.getElementById('results');
+    results.classList.remove('hidden');
+
+    // Risk card
+    const riskCard = document.getElementById('risk-card');
+    riskCard.className = `p-8 rounded-xl border-2 text-center ${risk.bg}`;
+    riskCard.style.borderColor = risk.color;
+
+    const riskLevel = document.getElementById('risk-level');
+    riskLevel.textContent = risk.level;
+    riskLevel.style.color = risk.color;
+
+    document.getElementById('risk-score').textContent = `Score : ${score}/100`;
+
+    const summaries = {
+      CRITIQUE: 'Votre bureau présente une exposition importante à l\'IA. Des données de clients quittent probablement le bureau par des outils d\'IA, des extensions de navigateur ou des appareils personnels. Une action immédiate s\'impose.',
+      'ÉLEVÉ': 'Votre exposition à l\'IA est élevée. Plusieurs facteurs de risque indiquent que des données de clients peuvent atteindre des serveurs externes à votre insu ou sans votre consentement.',
+      'MODÉRÉ': 'Votre exposition à l\'IA est modérée. Certains facteurs de risque existent, mais peuvent être gérés par des politiques et de la supervision.',
+      FAIBLE: 'Votre exposition à l\'IA est faible. Vos pratiques actuelles offrent une base raisonnable, mais restez vigilant.'
+    };
+    document.getElementById('risk-summary').textContent = summaries[risk.level];
+
+    // Findings list
+    const findingsList = document.getElementById('findings-list');
+    if (findings.length > 0) {
+      findingsList.innerHTML = findings.map(f => `<li class="flex items-start gap-2"><span style="color:${risk.color}">▸</span> <span>${f}</span></li>`).join('');
+    } else {
+      findingsList.innerHTML = '<li>Aucun facteur de risque important identifié à partir de vos réponses.</li>';
+    }
+
+    // Recommendations
+    document.getElementById('recommendations').innerHTML = recs.map(r => `<p>${r}</p>`).join('');
+
+    // Scroll to results
+    results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // --- Print ---
+  document.getElementById('print-btn').addEventListener('click', () => {
+    window.print();
+  });
+</script>
