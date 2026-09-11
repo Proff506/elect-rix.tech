@@ -39,7 +39,7 @@ const navItems = [
 ];
 
 // For French pages, prepend /fr to priority pages that have translations
-const frenchPages = new Set(['/', '/trust', '/safety', '/about', '/local-vault', '/contact', '/audit']);
+const frenchPages = new Set(['/', '/trust', '/safety', '/about', '/local-vault', '/contact', '/audit', '/lab']);
 const resolvedNav = navItems.map(item => {
   if (lang === 'fr' && frenchPages.has(item.href)) {
     return { ...item, href: '/fr' + item.href };

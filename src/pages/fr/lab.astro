@@ -1,0 +1,105 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const capabilities = [
+  {
+    name: 'Inférence locale',
+    description: 'Plusieurs LLM en exécution simultanée sur du matériel GPU dédié. L\'inférence reste sur place, jamais routée via une API tierce. Zéro télémétrie par architecture.',
+    icon: '🧠',
+  },
+  {
+    name: 'Calcul distribué',
+    description: 'Distribution des charges multi-machines pour l\'inférence par lots, les tests de modèles et le benchmarking reproductible. Aucune instance cloud, aucune facturation au jeton.',
+    icon: '⚡',
+  },
+  {
+    name: 'Services auto-hébergés',
+    description: 'Infrastructure conteneurisée — des runners CI aux agents IA, tout tourne sous le même toit. Aucun verrouillage fournisseur, aucune modification surprise des conditions d\'utilisation.',
+    icon: '🔧',
+  },
+  {
+    name: 'Opérations hors-ligne d\'abord',
+    description: 'Conçu pour continuer à fonctionner quand la connectivité tombe. Modèles locaux, stockage local, décisions locales. La résilience comme architecture, pas comme pensée tardive.',
+    icon: '📡',
+  },
+];
+
+const software = [
+  { name: 'Ollama', desc: 'Serveur d\'inférence LLM local. Exécute des modèles à poids ouverts avec contrôle total du contexte, de la température et des invites système.', link: 'https://ollama.com' },
+  { name: 'Astro', desc: 'Générateur de site statique. Ce site est Astro + Bun + Tailwind, construit localement.', link: 'https://astro.build' },
+  { name: 'Bun', desc: 'Environnement d\'exécution JavaScript et bundler. Rapide, TypeScript natif, conçu pour les charges de sites statiques.', link: 'https://bun.sh' },
+  { name: 'Tailwind CSS v4', desc: 'CSS utilitaire. Utilise la directive @theme pour les jetons de conception personnalisés.', link: 'https://tailwindcss.com' },
+  { name: 'Docker', desc: 'Services conteneurisés. Tout ce qui peut être conteneurisé l\'est.', link: 'https://docker.com' },
+  { name: 'Cloudflare', desc: 'Déploiement en périphérie. DNS, Pages et Workers pour la distribution mondiale.', link: 'https://cloudflare.com' },
+];
+---
+
+<Layout lang="fr" title="Le Labo — elect-rix.tech" description="Protégez vos données. Même quand les lumières s'éteignent. Infrastructure IA dédiée. Inférence locale, calcul distribué, zéro dépendance cloud — par architecture, pas par configuration.">
+  <section class="max-w-4xl mx-auto px-6 pt-24 pb-16">
+    <header class="text-center mb-16">
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">Le Labo</h1>
+      <p class="text-lg text-text-muted max-w-2xl mx-auto">Le matériel n'est pas l'histoire — ce qu'il rend possible l'est. Infrastructure dédiée pour l'inférence IA locale, le calcul distribué et des services auto-hébergés qui ne téléphonent à personne.</p>
+    </header>
+
+    <!-- Capacités -->
+    <div class="space-y-4 mb-16">
+      <h2 class="text-2xl font-bold mb-6">Capacités</h2>
+      <div class="rounded-xl border border-border overflow-hidden max-w-3xl mx-auto mb-8">
+        <img src="/comfy-local-electrix-test.png" alt="Infrastructure de labo d'IA locale — paysage urbain de circuits" class="w-full h-auto" />
+      </div>
+      {capabilities.map((c) => (
+        <div class="p-6 rounded-xl border border-border bg-surface">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent-bright shrink-0">{c.icon}</div>
+            <div>
+              <h3 class="text-lg font-semibold mb-1">{c.name}</h3>
+              <p class="text-sm text-text-muted leading-relaxed">{c.description}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Pile logicielle -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold mb-6">Pile logicielle</h2>
+      <div class="grid sm:grid-cols-2 gap-4">
+        {software.map((s) => (
+          <a href={s.link} target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl border border-border bg-surface hover:bg-surface-light transition-colors group">
+            <div class="font-semibold mb-1 group-hover:text-accent-bright transition-colors">{s.name} →</div>
+            <div class="text-sm text-text-muted">{s.desc}</div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Philosophie -->
+    <div class="p-6 rounded-xl border border-border bg-surface">
+      <h2 class="text-2xl font-bold mb-4">Pourquoi local ?</h2>
+      <div class="space-y-3 text-text-muted leading-relaxed">
+        <p>Chaque invite envoyée à un service cloud fermé devient des données d'entraînement. Chaque fichier téléversé vers une API distante est stocké, analysé et potentiellement reproduit. Pour le travail client, le code propriétaire et les données réglementées, c'est inacceptable.</p>
+        <p>Les modèles locaux tournent à des vitesses de production sur du matériel moderne. Ils sont privés, ne coûtent rien au jeton et fonctionnent hors ligne. Pas besoin d'un abonnement mensuel pour une IA compétente — il faut la bonne architecture et la discipline de la garder locale.</p>
+        <p>Quand le cloud est utilisé, c'est un choix conscient — pas un réflexe. C'est ça, la différence.</p>
+      </div>
+    </div>
+
+    <!-- Ce que le Labo écoute — lien sortant uniquement, aucun tiers intégré -->
+    <div class="p-6 rounded-xl border border-border bg-surface mt-16 flex items-start gap-4">
+      <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent-bright shrink-0">🎧</div>
+      <div>
+        <h2 class="text-lg font-semibold mb-1">Ce que le Labo écoute</h2>
+        <p class="text-sm text-text-muted leading-relaxed">
+          <span class="text-text font-medium">NIGHT PROTOCOL</span> — musique cyberpunk sombre pour le travail en profondeur, par SoundFlow Lab.
+          Aucun lecteur intégré, exprès : cette page ne charge rien de serveurs tiers.
+          La télémétrie zéro inclut la trame sonore.
+          <a
+            href="https://www.youtube.com/watch?v=zXGb3k-A1Vo"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-accent-bright hover:underline"
+          >Ouvrir sur YouTube →</a> si vous voulez le vibe.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
