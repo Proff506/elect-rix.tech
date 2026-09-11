@@ -30,76 +30,92 @@ const services = [
 
 <Layout
   lang="fr"
-  title="elect-rix.tech — Protégez vos données. Même quand les lumières s'éteignent."
-  description="Protégez vos données. Même quand les lumières s'éteignent. Systèmes d'IA résilients, privés et vérifiables. Intégrité, loyauté, honnêteté — intégrées, pas ajoutées."
+  title="elect-rix.tech — Coffre-fort local pour opérations et souveraineté des données"
+  description="Le Coffre-fort local garde votre IA, vos fichiers et vos conversations clients dans votre bureau du Nouveau-Brunswick. RixBot inclus. Fonctionne même quand internet tombe."
 >
   <!-- Hero -->
   <section class="relative overflow-hidden">
-    <div class="max-w-5xl mx-auto px-6 pt-32 pb-20 text-center">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-16 sm:pb-20 text-center">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent-bright text-sm font-medium mb-8 border border-accent/20">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
         {t('available')}
       </div>
-      <h1 class="text-5xl sm:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6">
-        {t('home.heroTitle')}<br />
-        <span class="text-accent-bright">{t('home.heroSubtitle')}</span>
+      <h1 class="text-[2rem] min-[360px]:text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08] mb-6">
+        Opérations et souveraineté des données<br class="hidden sm:block" />
+        <span class="text-accent-bright">pour les bureaux du Nouveau-Brunswick.</span>
       </h1>
       <p class="text-lg sm:text-xl text-text-muted max-w-2xl mx-auto leading-relaxed mb-10">
-        {t('home.heroBody')}
+        Le Coffre-fort local garde votre IA, vos fichiers et vos conversations clients dans votre bâtiment — pas chez un hyperscaler. RixBot, l'interface d'agent locale incluse, fonctionne même quand internet ne fonctionne plus.
       </p>
-      <div class="flex flex-col sm:flex-row gap-3 justify-center">
-        <a href="/fr/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright transition-colors">
-          {t('cta.getInTouch')}
+      <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+        <a href="/fr/local-vault" class="inline-flex w-full sm:w-auto items-center justify-center px-5 sm:px-6 py-3 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright transition-colors">
+          Découvrir le Coffre-fort local
         </a>
-        <a href="/fr/self-check" class="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-accent/40 text-accent-bright font-semibold hover:bg-accent/10 transition-colors">
+        <a href="/fr/self-check" class="inline-flex w-full sm:w-auto items-center justify-center px-5 sm:px-6 py-3 rounded-lg border border-accent/40 text-accent-bright font-semibold hover:bg-accent/10 transition-colors">
           Autotest d'exposition à l'IA gratuit →
         </a>
       </div>
-      <div class="mt-12 rounded-xl border border-border overflow-hidden max-w-3xl mx-auto">
+      <div class="mt-10 sm:mt-12 rounded-xl border border-border overflow-hidden max-w-3xl mx-auto shadow-2xl shadow-accent/5">
         <img src="/resilience-offline-shield.png" alt="Système résilient protégé du chaos réseau" class="w-full h-auto" />
       </div>
     </div>
   </section>
 
-  <!-- About Preview -->
+  <!-- Aperçu du Coffre-fort local -->
   <section class="border-y border-border bg-surface/50">
-    <div class="max-w-5xl mx-auto px-6 py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div>
-          <h2 class="text-3xl font-bold tracking-tight mb-4">{t('home.builtDifferent')}</h2>
+          <h2 class="text-3xl font-bold tracking-tight mb-4">Coffre-fort local, intégré</h2>
           <div class="space-y-4 text-text-muted leading-relaxed">
-            <p>{t('home.builtDifferentBody1')}</p>
-            <p>{t('home.builtDifferentBody2')}</p>
+            <p>
+              Le Coffre-fort local est un système d'IA et de données autonome pour les bureaux qui ne peuvent pas envoyer de fichiers clients, de dossiers de patients ou de conversations privilégiées vers le cloud. Il fonctionne sur du matériel que vous possédez, dans votre bâtiment, sur votre réseau.
+            </p>
+            <p>
+              RixBot est l'interface d'agent incluse — comme Siri sur un iPhone, elle vient avec le coffre-fort. Le personnel peut poser des questions, résumer des documents et automatiser du travail sans que les données quittent la pièce. Quand internet tombe, le coffre-fort continue de fonctionner.
+            </p>
           </div>
-          <a href="/fr/about" class="inline-flex items-center gap-2 text-accent-bright font-medium mt-6 hover:underline">
-            {t('cta.whyItMatters')}
+          <a href="/fr/local-vault" class="inline-flex items-center gap-2 text-accent-bright font-medium mt-6 hover:underline">
+            Ce qu'il y a dans le coffre-fort →
           </a>
         </div>
-        <div class="p-6 rounded-xl border border-border bg-primary">
+        <div class="p-4 sm:p-6 rounded-xl border border-border bg-primary">
           <div class="space-y-4">
-            <div class="flex items-center justify-between">
-              <span class="text-text-muted">LLM local</span>
-              <span class="text-accent-bright font-semibold">Ollama</span>
+            <div class="flex flex-col min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between gap-1">
+              <span class="text-text-muted">Résidence des données</span>
+              <span class="text-accent-bright font-semibold min-[380px]:text-right">Votre bâtiment</span>
             </div>
-            <div class="flex items-center justify-between">
-              <span class="text-text-muted">Plateforme conteneurs</span>
-              <span class="text-accent-bright font-semibold">Docker</span>
+            <div class="flex flex-col min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between gap-1">
+              <span class="text-text-muted">Télémétrie</span>
+              <span class="text-accent-bright font-semibold min-[380px]:text-right">Aucune, par conception</span>
             </div>
-            <div class="flex items-center justify-between">
-              <span class="text-text-muted">Orchestration</span>
-              <span class="text-accent-bright font-semibold">Docker</span>
+            <div class="flex flex-col min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between gap-1">
+              <span class="text-text-muted">Internet requis</span>
+              <span class="text-accent-bright font-semibold min-[380px]:text-right">Non</span>
             </div>
-            <div class="flex items-center justify-between">
-              <span class="text-text-muted">Système d'exploitation</span>
-              <span class="text-accent-bright font-semibold">Pop!_OS</span>
+            <div class="flex flex-col min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between gap-1">
+              <span class="text-text-muted">Coût au jeton</span>
+              <span class="text-accent-bright font-semibold min-[380px]:text-right">0 $</span>
             </div>
-            <div class="flex items-center justify-between">
-              <span class="text-text-muted">GPU</span>
-              <span class="text-accent-bright font-semibold">RTX 5070 Ti</span>
+            <div class="flex flex-col min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between gap-1">
+              <span class="text-text-muted">Conformité</span>
+              <span class="text-accent-bright font-semibold min-[380px]:text-right">Alignée PIPEDA / FOIPOP</span>
             </div>
-            <div class="flex items-center justify-between">
-              <span class="text-text-muted">Processeur</span>
-              <span class="text-accent-bright font-semibold">Core i9 14900K</span>
+            <div class="flex flex-col min-[380px]:flex-row min-[380px]:items-center min-[380px]:justify-between gap-1">
+              <span class="text-text-muted">Auditabilité</span>
+              <span class="text-accent-bright font-semibold min-[380px]:text-right">Journaux complets, sur demande</span>
+            </div>
+          </div>
+          <div class="mt-4 pt-4 border-t border-border">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent-bright shrink-0">🎧</div>
+              <div>
+                <div class="text-sm font-semibold mb-1">Ce que le Labo écoute</div>
+                <p class="text-sm text-text-muted leading-relaxed">
+                  <span class="text-text font-medium">NIGHT PROTOCOL</span> — musique cyberpunk sombre pour le travail en profondeur, par SoundFlow Lab. La télémétrie zéro inclut la trame sonore.
+                  <a href="https://www.youtube.com/watch?v=zXGb3k-A1Vo" target="_blank" rel="noopener noreferrer" class="text-accent-bright hover:underline">Ouvrir sur YouTube →</a>
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -109,7 +125,7 @@ const services = [
 
   <!-- Services -->
   <section class="py-20">
-    <div class="max-w-5xl mx-auto px-6">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
       <div class="text-center mb-16">
         <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">{t('home.whatIDo')}</h2>
         <p class="text-text-muted text-lg max-w-2xl mx-auto">
@@ -121,7 +137,7 @@ const services = [
       </div>
       <div class="grid sm:grid-cols-2 gap-6">
         {services.map((service) => (
-          <div class="p-6 rounded-xl border border-border bg-primary hover:border-accent/30 transition-colors group">
+          <div class="p-5 sm:p-6 rounded-xl border border-border bg-primary hover:border-accent/30 transition-colors group">
             <div class="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
               {service.icon}
             </div>
@@ -137,14 +153,22 @@ const services = [
   <section class="border-y border-border bg-surface/50 py-20">
     <div class="max-w-3xl mx-auto px-6 text-center">
       <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-6">
-        {t('home.startAudit')}
+        Le Coffre-fort local convient-il à votre bureau ?
       </h2>
       <p class="text-text-muted text-lg mb-10 leading-relaxed">
-        {t('home.startAuditBody')}
+        L'Autotest d'exposition à l'IA gratuit cartographie où vont vos données en cinq minutes environ. Ou parcourez le fonctionnement réel d'un déploiement de Coffre-fort local — le matériel, le réseau, et ce que le personnel peut demander à RixBot sans que les données quittent la pièce.
       </p>
-      <a href="/fr/contact" class="inline-flex items-center justify-center px-8 py-4 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright transition-colors text-lg">
-        {t('cta.getInTouch')}
-      </a>
+      <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+        <a href="/fr/local-vault" class="inline-flex w-full sm:w-auto items-center justify-center px-6 sm:px-8 py-4 rounded-lg bg-accent text-white font-semibold hover:bg-accent-bright transition-colors text-lg">
+          Découvrir le Coffre-fort local
+        </a>
+        <a href="/fr/self-check" class="inline-flex w-full sm:w-auto items-center justify-center px-6 sm:px-8 py-4 rounded-lg border border-border text-text font-semibold hover:border-accent/60 hover:text-accent-bright transition-colors text-lg">
+          Autotest d'exposition à l'IA gratuit →
+        </a>
+      </div>
+      <p class="text-sm text-text-muted mt-8">
+        Vous préférez en parler d'abord ? <a href="/fr/contact" class="text-accent-bright hover:underline">Réservez un audit téléphonique gratuit de 20 minutes</a> — aucune pression de vente, juste un oui ou un non clair.
+      </p>
     </div>
   </section>
 </Layout>
